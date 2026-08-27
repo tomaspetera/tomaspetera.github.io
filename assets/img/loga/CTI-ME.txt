@@ -1,0 +1,27 @@
+Sem patří loga klientů pro posouvající se pás v sekci „Vybraní klienti".
+
+FORMÁT
+  - nejlépe SVG, jinak PNG s průhledným pozadím
+  - jednobarevné bílé nebo světlé (pás je přebarví na bílou přes CSS filtr)
+  - výška originálu klidně 200 px, CSS je stáhne na ~26 px
+  - pojmenování bez diakritiky: young-lions.svg, tanec-praha.svg, ponec.svg, …
+
+JAK JE ZAPOJIT
+  V index.html najdi <div class="marquee__track"> a u dané značky
+  nahraď text obrázkem:
+
+      <span class="logo">Young Lions</span>
+
+  za
+
+      <span class="logo"><img src="assets/img/loga/young-lions.svg" alt="Young Lions"></span>
+
+  Text a obrázky se dají míchat — co nemáš jako soubor, nech textem.
+  Pás se v JS sám zdvojuje, takže každou značku uveď jen jednou.
+
+POZOR NA PRÁVA
+  Logo klienta smíš na webu ukázat jako referenci, ale u větších značek
+  (Sev.en, Young Lions) si radši vyžádej souhlas nebo brand manuál —
+  některé mají pravidla, jak se logo smí zobrazovat.
+
+Tenhle soubor můžeš smazat.
