@@ -4,19 +4,83 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tomáš Petera — grafický designér | Vizuální identity &amp; kampaně</title>
-<meta name="description" content="Tvořím vizuální identity, kampaně a obaly, které fungují v ulici i na displeji. Grafický designér na volné noze, Praha.">
+<title>Tomáš Petera — grafický designér Praha | Logo a vizuální identita</title>
+<meta name="description" content="Tvořím loga, vizuální identity, kampaně, obaly i weby, které fungují v ulici i na displeji. Grafický designér na volné noze, Praha.">
 <meta name="theme-color" content="#050409">
-<meta property="og:title" content="Tomáš Petera — grafický designér">
-<meta property="og:description" content="Vizuální identity, kampaně a packaging. Značky, které drží pohromadě.">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="canonical" href="https://tomaspetera.cz/">
+
+<meta property="og:title" content="Tomáš Petera — grafický designér Praha">
+<meta property="og:description" content="Logo, vizuální identita, kampaně a packaging. Značky, které drží pohromadě.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/younglions.webp">
+<meta property="og:url" content="https://tomaspetera.cz/">
+<meta property="og:site_name" content="Tomáš Petera">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:image" content="https://tomaspetera.cz/assets/img/younglions.webp">
+<meta property="og:image:alt" content="Young Lions 2024 — rebranding kreativní soutěže">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tomáš Petera — grafický designér Praha">
+<meta name="twitter:description" content="Logo, vizuální identita, kampaně a packaging.">
+<meta name="twitter:image" content="https://tomaspetera.cz/assets/img/younglions.webp">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/ring/younglions.webp">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+  /* Řádek "Grafický designér · Praha" je nově uvnitř <h1> — kvůli vyhledávačům.
+     Uvnitř nadpisu by zdědil jeho tučnost a stín, tyhle tři vlastnosti ho
+     vracejí do původní podoby. Vizuálně je výsledek shodný s původním stavem. */
+  .hero__title .hero__eyebrow{ display:block; font-weight:300; text-shadow:none; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://tomaspetera.cz/#business",
+  "name": "Tomáš Petera — grafický designér",
+  "url": "https://tomaspetera.cz/",
+  "image": "https://tomaspetera.cz/assets/img/tomas.webp",
+  "email": "petera.tomas11@gmail.com",
+  "telephone": "+420722221334",
+  "priceRange": "13000–60000 Kč",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Praha",
+    "addressCountry": "CZ"
+  },
+  "areaServed": { "@type": "Country", "name": "Česká republika" },
+  "founder": {
+    "@type": "Person",
+    "name": "Tomáš Petera",
+    "jobTitle": "Grafický designér",
+    "url": "https://tomaspetera.cz/",
+    "sameAs": [ "https://www.linkedin.com/in/tomaspetera" ]
+  },
+  "knowsAbout": [
+    "vizuální identita", "tvorba loga", "logomanuál", "brand design",
+    "reklamní kampaně", "art direction", "obalový design", "packaging",
+    "design webu", "grafický design"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Služby",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vizuální identita" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kampaně" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Packaging" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web a digitál" } }
+    ]
+  }
+}
+</script>
 </head>
 
 <body>
@@ -94,8 +158,8 @@
 
     <div class="hero__content" id="heroContent">
       <div class="hero__inner">
-        <p class="hero__eyebrow">Grafický designér · Praha</p>
         <h1 class="hero__title">
+          <span class="hero__eyebrow">Grafický designér · Praha</span>
           <span class="line"><span class="split">Značky, které fungují</span></span>
           <span class="line"><span class="split">v ulici i na displeji.</span></span>
         </h1>
