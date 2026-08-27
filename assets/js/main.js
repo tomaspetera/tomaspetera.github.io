@@ -51,16 +51,38 @@ if (!REDUCED) {
   });
 }
 
+/* Bar dřív běžel na náhodném čísle — doskákal za 0,8 až 2 s bez ohledu na to,
+   jak rychle byl web opravdu načtený, a přesně o tu dobu se odkládalo zobrazení
+   obsahu. Google tenhle okamžik měří jako LCP. Teď má plnění pevnou délku
+   a čeká se navíc jen na fonty, aby text nepřeskočil. Vizuálně stejné. */
 if (loader) {
-  let pct = 0;
-  const ticker = setInterval(() => {
-    pct = Math.min(100, pct + Math.random() * 16 + 6);
-    if (loaderBar) loaderBar.style.width = pct + '%';
-    if (pct >= 100) {
-      clearInterval(ticker);
-      setTimeout(() => { loader.classList.add('done'); bootHero(); }, 260);
-    }
-  }, 100);
+  const START = performance.now();
+  const SPAN  = 420;   // jak dlouho se bar plní
+  const CAP   = 900;   // na fonty čekáme nejdéle takhle dlouho
+
+  let fontsOk = !(document.fonts && document.fonts.ready);
+  if (!fontsOk) document.fonts.ready.then(() => { fontsOk = true; });
+
+  let finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    if (loaderBar) loaderBar.style.width = '100%';
+    setTimeout(() => { loader.classList.add('done'); bootHero(); }, 120);
+  };
+
+  const tick = () => {
+    if (finished) return;
+    const t = performance.now() - START;
+    if (loaderBar) loaderBar.style.width = (easeOut(Math.min(1, t / SPAN)) * 100).toFixed(1) + '%';
+    if (t >= SPAN && (fontsOk || t >= CAP)) { finish(); return; }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+
+  // Pojistka: requestAnimationFrame v záložce na pozadí neběží. Ať se stane
+  // cokoli, loader nesmí zůstat viset přes obsah.
+  setTimeout(finish, 3000);
 }
 
 /* ═══════════ 2. KURZOR + MAGNETICKÁ TLAČÍTKA ═══════════ */
