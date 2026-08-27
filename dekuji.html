@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Poptávka odeslána — Tomáš Petera</title>
+<meta name="description" content="Děkuji za poptávku. Ozvu se do 24 hodin.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#050409">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon512.png">
+<link rel="apple-touch-icon" href="/appletouchicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+  /* Jediné, co tahle stránka potřebuje navíc — zbytek jede na tvém style.css. */
+  .thanks{ padding-block:2rem 6rem; }
+  .thanks__inner{ max-width:44rem; }
+  .thanks__cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.5rem; }
+  .thanks .brief{ margin-top:3rem; max-width:34rem; }
+  .thanks__next{
+    margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--line);
+    max-width:44rem;
+  }
+  .thanks__next h2{
+    font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:600;
+    letter-spacing:-.01em; margin-bottom:1rem;
+  }
+  .thanks__steps{ list-style:none; display:grid; gap:.9rem; }
+  .thanks__steps li{
+    display:grid; grid-template-columns:auto 1fr; gap:.9rem; align-items:baseline;
+    color:var(--ink-2); font-size:.97rem;
+  }
+  .thanks__steps b{
+    font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.14em;
+    color:var(--neon-2); font-weight:400;
+  }
+</style>
+</head>
+
+<body>
+
+<a href="#thanks" class="skip">Přeskočit na obsah</a>
+
+<div class="loader" id="loader">
+  <div class="loader__mark">TP</div>
+  <div class="loader__bar"><span id="loaderBar"></span></div>
+</div>
+
+<div class="cursor" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress"><span id="progressBar"></span></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="nav__logo" data-cursor="hover">Tomáš&nbsp;Petera<i>®</i></a>
+  <nav class="nav__links">
+    <a href="prace.html" data-cursor="hover">Práce</a>
+    <a href="index.html#services" data-cursor="hover">Služby</a>
+    <a href="index.html#pricing" data-cursor="hover">Ceník</a>
+  </nav>
+  <a href="index.html#contact" class="btn btn--sm" data-cursor="hover" data-magnetic><span>Poptávka</span></a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu">
+  <a href="index.html">Domů</a>
+  <a href="prace.html">Práce</a>
+  <a href="index.html#about">O mně</a>
+  <a href="index.html#services">Služby</a>
+  <a href="index.html#pricing">Ceník</a>
+  <a href="index.html#contact">Poptávka</a>
+</div>
+
+<main id="top">
+
+<section class="page-head thanks" id="thanks">
+  <div class="container thanks__inner">
+    <a href="index.html" class="back" data-cursor="hover"><i>&#8592;</i> Zpět na hlavní stránku</a>
+    <p class="eyebrow reveal">Poptávka odeslána</p>
+    <h1 class="page-head__title reveal">Díky, mám to.<br><span class="accent">Ozvu se do 24 hodin.</span></h1>
+    <p class="lead reveal">
+      Poptávka dorazila. Přečtu si ji ještě dnes a odepíšu ti s prvním nástřelem,
+      rozsahem a cenou — ne šablonou, ale konkrétně k tomu, co jsi napsal.
+    </p>
+
+    <div class="thanks__next reveal">
+      <h2>Co bude dál</h2>
+      <ul class="thanks__steps">
+        <li><b>01</b><span>Ozvu se ti mailem, nejpozději do 24 hodin.</span></li>
+        <li><b>02</b><span>Domluvíme si krátký hovor o značce, cílovce a rozpočtu — zdarma a nezávazně.</span></li>
+        <li><b>03</b><span>Z toho postavím zadání a dostaneš cenu i termín na papíře.</span></li>
+      </ul>
+    </div>
+
+    <a class="brief reveal" href="assets/dotaznik/dotaznik-znacka.docx"
+       download="Zakladni-informace-o-znacce.docx" data-cursor="hover" data-spot>
+      <span class="brief__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/>
+        </svg>
+      </span>
+      <span class="brief__text">
+        <b>Než se ozvu — stáhni si dotazník značky</b>
+        <em>36 otázek · DOCX · zdarma</em>
+        <p>Vyplň ho ve svém tempu a pošli mi ho v odpovědi. Ušetří nám oběma jeden celý
+           hovor a nabídku dostaneš rovnou konkrétní.</p>
+      </span>
+    </a>
+
+    <div class="thanks__cta reveal">
+      <a href="prace.html" class="btn btn--primary" data-cursor="hover" data-magnetic><span>Prohlédnout portfolio</span></a>
+      <a href="index.html" class="btn btn--ghost" data-cursor="hover" data-magnetic><span>Zpět na web</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <b>Tomáš Petera<i>&#174;</i></b>
+      <p>Vizuální identity, kampaně a packaging.<br>Praha, Česká republika.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Web</h4>
+      <a href="prace.html">Práce</a><a href="index.html#about">O mně</a><a href="index.html#services">Služby</a><a href="index.html#pricing">Ceník</a>
+    </div>
+    <div class="footer__col">
+      <h4>Kontakt</h4>
+      <a href="mailto:petera.tomas11@gmail.com">petera.tomas11@gmail.com</a>
+      <a href="tel:+420722221334">+420 722 221 334</a>
+      <a href="https://www.linkedin.com/in/tomaspetera" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer__col">
+      <h4>Praha</h4>
+      <p class="clock" id="clock">--:--</p>
+      <p class="footer__status"><span class="dot"></span> Beru nové projekty</p>
+    </div>
+  </div>
+  <div class="footer__bar container">
+    <span>&#169; <span id="year">2026</span> Tomáš Petera</span>
+    <a href="#top" data-cursor="hover">Zpět nahoru &#8593;</a>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
