@@ -631,7 +631,7 @@ section{ position:relative; }
   content:''; position:absolute; inset:0; opacity:0; transition:opacity .5s; pointer-events:none;
   background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(168,85,247,.09),transparent 60%);
 }
-.brief:hover{ border-color:rgba(168,85,247,.5); transform:translateY(-3px); }
+.brief:hover{ border-color:rgba(168,85,247,.35); transform:translateY(-2px); }
 .brief:hover::before{ opacity:1; }
 .brief__icon{
   flex:0 0 42px; height:42px; border-radius:10px; display:grid; place-items:center;
@@ -649,16 +649,17 @@ section{ position:relative; }
 }
 .brief__text p{ margin-top:.7rem; font-size:.85rem; color:var(--ink-2); }
 
-.brief__alt{                       /* sourozenec karty, ne její vnitřek —
-                                      odkaz v odkazu je neplatné HTML */
-  margin-top:.8rem; padding-left:.2rem;
-  font-size:.79rem; color:var(--muted);
+/* dvě stažení uvnitř karty */
+.brief__links{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.1rem; }
+.brief__links a{
+  padding:.42rem 1rem; border-radius:100px;
+  border:1px solid var(--line); background:rgba(255,255,255,.02);
+  font-size:.79rem; color:var(--ink-2); white-space:nowrap;
+  transition:border-color .35s,background .35s,color .35s;
 }
-.brief__alt a{
-  color:var(--ink-2); border-bottom:1px solid var(--line);
-  transition:color .35s,border-color .35s;
+.brief__links a:hover{
+  border-color:rgba(168,85,247,.55); background:var(--neon-dim); color:var(--ink);
 }
-.brief__alt a:hover{ color:var(--neon-2); border-color:rgba(168,85,247,.5); }
 
 /* formulář */
 .form{ display:flex; flex-direction:column; gap:1.1rem; }

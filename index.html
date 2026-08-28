@@ -630,21 +630,24 @@
       </div>
 
       <!-- ── DOTAZNÍK KE STAŽENÍ ── -->
-      <a class="brief reveal" href="assets/dotaznik/dotaznik-znacka.docx"
-         download="Zakladni-informace-o-znacce.docx" data-cursor="hover" data-spot>
+      <!-- Karta je <div>, ne <a> — uvnitř jsou dva odkazy a odkaz v odkazu
+           je neplatné HTML. -->
+      <div class="brief reveal" data-spot>
         <span class="brief__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/>
           </svg>
         </span>
-        <span class="brief__text">
+        <div class="brief__text">
           <b>Stáhnout dotazník značky</b>
-          <em>36 otázek · DOCX i PDF · zdarma</em>
+          <em>36 otázek · zdarma</em>
           <p>Vyplň ho ve svém tempu a přilož k poptávce. Ušetří nám oběma jeden celý hovor a nabídku dostaneš rovnou konkrétní.</p>
-        </span>
-      </a>
-      <p class="brief__alt reveal">Nemáš Word? <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">Stáhni PDF</a></p>
-        
+          <span class="brief__links">
+            <a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx" data-cursor="hover">Stáhnout DOCX</a>
+            <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">Stáhnout PDF</a>
+          </span>
+        </div>
+      </div>
     </div>
 
     <!--
