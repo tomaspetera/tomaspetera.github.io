@@ -1,26 +1,15 @@
-Loga klientů pro posouvající se pás v sekci „Vybraní klienti".
+Pás „Vybraní klienti" jede ZÁMĚRNĚ textem, ne logy. Složka je prázdná.
 
-CO UŽ TU JE
-  tanec-praha.png ........ z divadloponec.cz
-  czech-dance-platform.png z tanecniplatforma.cz (jen 247x32, na retina měkké)
-  bohempia.svg ........... z bohempia.com
-  pharmaport.png ......... z pharmaport.cz
-  clnk.png ............... z lekarnici.cz (vyklíčované bílé pozadí)
-  mitogena.svg ........... z mitogena.cz
+PROČ
+  Loga klientů mají různé optické váhy, proporce a barvy. Pás je všechna
+  přebarvuje na jednu bílou (filter: brightness(0) invert(1)), aby se
+  nepraly s paletou webu — jenže vedle sebe pak stejně působí rozdrbaně:
+  jeden nápis široký, druhý úzký, třetí s obrázkovou značkou.
+  Jednotná typografie vypadá klidněji a je konzistentní se zbytkem webu.
+  Navíc odpadá řešení souhlasu u větších značek.
 
-CO CHYBÍ (jede textem)
-  Young Lions, Divadlo PONEC, Sev.en, LabePharm, Grow Smart, Kreativní kancl,
-  Viadukt Karlín
-
-FORMÁT
-  - nejlépe SVG, jinak PNG s průhledným pozadím
-  - jednobarevné nebo aspoň dobře čitelné po přebarvení na bílou
-  - CSS přebarví všechno na bílou přes filter: brightness(0) invert(1),
-    takže barevné ilustrace (např. logo Waflárny) se změní v bílou placku
-    a použít nejdou — potřebuješ verzi s nápisem, ne obrázkovou
-
-JAK ZAPOJIT
-  V index.html najdi <div class="marquee__track"> a u dané značky nahraď
+KDYBYS TO PŘESTO CHTĚL ZKUSIT
+  Do index.html, <div class="marquee__track">, u dané značky nahraď
 
       <span class="logo">Young Lions</span>
 
@@ -29,10 +18,19 @@ JAK ZAPOJIT
       <span class="logo"><img src="assets/img/loga/young-lions.svg"
         alt="Young Lions" width="…" height="…" loading="lazy"></span>
 
-  Text a obrázky se dají míchat. Pás se v JS sám zdvojuje, každou značku
-  uveď jen jednou.
+  Text a obrázky se dají míchat, takže to jde i po jednom.
+  Pás se v JS sám zdvojuje — každou značku uveď jen jednou.
+
+  Co musí logo splňovat:
+  - SVG, nebo PNG s průhledným pozadím
+  - čitelné i po přebarvení na plnou bílou. Obrázkové značky
+    (např. logo Waflárny) se změní v bílou placku a nefungují —
+    potřebuješ verzi s nápisem.
+
+  Loga těchto značek jsem dřív stáhl z jejich webů a fungovala:
+    divadloponec.cz (pozor, je to logo Tanec Praha), tanecniplatforma.cz,
+    bohempia.com, pharmaport.cz, lekarnici.cz, mitogena.cz
 
 POZOR NA PRÁVA
-  Logo klienta smíš na webu ukázat jako referenci, ale u větších značek
-  (Sev.en, Young Lions) si radši vyžádej souhlas — mají pravidla, jak se
-  logo smí zobrazovat.
+  Logo klienta smíš ukázat jako referenci, ale u větších značek
+  (Sev.en, Young Lions) si radši vyžádej souhlas.

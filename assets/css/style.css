@@ -521,6 +521,40 @@ section{ position:relative; }
   font-size:.62rem; letter-spacing:.1em; color:var(--muted);
 }
 
+/* ═══ REFERENCE ═══ */
+.refs{ padding:6rem 0 7rem; }
+.refs__grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:3.5rem;
+  align-items:stretch;
+}
+.ref{
+  position:relative; overflow:hidden;
+  padding:2.2rem 2rem; border:1px solid var(--line); border-radius:10px;
+  display:flex; flex-direction:column; gap:1.6rem;
+  transition:border-color .45s,transform .45s var(--ease);
+}
+.ref::before{
+  content:''; position:absolute; inset:0; opacity:0; transition:opacity .5s; pointer-events:none;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(168,85,247,.08),transparent 60%);
+}
+.ref:hover{ transform:translateY(-4px); border-color:var(--line-2); }
+.ref:hover::before{ opacity:1; }
+.ref::after{                       /* uvozovka jako tichá dekorace */
+  content:'E'; position:absolute; top:.4rem; right:1.2rem;
+  font-family:'Space Grotesk',sans-serif; font-size:5rem; line-height:1;
+  color:rgba(255,255,255,.035); pointer-events:none;
+}
+.ref blockquote{
+  font-size:1rem; line-height:1.7; color:var(--ink);
+  position:relative; z-index:1; margin:0;
+}
+.ref figcaption{
+  margin-top:auto; padding-top:1.2rem; border-top:1px solid var(--line);
+  display:flex; flex-direction:column; gap:.2rem;
+}
+.ref figcaption b{ font-family:'Space Grotesk',sans-serif; font-size:.95rem; font-weight:500; }
+.ref figcaption span{ font-size:.8rem; color:var(--muted); }
+
 /* ═══ CENÍK ═══ */
 .pricing{ padding:5rem 0 8rem; }
 .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:3.5rem; align-items:stretch; }
@@ -741,6 +775,7 @@ section{ position:relative; }
   .step:last-child{ padding-bottom:0; }
   .step__node{ top:0; left:-2.65rem; }
   .step__ghost{ top:-.6rem; right:.2rem; }
+  .refs__grid{ grid-template-columns:1fr; max-width:560px; }
   .plans{ grid-template-columns:1fr; max-width:520px; }
   .contact__grid{ grid-template-columns:1fr; gap:3rem; }
   .footer__inner{ grid-template-columns:1fr 1fr; }

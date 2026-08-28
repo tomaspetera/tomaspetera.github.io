@@ -40,6 +40,16 @@ og-cover.jpg — náhledový obrázek při sdílení odkazu. LinkedIn a Facebook
 
 Ze stejného důvodu nepřesouvej ani index.html a prace.html. Google je má zaindexované a GitHub Pages neumí přesměrování — starý odkaz by už nikdy nefungoval.
 
+## Reference
+
+Sekce na reference je v index.html hotová, ale zakomentovaná, aby se na web nedostaly vymyšlené citace. Až budeš mít aspoň dvě skutečné, postup je popsaný v komentáři přímo nad tou sekcí — přepsat texty, smazat dvě řádky komentáře, přidat odkaz do boční navigace a přečíslovat sekce pod ní.
+
+Jak o citaci požádat, ať za něco stojí: nechtěj "napiš mi referenci", z toho vznikne obecná chvála. Zeptej se, co klient řešil předtím, co se změnilo potom a co by překvapilo někoho dalšího. Z odpovědí vyber dvě tři věty a nech si je odsouhlasit.
+
+## Pás klientů
+
+Značky v pásu jedou záměrně textem, ne logy. Loga mají různé váhy a barvy, vedle sebe působí rozdrbaně a u větších značek by bylo potřeba řešit souhlas. Kdybys to chtěl přesto zkusit, návod je v assets/img/loga/CTI-ME.txt.
+
 ## Jak web aktualizovat
 
 Nahrávací stránka určuje cílovou složku. Do kořene: Add file, Upload files. Do assets/js: otevři nejdřív tu složku a teprve tam Add file, Upload files. Soubor se stejným názvem se přepíše.

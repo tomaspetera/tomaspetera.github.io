@@ -258,27 +258,26 @@
     <p class="brands__label reveal">Vybraní klienti a spolupráce</p>
   </div>
   <!--
-    LOGA: čtyři značky mají obrázek, zbytek jede textem. Doplnit další =
-    soubor do assets/img/loga/ a text nahradit za:
-    <img src="assets/img/loga/nazev.svg" alt="Značka" width="…" height="…" loading="lazy">
-    Nejlépe SVG nebo PNG s průhledností — CSS je stejně přebarví na bílou.
-    Pás se v JS sám zdvojuje, každou značku uveď jen jednou.
+    Značky jedou záměrně textem, ne logy. Loga klientů mají různé optické
+    váhy a barvy; sjednocené na bílou vedle sebe působí rozdrbaně a navíc
+    by u větších značek bylo potřeba řešit souhlas. Kdybys to chtěl přesto
+    zkusit, návod je v assets/img/loga/CTI-ME.txt.
   -->
   <div class="marquee" id="marquee">
     <div class="marquee__track">
       <span class="logo">Young Lions</span>
-      <span class="logo"><img src="assets/img/loga/tanec-praha.png" alt="Tanec Praha" width="1267" height="416" loading="lazy"></span>
+      <span class="logo">Tanec Praha</span>
       <span class="logo">Divadlo PONEC</span>
-      <span class="logo"><img src="assets/img/loga/czech-dance-platform.png" alt="Czech Dance Platform" width="247" height="32" loading="lazy"></span>
-      <span class="logo"><img src="assets/img/loga/bohempia.svg" alt="Bohempia" width="1440" height="384" loading="lazy"></span>
+      <span class="logo">Czech Dance Platform</span>
+      <span class="logo">Bohempia</span>
       <span class="logo">Sev.en</span>
-      <span class="logo"><img src="assets/img/loga/clnk.png" alt="Česká lékárnická komora" width="310" height="120" loading="lazy"></span>
-      <span class="logo"><img src="assets/img/loga/pharmaport.png" alt="PharmaPort" width="1053" height="253" loading="lazy"></span>
+      <span class="logo">ČLnK</span>
+      <span class="logo">PharmaPort</span>
       <span class="logo">LabePharm</span>
       <span class="logo">Grow Smart</span>
       <span class="logo">Kreativní kancl</span>
       <span class="logo">Viadukt Karlín</span>
-      <span class="logo"><img src="assets/img/loga/mitogena.svg" alt="Mitogena" width="103" height="32" loading="lazy"></span>
+      <span class="logo">Mitogena</span>
     </div>
   </div>
 </section>
@@ -485,6 +484,69 @@
     </div>
   </div>
 </section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     REFERENCE — ZATÍM VYPNUTO
+     ══════════════════════════════════════════════════════════════════
+     Sekce je hotová, ale schválně zakomentovaná, aby se na web omylem
+     nedostaly vymyšlené citace. Vymyšlená reference je to nejhorší,
+     co si na portfoliu můžeš udělat — klient si ji ověří jedním mailem.
+
+     AŽ BUDEŠ MÍT ALESPOŇ DVĚ SKUTEČNÉ CITACE:
+       1. přepiš texty, jména, role a firmy níž
+       2. smaž řádek s otevřením komentáře nad touhle sekcí
+          a řádek s jeho ukončením pod ní
+       3. v <nav class="dots"> přidej odkaz na #reference,
+          ať sekce naskočí i do boční navigace
+       4. přečísluj popisky sekcí pod ní (ceník na 06, poptávka na 07)
+
+     JAK O CITACI POŽÁDAT, AŤ ZA NĚCO STOJÍ
+       Nepiš „napsal bys mi referenci" — z toho vznikne obecná chvála.
+       Zeptej se na tři konkrétní věci:
+         · Co jste řešili, než jsme začali?
+         · Co se změnilo potom?
+         · Co by tě překvapilo, kdyby to věděl někdo další?
+       Z odpovědí vyber dvě až tři věty. Vždycky si nech text odsouhlasit.
+
+     Nejcennější je konkrétnost. „Poptávky nám vyskočily" je slabé.
+     „Za tři měsíce po spuštění nám přišlo dvakrát tolik poptávek" prodává.
+     ══════════════════════════════════════════════════════════════════ -->
+<!--
+<section class="refs" id="reference">
+  <div class="container">
+    <p class="eyebrow reveal">05 — Reference</p>
+    <h2 class="h2 reveal">Co říkají lidé,<br><span class="accent">se kterými jsem dělal.</span></h2>
+
+    <div class="refs__grid">
+
+      <figure class="ref reveal" data-spot>
+        <blockquote>SEM PATŘÍ SKUTEČNÁ CITACE KLIENTA — dvě až tři věty, konkrétně o tom, co se změnilo.</blockquote>
+        <figcaption>
+          <b>Jméno Příjmení</b>
+          <span>role, firma</span>
+        </figcaption>
+      </figure>
+
+      <figure class="ref reveal" data-spot>
+        <blockquote>SEM PATŘÍ SKUTEČNÁ CITACE KLIENTA — dvě až tři věty, konkrétně o tom, co se změnilo.</blockquote>
+        <figcaption>
+          <b>Jméno Příjmení</b>
+          <span>role, firma</span>
+        </figcaption>
+      </figure>
+
+      <figure class="ref reveal" data-spot>
+        <blockquote>SEM PATŘÍ SKUTEČNÁ CITACE KLIENTA — dvě až tři věty, konkrétně o tom, co se změnilo.</blockquote>
+        <figcaption>
+          <b>Jméno Příjmení</b>
+          <span>role, firma</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+-->
 
 <!-- ══════ CENÍK ══════ -->
 <section class="pricing" id="pricing">
