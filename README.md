@@ -20,7 +20,7 @@ assets/js/main.js — animace, filtr portfolia, lightbox, obsluha formuláře
 
 assets/img/ — obrázky projektů. Podsložka ring jsou desky 3D prstence na úvodu, podsložka loga jsou loga klientů.
 
-assets/dotaznik/ — dotazník značky ke stažení
+assets/dotaznik/ — dotazník značky ke stažení, ve verzi DOCX i PDF. Když ho budeš měnit, nahraj obě — PDF se z Wordu udělá přes Soubor, Uložit jako, PDF.
 
 ## Tohle nikdy nemaž a nepřesouvej
 

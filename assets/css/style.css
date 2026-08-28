@@ -649,6 +649,17 @@ section{ position:relative; }
 }
 .brief__text p{ margin-top:.7rem; font-size:.85rem; color:var(--ink-2); }
 
+.brief__alt{                       /* sourozenec karty, ne její vnitřek —
+                                      odkaz v odkazu je neplatné HTML */
+  margin-top:.8rem; padding-left:.2rem;
+  font-size:.79rem; color:var(--muted);
+}
+.brief__alt a{
+  color:var(--ink-2); border-bottom:1px solid var(--line);
+  transition:color .35s,border-color .35s;
+}
+.brief__alt a:hover{ color:var(--neon-2); border-color:rgba(168,85,247,.5); }
+
 /* formulář */
 .form{ display:flex; flex-direction:column; gap:1.1rem; }
 .form__row{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
