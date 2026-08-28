@@ -20,7 +20,9 @@
 
 <style>
   /* Jediné, co tahle stránka potřebuje navíc — zbytek jede na tvém style.css. */
-  .thanks{ padding-block:2rem 6rem; }
+  /* jen spodek — horní odsazení drží .page-head, jinak by obsah
+     zalezl pod pevnou hlavičku */
+  .thanks{ padding-bottom:6rem; }
   .thanks__inner{ max-width:44rem; }
   .thanks__cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.5rem; }
   .thanks .brief{ margin-top:3rem; max-width:34rem; }
