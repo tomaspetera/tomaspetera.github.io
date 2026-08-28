@@ -1,27 +1,38 @@
-Sem patří loga klientů pro posouvající se pás v sekci „Vybraní klienti".
+Loga klientů pro posouvající se pás v sekci „Vybraní klienti".
+
+CO UŽ TU JE
+  tanec-praha.png ........ z divadloponec.cz
+  czech-dance-platform.png z tanecniplatforma.cz (jen 247x32, na retina měkké)
+  bohempia.svg ........... z bohempia.com
+  pharmaport.png ......... z pharmaport.cz
+  clnk.png ............... z lekarnici.cz (vyklíčované bílé pozadí)
+  mitogena.svg ........... z mitogena.cz
+
+CO CHYBÍ (jede textem)
+  Young Lions, Divadlo PONEC, Sev.en, LabePharm, Grow Smart, Kreativní kancl,
+  Viadukt Karlín
 
 FORMÁT
   - nejlépe SVG, jinak PNG s průhledným pozadím
-  - jednobarevné bílé nebo světlé (pás je přebarví na bílou přes CSS filtr)
-  - výška originálu klidně 200 px, CSS je stáhne na ~26 px
-  - pojmenování bez diakritiky: young-lions.svg, tanec-praha.svg, ponec.svg, …
+  - jednobarevné nebo aspoň dobře čitelné po přebarvení na bílou
+  - CSS přebarví všechno na bílou přes filter: brightness(0) invert(1),
+    takže barevné ilustrace (např. logo Waflárny) se změní v bílou placku
+    a použít nejdou — potřebuješ verzi s nápisem, ne obrázkovou
 
-JAK JE ZAPOJIT
-  V index.html najdi <div class="marquee__track"> a u dané značky
-  nahraď text obrázkem:
+JAK ZAPOJIT
+  V index.html najdi <div class="marquee__track"> a u dané značky nahraď
 
       <span class="logo">Young Lions</span>
 
   za
 
-      <span class="logo"><img src="assets/img/loga/young-lions.svg" alt="Young Lions"></span>
+      <span class="logo"><img src="assets/img/loga/young-lions.svg"
+        alt="Young Lions" width="…" height="…" loading="lazy"></span>
 
-  Text a obrázky se dají míchat — co nemáš jako soubor, nech textem.
-  Pás se v JS sám zdvojuje, takže každou značku uveď jen jednou.
+  Text a obrázky se dají míchat. Pás se v JS sám zdvojuje, každou značku
+  uveď jen jednou.
 
 POZOR NA PRÁVA
   Logo klienta smíš na webu ukázat jako referenci, ale u větších značek
-  (Sev.en, Young Lions) si radši vyžádej souhlas nebo brand manuál —
-  některé mají pravidla, jak se logo smí zobrazovat.
-
-Tenhle soubor můžeš smazat.
+  (Sev.en, Young Lions) si radši vyžádej souhlas — mají pravidla, jak se
+  logo smí zobrazovat.
