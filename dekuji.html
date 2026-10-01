@@ -13,10 +13,13 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon512.png">
 <link rel="apple-touch-icon" href="/appletouchicon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=20261002">
 
 <style>
   /* Jediné, co tahle stránka potřebuje navíc — zbytek jede na tvém style.css. */
@@ -86,18 +89,15 @@
   <div class="container thanks__inner">
     <a href="index.html" class="back" data-cursor="hover"><i>&#8592;</i> Zpět na hlavní stránku</a>
     <p class="eyebrow reveal">Poptávka odeslána</p>
-    <h1 class="page-head__title reveal">Díky, mám to.<br><span class="accent">Ozvu se do 24 hodin.</span></h1>
-    <p class="lead reveal">
-      Poptávka dorazila. Přečtu si ji ještě dnes a odepíšu ti s prvním nástřelem,
-      rozsahem a cenou — ne šablonou, ale konkrétně k tomu, co jsi napsal.
-    </p>
+    <h1 class="page-head__title reveal">Díky za zprávu.<br><span class="accent">Teď je řada na mně.</span></h1>
+    <p class="lead reveal">Poptávka je odeslaná. Projdu si tvoje zadání a ozvu se na uvedený e-mail. Společně si ujasníme, co potřebuješ, a domluvíme další postup.</p>
 
     <div class="thanks__next reveal">
       <h2>Co bude dál</h2>
       <ul class="thanks__steps">
-        <li><b>01</b><span>Ozvu se ti mailem, nejpozději do 24 hodin.</span></li>
+        <li><b>01</b><span>Ozvu se ti e-mailem a domluvíme další krok.</span></li>
         <li><b>02</b><span>Domluvíme si krátký hovor o značce, cílovce a rozpočtu — zdarma a nezávazně.</span></li>
-        <li><b>03</b><span>Z toho postavím zadání a dostaneš cenu i termín na papíře.</span></li>
+        <li><b>03</b><span>Připravím nabídku s jasným rozsahem, cenou a termínem.</span></li>
       </ul>
     </div>
 
@@ -112,7 +112,7 @@
       <div class="brief__text">
         <b>Než se ozvu — stáhni si dotazník značky</b>
         <em>36 otázek · zdarma</em>
-        <p>Vyplň ho ve svém tempu a pošli mi ho v odpovědi. Ušetří nám oběma jeden celý hovor a nabídku dostaneš rovnou konkrétní.</p>
+        <p>Vyplň ho ve svém tempu a pošli mi ho v odpovědi. Pomůže nám ujasnit si zadání. Vyplnění je dobrovolné.</p>
         <span class="brief__links">
           <a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx" data-cursor="hover">Stáhnout DOCX</a>
           <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">Stáhnout PDF</a>
@@ -132,7 +132,7 @@
   <div class="container footer__inner">
     <div>
       <b>Tomáš Petera<i>&#174;</i></b>
-      <p>Vizuální identity, kampaně a packaging.<br>Praha, Česká republika.<br>IČO: 09863303</p>
+      <p>Vizuální identity, kampaně, obaly a weby.<br>Praha, Česká republika.<br>IČO: 09863303</p>
     </div>
     <div class="footer__col">
       <h4>Web</h4>
@@ -156,6 +156,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=20261002"></script>
 </body>
 </html>

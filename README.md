@@ -10,7 +10,7 @@ Stránky leží v kořeni, všechno ostatní v assets.
 
 index.html — jednostránkovka: hero, o mně, práce, služby, proces, ceník, poptávka
 
-prace.html — portfolio, 13 projektů
+prace.html — portfolio, 18 projektů
 
 dekuji.html — stránka, na kterou se návštěvník dostane po odeslání poptávky
 
@@ -18,7 +18,9 @@ assets/css/style.css — veškerý vzhled webu
 
 assets/js/main.js — animace, filtr portfolia, lightbox, obsluha formuláře
 
-assets/img/ — obrázky projektů. Podsložka ring jsou desky 3D prstence na úvodu, podsložka loga jsou loga klientů.
+assets/fonts/ — písma Space Grotesk, Inter a JetBrains Mono, hostovaná přímo u nás (ne na Googlu). Jsou zúžená na české znaky a používané váhy. Nemaž je, web na nich stojí.
+
+assets/img/ — obrázky projektů, každý ve velké (1600 px) a malé (-800) verzi. Podsložka ring jsou desky 3D prstence na úvodu, podsložka loga jsou loga klientů.
 
 assets/dotaznik/ — dotazník značky ke stažení, ve verzi DOCX i PDF. Když ho budeš měnit, nahraj obě — PDF se z Wordu udělá přes Soubor, Uložit jako, PDF.
 
@@ -46,6 +48,14 @@ Sekce na reference je v index.html hotová, ale zakomentovaná, aby se na web ne
 
 Jak o citaci požádat, ať za něco stojí: nechtěj "napiš mi referenci", z toho vznikne obecná chvála. Zeptej se, co klient řešil předtím, co se změnilo potom a co by překvapilo někoho dalšího. Z odpovědí vyber dvě tři věty a nech si je odsouhlasit.
 
+## Ceny v ceníku
+
+Ceny jsou záměrně rozmazané a ukážou se až po najetí myší na kartu (na mobilu po klepnutí na cenu, na pár sekund). Řídí to CSS u .plan__price-val a krátký skript v main.js. Pozor na pravidla typu filter:none s !important na .plan__price-val nebo display:none na .plan__price-hint — cenu by odkryla napořád. Jednou se to při aktualizaci stalo.
+
+## Verze CSS a JS
+
+V index.html, prace.html a dekuji.html jsou odkazy na style.css a main.js s číslem verze (?v=20261002). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech třech souborech (třeba na dnešní datum).
+
 ## Pás klientů
 
 Značky v pásu jedou záměrně textem, ne logy. Loga mají různé váhy a barvy, vedle sebe působí rozdrbaně a u větších značek by bylo potřeba řešit souhlas. Kdybys to chtěl přesto zkusit, návod je v assets/img/loga/CTI-ME.txt.
@@ -53,6 +63,8 @@ Značky v pásu jedou záměrně textem, ne logy. Loga mají různé váhy a bar
 ## Jak web aktualizovat
 
 Nahrávací stránka určuje cílovou složku. Do kořene: Add file, Upload files. Do assets/js: otevři nejdřív tu složku a teprve tam Add file, Upload files. Soubor se stejným názvem se přepíše.
+
+Rychlejší cesta: na nahrávací stránce v kořeni přetáhni najednou celou složku assets i jednotlivé soubory z kořene. GitHub zachová podsložky. Při jednom nahrání je limit 100 souborů.
 
 Změny se na webu projeví zhruba do minuty.
 

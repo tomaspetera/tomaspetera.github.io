@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Tomáš Petera — grafický designér Praha | Logo a vizuální identita</title>
-<meta name="description" content="Tvořím loga, vizuální identity, kampaně, obaly i weby, které fungují v ulici i na displeji. Grafický designér na volné noze, Praha.">
+<meta name="description" content="Grafický design pro značky, které chtějí být vidět. Tomáš Petera — vizuální identity, kampaně, obaly a weby. Prohlédni si projekty a pojďme probrat ten tvůj.">
 <meta name="theme-color" content="#050409">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
@@ -15,7 +15,7 @@
 <link rel="canonical" href="https://tomaspetera.cz/">
 
 <meta property="og:title" content="Tomáš Petera — grafický designér Praha">
-<meta property="og:description" content="Logo, vizuální identita, kampaně a packaging. Značky, které drží pohromadě.">
+<meta property="og:description" content="Grafický design pro značky, které chtějí být vidět. Tomáš Petera — vizuální identity, kampaně, obaly a weby. Prohlédni si projekty a pojďme probrat ten tvůj.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tomaspetera.cz/">
 <meta property="og:site_name" content="Tomáš Petera">
@@ -27,14 +27,17 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tomáš Petera — grafický designér Praha">
-<meta name="twitter:description" content="Logo, vizuální identita, kampaně a packaging.">
+<meta name="twitter:description" content="Grafický design pro značky, které chtějí být vidět. Tomáš Petera — vizuální identity, kampaně, obaly a weby. Prohlédni si projekty a pojďme probrat ten tvůj.">
 <meta name="twitter:image" content="https://tomaspetera.cz/og-cover.jpg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/ring/younglions.webp">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20261002">
 
 <style>
   /* Řádek "Grafický designér · Praha" je nově uvnitř <h1> — kvůli vyhledávačům.
@@ -193,18 +196,18 @@
   <div class="hero__stage">
     <div class="ring-wrap" id="ringWrap" aria-hidden="true">
       <div class="ring" id="ring">
-        <div class="ring__face" style="--i:0"><img src="assets/img/ring/younglions.webp" alt="" loading="eager" width="640" height="360"></div>
-        <div class="ring__face" style="--i:1"><img src="assets/img/ring/viadukt.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:2"><img src="assets/img/ring/pharmaport.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:3"><img src="assets/img/ring/bohempia.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:4"><img src="assets/img/ring/povalec.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:5"><img src="assets/img/ring/labepharm.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:6"><img src="assets/img/ring/ameliora.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:7"><img src="assets/img/ring/ecoffee.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:8"><img src="assets/img/ring/den-usmevu.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:9"><img src="assets/img/ring/sisters-conspiracy.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:10"><img src="assets/img/ring/fits.webp" alt="" width="640" height="360"></div>
-        <div class="ring__face" style="--i:11"><img src="assets/img/ring/kutna-hora.webp" alt="" width="640" height="360"></div>
+        <div class="ring__face" style="--i:0"><img src="assets/img/ring/younglions.webp" alt="" width="640" height="360" decoding="async" fetchpriority="high"></div>
+        <div class="ring__face" style="--i:1"><img src="assets/img/ring/lekiq.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:2"><img src="assets/img/ring/clnk.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:3"><img src="assets/img/ring/therrapia.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:4"><img src="assets/img/ring/ponec.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:5"><img src="assets/img/ring/cdp.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:6"><img src="assets/img/ring/ameliora.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:7"><img src="assets/img/ring/ecoffee.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:8"><img src="assets/img/ring/den-usmevu.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:9"><img src="assets/img/ring/sisters-conspiracy.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:10"><img src="assets/img/ring/fits.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:11"><img src="assets/img/ring/kutna-hora.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
       </div>
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
@@ -213,15 +216,12 @@
       <div class="hero__inner">
         <h1 class="hero__title">
           <span class="hero__eyebrow">Grafický designér · Praha</span>
-          <span class="line"><span class="split">Značky, které fungují</span></span>
-          <span class="line"><span class="split">v ulici i na displeji.</span></span>
+          <span class="line"><span class="split">Ať tvoji značku</span></span>
+          <span class="line"><span class="split">nejde přehlédnout.</span></span>
         </h1>
-        <p class="hero__sub">
-          Vizuální identity, kampaně a obaly. Od strategie po poslední aplikaci —
-          všechno v jednom systému, který drží pohromadě.
-        </p>
+        <p class="hero__sub">Navrhnu identitu, kampaň i web, ze kterých bude jasné, kdo jsi a proč si vybrat právě tebe. Od prvního nápadu po podklady připravené k použití.</p>
         <div class="hero__cta">
-          <a href="#showcase" class="btn btn--primary" data-cursor="hover" data-magnetic><span>Prohlédnout práci</span></a>
+          <a href="#showcase" class="btn btn--primary" data-cursor="hover" data-magnetic><span>Prohlédnout projekty</span></a>
           <a href="#contact" class="btn btn--ghost" data-cursor="hover" data-magnetic><span>Poptat spolupráci</span></a>
         </div>
       </div>
@@ -229,9 +229,9 @@
 
     <!-- odhalí se, až se mračno rozpadne -->
     <div class="hero__reveal" id="heroReveal">
-      <p class="hero__reveal-kicker">Za každou značkou stojí jeden člověk</p>
+      <p class="hero__reveal-kicker">Tvůj partner pro grafický design</p>
       <h2 class="hero__reveal-title">Tomáš<br><span class="accent">Petera</span></h2>
-      <a href="#showcase" class="hero__reveal-link" data-cursor="hover">Podívej se, co jsem postavil <i>↓</i></a>
+      <a href="#showcase" class="hero__reveal-link" data-cursor="hover">Prohlédni si mou práci <i>↓</i></a>
     </div>
 
     <div class="hero__hint" id="heroHint"><span>scrolluj</span><i></i></div>
@@ -286,26 +286,14 @@
 <section class="about" id="about">
   <div class="container about__grid">
     <div class="about__photo reveal">
-      <img src="assets/img/tomas.webp" alt="Tomáš Petera, grafický designér" width="504" height="630" loading="lazy">
+      <img src="assets/img/tomas.webp" alt="Tomáš Petera, grafický designér" width="504" height="630" loading="lazy" decoding="async">
     </div>
     <div class="about__text">
       <p class="eyebrow reveal">01 — Kdo za tím stojí</p>
-      <h2 class="h2 reveal">Jeden člověk.<br><span class="accent">Žádná agentura.</span></h2>
-      <p class="lead reveal">
-        Jsem designér, který nad prací tráví více času přemýšlením než samotným klikáním.
-        Mým cílem je propojovat znalosti z brandingu, packagingu i digitálu tak, aby vznikla
-        maximální efektivita při minimálních nákladech. Hledám synergie tam, kde ostatní vidí
-        oddělené obory. Baví mě tvořit komplexní systémy, které fungují v offline světě i na displejích.
-      </p>
-      <p class="reveal muted">
-        Prakticky to znamená, že jednáš přímo s autorem. Žádný account manager,
-        žádná tichá pošta, žádná agenturní přirážka — a rozhodnutí padají tentýž den.
-      </p>
-      <ul class="about__facts reveal">
-        <li><b>20+</b><span>značek a kampaní za&nbsp;2024–2025</span></li>
-        <li><b>5</b><span>dlouhodobých spoluprací</span></li>
-        <li><b>4</b><span>obory studia designu a&nbsp;marketingu</span></li>
-      </ul>
+      <h2 class="h2 reveal">Tvoje značka.<br><span class="accent">Moje osobní péče.</span></h2>
+      <p class="lead reveal">Jsem Tomáš Petera, grafický designér z Prahy. Pomáhám značkám najít vlastní výraz a používat ho všude, kde se potkávají s lidmi. Navrhuji identity, kampaně, obaly i weby a přemýšlím přitom nad tím, jak budeš design používat každý den.</p>
+      <p class="reveal muted">Od zadání po předání jednáš přímo se mnou. Vysvětlím ti návrhy, pohlídám návaznost jednotlivých výstupů a můžeme spolu pokračovat i s další kampaní nebo novým produktem.</p>
+      <ul class="about__facts reveal"><li><b>Napřímo</b><span>od prvního hovoru po předání</span></li><li><b>V souvislostech</b><span>tisk, digitál i obaly</span></li><li><b>Dlouhodobě</b><span>podpora pro další rozvoj značky</span></li></ul>
     </div>
   </div>
 </section>
@@ -318,60 +306,17 @@
     </div>
 
     <div class="showcase__stage" id="stage">
-      <figure class="shot">
-        <div class="shot__media"><img src="assets/img/younglions.webp" alt="Young Lions 2024" loading="lazy"></div>
-        <figcaption>
-          <span class="shot__idx">01 / 05</span>
-          <h3>Young Lions 2024</h3>
-          <p>Rebranding kreativní soutěže — vizuální styl, guidebook, výstavní systém, foto i video.</p>
-          <a class="shot__link" href="prace.html" data-cursor="hover">Zobrazit v portfoliu <i>&#8594;</i></a>
-        </figcaption>
-      </figure>
-
-      <figure class="shot">
-        <div class="shot__media"><img src="assets/img/viadukt.webp" alt="Viadukt Karlín" loading="lazy"></div>
-        <figcaption>
-          <span class="shot__idx">02 / 05</span>
-          <h3>Viadukt Karlín</h3>
-          <p>Vizuální identita kulturního centra. Systém „Via ___“ funguje od mobiliáře po Instagram.</p>
-          <a class="shot__link" href="prace.html" data-cursor="hover">Zobrazit v portfoliu <i>&#8594;</i></a>
-        </figcaption>
-      </figure>
-
-      <figure class="shot">
-        <div class="shot__media"><img src="assets/img/pharmaport.webp" alt="PharmaPort" loading="lazy"></div>
-        <figcaption>
-          <span class="shot__idx">03 / 05</span>
-          <h3>PharmaPort</h3>
-          <p>Kompletní branding portálu na hledání práce ve farmacii — od loga po outdoor.</p>
-          <a class="shot__link" href="prace.html" data-cursor="hover">Zobrazit v portfoliu <i>&#8594;</i></a>
-        </figcaption>
-      </figure>
-
-      <figure class="shot">
-        <div class="shot__media"><img src="assets/img/bohempia.webp" alt="Bohempia" loading="lazy"></div>
-        <figcaption>
-          <span class="shot__idx">04 / 05</span>
-          <h3>Bohempia</h3>
-          <p>Kampaň „Where comfort meets style“ pro barefoot boty, včetně produktového focení.</p>
-          <a class="shot__link" href="prace.html" data-cursor="hover">Zobrazit v portfoliu <i>&#8594;</i></a>
-        </figcaption>
-      </figure>
-
-      <figure class="shot">
-        <div class="shot__media"><img src="assets/img/povalec.webp" alt="Festival Povaleč" loading="lazy"></div>
-        <figcaption>
-          <span class="shot__idx">05 / 05</span>
-          <h3>Festival Povaleč</h3>
-          <p>Plakátová kampaň — jeden systém ve třech barevných variantách, snese i hustý line-up.</p>
-          <a class="shot__link" href="prace.html" data-cursor="hover">Zobrazit v portfoliu <i>&#8594;</i></a>
-        </figcaption>
-      </figure>
+<figure class="shot"><div class="shot__media"><img src="assets/img/younglions.webp" srcset="assets/img/younglions-800.webp 800w, assets/img/younglions.webp 1600w" sizes="(max-width: 1080px) 92vw, min(58vw, 800px)" alt="Young Lions 2026 — ukázka projektu" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption><span class="shot__idx">01 / 06</span><h3>Young Lions 2026</h3><p>Dlouhodobá spolupráce s kreativní soutěží. Ročník 2026 propojuje sociální kampaň, registrační vizuály a grafiku pro Awards & Networking Night včetně diplomů.</p><a class="shot__link" href="prace.html#younglions" data-cursor="hover">Prohlédnout projekt <i>→</i></a></figcaption></figure>
+<figure class="shot"><div class="shot__media"><img src="assets/img/lekiq.webp" srcset="assets/img/lekiq-800.webp 800w, assets/img/lekiq.webp 1600w" sizes="(max-width: 1080px) 92vw, min(58vw, 800px)" alt="LekIQ — ukázka projektu" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption><span class="shot__idx">02 / 06</span><h3>LekIQ</h3><p>Vizuální komunikace LekIQ od obalů a merche po společné materiály s Vicks. Ukázka toho, jak může značka držet pohromadě i napříč různými formáty a partnerskou komunikací.</p><a class="shot__link" href="prace.html#lekiq" data-cursor="hover">Prohlédnout projekt <i>→</i></a></figcaption></figure>
+<figure class="shot"><div class="shot__media"><img src="assets/img/clnk.webp" srcset="assets/img/clnk-800.webp 800w, assets/img/clnk.webp 1600w" sizes="(max-width: 1080px) 92vw, min(58vw, 800px)" alt="Česká lékárnická komora — ukázka projektu" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption><span class="shot__idx">03 / 06</span><h3>Česká lékárnická komora</h3><p>Materiály pro každodenní komunikaci České lékárnické komory: publikace, pracovní tiskoviny, vizitky a sociální sítě. Důraz na přehlednost a jednotný vizuální styl.</p><a class="shot__link" href="prace.html#clnk" data-cursor="hover">Prohlédnout projekt <i>→</i></a></figcaption></figure>
+<figure class="shot"><div class="shot__media"><img src="assets/img/therrapia.webp" srcset="assets/img/therrapia-800.webp 800w, assets/img/therrapia.webp 1600w" sizes="(max-width: 1080px) 92vw, min(58vw, 800px)" alt="Therrapia — ukázka projektu" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption><span class="shot__idx">04 / 06</span><h3>Therrapia</h3><p>Web a navazující grafika pro psychoterapeutickou praxi. Přírodní motivy, klidná barevnost a přehledné uspořádání představují služby i osobnost terapeutky.</p><a class="shot__link" href="prace.html#therrapia" data-cursor="hover">Prohlédnout projekt <i>→</i></a></figcaption></figure>
+<figure class="shot"><div class="shot__media"><img src="assets/img/ponec.webp" srcset="assets/img/ponec-800.webp 800w, assets/img/ponec.webp 1600w" sizes="(max-width: 1080px) 92vw, min(58vw, 800px)" alt="Divadlo PONEC — ukázka projektu" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption><span class="shot__idx">05 / 06</span><h3>Divadlo PONEC</h3><p>Vizuální komunikace tanečního divadla: plakáty k zahájení sezony, nabídka lekcí a grafika pro sociální sítě. Jeden rozpoznatelný styl v tisku i na telefonu.</p><a class="shot__link" href="prace.html#ponec" data-cursor="hover">Prohlédnout projekt <i>→</i></a></figcaption></figure>
+<figure class="shot"><div class="shot__media"><img src="assets/img/cdp.webp" srcset="assets/img/cdp-800.webp 800w, assets/img/cdp.webp 1600w" sizes="(max-width: 1080px) 92vw, min(58vw, 800px)" alt="Czech Dance Platform — ukázka projektu" width="1600" height="900" loading="lazy" decoding="async"></div><figcaption><span class="shot__idx">06 / 06</span><h3>Czech Dance Platform</h3><p>Vizuální identita festivalu v praxi: plakáty, program, výzva Open Call na sociálních sítích, taška a šňůrka na krk. Jednotná podoba od první pozvánky po festivalové materiály.</p><a class="shot__link" href="prace.html#cdp" data-cursor="hover">Prohlédnout projekt <i>→</i></a></figcaption></figure>
     </div>
 
     <div class="showcase__foot">
       <a href="prace.html" class="btn btn--ghost" data-cursor="hover" data-magnetic>
-        <span>Zobrazit celé portfolio — 13 projektů</span>
+        <span>Zobrazit celé portfolio — 18 projektů</span>
       </a>
     </div>
 
@@ -383,18 +328,15 @@
 <section class="services" id="services">
   <div class="container">
     <p class="eyebrow reveal">03 — Co dělám</p>
-    <h2 class="h2 reveal">Čtyři věci.<br><span class="accent">Pořádně.</span></h2>
-    <p class="lead reveal">
-      Vizuální identity, reklamní kampaně, obalový design a weby — pro značky z Prahy
-      i odkudkoli z Česka. Od loga a manuálu přes plakáty a sociální sítě až po obal na regál.
-    </p>
+    <h2 class="h2 reveal">Co tvoje značka<br><span class="accent">právě potřebuje?</span></h2>
+    <p class="lead reveal">Začínáš od nuly, měníš směr, nebo potřebuješ pravidelnou grafickou podporu? Vybereme výstupy, které teď využiješ, a připravíme je tak, aby na ně šlo navázat.</p>
 
     <div class="svc">
       <article class="svc__row reveal" data-cursor="hover">
         <span class="svc__no">01</span>
         <div class="svc__main">
           <h3>Vizuální identita</h3>
-          <p>Logo, barvy, typografie, systém aplikací a manuál. Ne jen značka, ale pravidla, podle kterých ji zvládne používat i někdo jiný než já.</p>
+          <p>Dej své značce podobu, podle které ji lidé poznají. Navrhnu logo, barvy a typografii, ukážu jejich použití a sepíšu pravidla pro tebe i tvůj tým.</p>
         </div>
         <ul class="svc__tags"><li>Logo</li><li>Design systém</li><li>Manuál</li></ul>
       </article>
@@ -403,7 +345,7 @@
         <span class="svc__no">02</span>
         <div class="svc__main">
           <h3>Kampaně</h3>
-          <p>Od nápadu po výstupy — outdoor, print, sociální sítě, bannery. Včetně art direction focení, aby vizuál nedrhnul o špatné fotky.</p>
+          <p>Dostaň svou nabídku mezi lidi s jasným sdělením a výrazným vizuálem. Připravím koncept i formáty pro plakáty, reklamu a sociální sítě.</p>
         </div>
         <ul class="svc__tags"><li>Art direction</li><li>Outdoor &amp; print</li><li>Social</li></ul>
       </article>
@@ -412,7 +354,7 @@
         <span class="svc__no">03</span>
         <div class="svc__main">
           <h3>Packaging</h3>
-          <p>Obaly, které fungují na regálu i v ruce. Řeším architekturu řad, čitelnost a technické podklady pro tisk.</p>
+          <p>Pomůžu zákazníkům zorientovat se v nabídce a všimnout si tvého produktu. Navrhnu obaly i celé produktové řady a připravím data pro tisk.</p>
         </div>
         <ul class="svc__tags"><li>Obalový design</li><li>Produktové řady</li><li>Podklady pro tisk</li></ul>
       </article>
@@ -421,7 +363,7 @@
         <span class="svc__no">04</span>
         <div class="svc__main">
           <h3>Web &amp; digitál</h3>
-          <p>Weby dělám ve dvou — já design a frontend, parťák backend. Díky tomu má web stejnou identitu jako všechno ostatní, ne cizí šablonu.</p>
+          <p>Představ svou práci přehledně a v souladu se značkou. Navrhnu vzhled webu a frontend; na backendu spolupracuji s vývojářem. Doplním i grafiku pro digitální komunikaci.</p>
         </div>
         <ul class="svc__tags"><li>Design webu</li><li>Frontend</li><li>Sociální sítě</li></ul>
       </article>
@@ -433,7 +375,7 @@
 <section class="process" id="process">
   <div class="container">
     <p class="eyebrow reveal">04 — Jak to probíhá</p>
-    <h2 class="h2 reveal">Od prvního hovoru<br><span class="accent">k hotové značce.</span></h2>
+    <h2 class="h2 reveal">Jasný postup.<br><span class="accent">Společný cíl.</span></h2>
 
     <div class="timeline" id="timeline">
       <div class="timeline__rail"><span class="timeline__fill" id="timelineFill"></span></div>
@@ -444,7 +386,7 @@
         <div class="step__body">
           <b class="step__no">Krok 01</b>
           <h4>Poznáme se</h4>
-          <p>Krátký hovor o značce, cílovce a rozpočtu. Zdarma a nezávazně.</p>
+          <p>Probereme, co tvoříš, koho chceš oslovit a co má design vyřešit. První hovor je zdarma a nezávazný.</p>
           <span class="step__time">30 minut</span>
         </div>
       </article>
@@ -455,7 +397,7 @@
         <div class="step__body">
           <b class="step__no">Krok 02</b>
           <h4>Zadání &amp; nabídka</h4>
-          <p>Vyplníš dotazník, já z něj postavím zadání. Dostaneš cenu i termín na papíře.</p>
+          <p>Ujasníme si výstupy, rozpočet a termín. Před začátkem práce dostaneš konkrétní nabídku.</p>
           <span class="step__time">2–3 dny</span>
         </div>
       </article>
@@ -466,7 +408,7 @@
         <div class="step__body">
           <b class="step__no">Krok 03</b>
           <h4>Návrh</h4>
-          <p>Koncept, dvě kola revizí a doladění do finální podoby.</p>
+          <p>Představím směr a vysvětlím, proč ho navrhuji. Ve dvou kolech připomínek společně doladíme výsledek.</p>
           <span class="step__time">2–4 týdny</span>
         </div>
       </article>
@@ -477,7 +419,7 @@
         <div class="step__body">
           <b class="step__no">Krok 04</b>
           <h4>Předání</h4>
-          <p>Zdrojáky, exporty a manuál. Plus podpora, když se objeví nový nosič.</p>
+          <p>Dostaneš domluvené zdrojové soubory, exporty a pravidla použití. Na hotový design můžeme navázat dalšími výstupy.</p>
           <span class="step__time">a jedeme dál</span>
         </div>
       </article>
@@ -552,7 +494,7 @@
 <section class="pricing" id="pricing">
   <div class="container">
     <p class="eyebrow reveal">05 — Orientační ceny</p>
-    <h2 class="h2 reveal">Ať víš, na čem jsi<br><span class="accent">ještě před hovorem.</span></h2>
+    <h2 class="h2 reveal">Vyber si dobrý základ.<br><span class="accent">Rozsah doladíme spolu.</span></h2>
 
     <div class="plans">
       <div class="plan reveal" data-spot data-price>
@@ -561,7 +503,7 @@
           <span class="plan__price-val">13 000 – 25 000 <i>Kč</i></span>
           <span class="plan__price-hint">Ukázat cenu</span>
         </div>
-        <p class="plan__desc">Pro nové značky, které potřebují rychle vypadat věrohodně.</p>
+        <p class="plan__desc">Pro start značky: vlastní logo a základní pravidla pro jeho každodenní použití.</p>
         <ul>
           <li>Logo ve všech variantách</li>
           <li>Barevnost a typografie</li>
@@ -578,7 +520,7 @@
           <span class="plan__price-val">40 000 – 60 000 <i>Kč</i></span>
           <span class="plan__price-hint">Ukázat cenu</span>
         </div>
-        <p class="plan__desc">Kompletní systém — přesně to, co vidíš v portfoliu.</p>
+        <p class="plan__desc">Pro značku, která chce mít jednotný a rozpoznatelný styl napříč komunikací.</p>
         <ul>
           <li>Rešerše a pozicování</li>
           <li>Logo a celý vizuální systém</li>
@@ -596,7 +538,7 @@
           <span class="plan__price-val">dle rozsahu</span>
           <span class="plan__price-hint">Ukázat cenu</span>
         </div>
-        <p class="plan__desc">Větší celky, kde cena stojí na počtu výstupů.</p>
+        <p class="plan__desc">Pro konkrétní uvedení produktu, novou kampaň, web i pravidelnou grafickou podporu.</p>
         <ul>
           <li>Kampaň vč. art direction</li>
           <li>Obalový design a řady</li>
@@ -606,11 +548,7 @@
         <a href="#contact" class="btn btn--ghost btn--full" data-cursor="hover">Domluvit hovor</a>
       </div>
     </div>
-    <p class="plans__note reveal">
-      Rozpětí odpovídá náročnosti zadání — počtu nosičů, kol revizí a rozsahu rešerše.
-      <b>Cena není nikdy fixní</b>, vždycky ji doladíme podle toho, co reálně potřebuješ.
-      Studentské a neziskové projekty řeším individuálně.
-    </p>
+    <p class="plans__note reveal">Uvedené ceny jsou orientační. Konkrétní nabídku připravím podle počtu výstupů a náročnosti zadání. <b>Rozsah i cenu si odsouhlasíme před začátkem práce.</b> Studentské a neziskové projekty řeším individuálně.</p>
   </div>
 </section>
 
@@ -621,8 +559,8 @@
   <div class="container contact__grid">
     <div class="contact__side">
       <p class="eyebrow reveal">06 — Poptávka</p>
-      <h2 class="h2 reveal">Máš značku,<br><span class="accent">která si zaslouží víc?</span></h2>
-      <p class="lead reveal">Napiš pár vět o projektu. Ozvu se do 24 hodin s prvním nástřelem, rozsahem a cenou.</p>
+      <h2 class="h2 reveal">Co chystáš?<br><span class="accent">Pojďme tomu dát podobu.</span></h2>
+      <p class="lead reveal">Stačí pár vět: co děláš, co potřebuješ a kdy to má být hotové. Ozvu se ti a domluvíme, jak začít.</p>
       <div class="contact__direct reveal">
         <a href="mailto:petera.tomas11@gmail.com" data-cursor="hover">petera.tomas11@gmail.com</a>
         <a href="tel:+420722221334" data-cursor="hover">+420 722 221 334</a>
@@ -641,7 +579,7 @@
         <div class="brief__text">
           <b>Stáhnout dotazník značky</b>
           <em>36 otázek · zdarma</em>
-          <p>Vyplň ho ve svém tempu a přilož k poptávce. Ušetří nám oběma jeden celý hovor a nabídku dostaneš rovnou konkrétní.</p>
+          <p>Chceš si nejdřív utřídit myšlenky? Dotazník ti pomůže popsat značku i očekávání. K poptávce ho můžeš přiložit, ale není povinný.</p>
           <span class="brief__links">
             <a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx" data-cursor="hover">Stáhnout DOCX</a>
             <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">Stáhnout PDF</a>
@@ -677,7 +615,7 @@
           <option>Zatím nevím</option>
         </select>
       </label>
-      <label><span>O projektu</span><textarea name="Zpráva" rows="4" placeholder="Jsme kavárna v Karlíně a potřebujeme…" required></textarea></label>
+      <label><span>O projektu</span><textarea name="Zpráva" rows="4" placeholder="Co chystáš, pro koho a do kdy? Pokud máš představu o rozpočtu, připiš ji." required></textarea></label>
 
       <div class="file" data-cursor="hover">
         <input type="file" id="attach" name="attachment" multiple
@@ -689,8 +627,8 @@
         </label>
       </div>
 
-      <button type="submit" class="btn btn--primary btn--lg btn--full" data-cursor="hover" data-magnetic><span>Odeslat poptávku</span></button>
-      <p class="form__note">Odpověď do 24 h · Nezávazné · Bez spamu</p>
+      <button type="submit" class="btn btn--primary btn--lg btn--full" data-cursor="hover" data-magnetic><span>Pojďme probrat projekt</span></button>
+      <p class="form__note">Nezávazná poptávka · Zadání doladíme společně</p>
     </form>
   </div>
 </section>
@@ -702,7 +640,7 @@
   <div class="container footer__inner">
     <div>
       <b>Tomáš Petera<i>®</i></b>
-      <p>Vizuální identity, kampaně a packaging.<br>Praha, Česká republika.<br>IČO: 09863303</p>
+      <p>Vizuální identity, kampaně, obaly a weby.<br>Praha, Česká republika.<br>IČO: 09863303</p>
     </div>
     <div class="footer__col">
       <h4>Web</h4>
@@ -726,6 +664,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=20261002"></script>
 </body>
 </html>

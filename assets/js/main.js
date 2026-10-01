@@ -160,7 +160,7 @@ $$('.filter').forEach(btn => btn.addEventListener('click', () => {
   $$('.filter').forEach(b => b.classList.remove('is-on'));
   btn.classList.add('is-on');
   const f = btn.dataset.filter;
-  items.forEach(it => it.classList.toggle('is-hidden', f !== 'all' && it.dataset.cat !== f));
+  items.forEach(it => it.classList.toggle('is-hidden', f !== 'all' && !it.dataset.cat.split(' ').includes(f)));
 }));
 
 const lb = $('#lb');
@@ -200,7 +200,13 @@ if (lb && items.length) {
     document.body.classList.remove('is-locked');
   };
 
-  items.forEach(el => el.addEventListener('click', () => open(el)));
+  items.forEach(el => {
+    if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', 'Otevřít projekt ' + el.dataset.title);
+    el.addEventListener('click', () => open(el));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el); } });
+  });
   $('#lbClose').addEventListener('click', close);
   $('#lbPrev').addEventListener('click', () => step(-1));
   $('#lbNext').addEventListener('click', () => step(1));
@@ -331,6 +337,7 @@ let sySmooth = scrollY, smoothInit = false;
 let showcaseTop = 0, showcaseH = 0;
 let timelineTop = 0, timelineH = 0;
 let flowTop = 0, flowH = 0;
+let sectionTops = [];            // pozice sekcí pro boční tečky (čtou se jen v measure)
 
 /* vlnovka přes celou šířku — vede od klientů dolů k formuláři */
 let lastGuideW = 0, lastGuideH = 0;
@@ -381,15 +388,25 @@ function measure() {
     flowTop = flow.getBoundingClientRect().top + sy;
     flowH = flow.offsetHeight;
   }
+  sectionTops = sections.map(el => el.getBoundingClientRect().top + sy);
   buildGuide();
 }
 
 /* ═══════════ 11. HLAVNÍ SMYČKA ═══════════ */
+/* Smyčka běží jen tehdy, když se něco hýbe. Jakmile se scroll, myš i dojezdy
+   ustálí, po ~20 klidných snímcích se zastaví (nulová zátěž procesoru a baterie)
+   a znovu ji probudí scroll, pohyb myši, dotyk nebo změna velikosti okna. */
+let running = false, idleFrames = 0, guideP = -1;
+function wake() {
+  idleFrames = 0;
+  if (!running) { running = true; requestAnimationFrame(frame); }
+}
+
 function frame() {
   const sy = scrollY;
   const docH = document.documentElement.scrollHeight - vh;
 
-  if (progressBar) progressBar.style.width = (clamp(sy / (docH || 1)) * 100) + '%';
+  if (progressBar) progressBar.style.transform = 'scaleX(' + clamp(sy / (docH || 1)).toFixed(4) + ')';
   if (nav) nav.classList.toggle('stuck', sy > 40);
 
   // ── kde právě jsem ────────────────────────────────
@@ -397,7 +414,7 @@ function frame() {
     // aktivní je poslední sekce, jejíž vršek už minul třetinu obrazovky
     let idx = 0;
     for (let i = 0; i < sections.length; i++) {
-      if (sections[i].getBoundingClientRect().top <= vh * .34) idx = i;
+      if (sectionTops[i] - sy <= vh * .34) idx = i;
     }
     if (idx !== activeIdx) {
       activeIdx = idx;
@@ -490,7 +507,7 @@ function frame() {
         if (img) img.style.transform = `scale(1.06) translateY(${(local * 22).toFixed(1)}px)`;
       });
 
-      if (showcaseFill) showcaseFill.style.width = (p * 100).toFixed(1) + '%';
+      if (showcaseFill) showcaseFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     }
   }
 
@@ -500,7 +517,7 @@ function frame() {
     if (top + timelineH > -200 && top < vh + 200) {
       const START = vh * .85;
       const p = clamp((START - top) / Math.max(1, timelineH + START - vh * .25));
-      timelineFill.style.setProperty('--fill', (p * 100).toFixed(1) + '%');
+      timelineFill.style.setProperty('--fill', p.toFixed(4));
       timelineSteps.forEach((s, i) => s.classList.toggle('is-on', p >= (i + .3) / timelineSteps.length));
     }
   }
@@ -509,14 +526,19 @@ function frame() {
   if (guideLen && flow) {
     const top = flowTop - sySmooth;
     const p = clamp((vh * .62 - top) / Math.max(1, flowH - vh * .25));
-    guidePath.style.strokeDashoffset = guideLen * (1 - p);
-    if (p > 0 && p < 1) {
-      const pt = guidePath.getPointAtLength(guideLen * p);
-      guideDot.setAttribute('cx', pt.x);
-      guideDot.setAttribute('cy', pt.y);
-      guideDot.style.opacity = 1;
-    } else {
-      guideDot.style.opacity = 0;
+    // Překresluje se jen při znatelné změně (a vždy na krajích). SVG je vysoké
+    // tisíce pixelů, takže každé zbytečné přepsání stojí vykreslení celé linky.
+    if (Math.abs(p - guideP) > .0003 || ((p === 0 || p === 1) && p !== guideP)) {
+      guideP = p;
+      guidePath.style.strokeDashoffset = guideLen * (1 - p);
+      if (p > 0 && p < 1) {
+        const pt = guidePath.getPointAtLength(guideLen * p);
+        guideDot.setAttribute('cx', pt.x);
+        guideDot.setAttribute('cy', pt.y);
+        guideDot.style.opacity = 1;
+      } else {
+        guideDot.style.opacity = 0;
+      }
     }
   }
 
@@ -525,6 +547,12 @@ function frame() {
     ring.style.transform = `translate(${rx.toFixed(2)}px, ${ry.toFixed(2)}px)`;
   }
 
+  // ustálilo se všechno, co doplouvá? pak smyčku po chvíli uspíme
+  const moving = Math.abs(sy - sySmooth) > .05 ||
+                 Math.abs(mNX - mouseNX) > .001 || Math.abs(mNY - mouseNY) > .001 ||
+                 (hasHover && !REDUCED && (Math.abs(rx - mx) > .1 || Math.abs(ry - my) > .1));
+  idleFrames = moving ? 0 : idleFrames + 1;
+  if (idleFrames > 20) { running = false; return; }
   requestAnimationFrame(frame);
 }
 
@@ -535,7 +563,7 @@ let measurePending = false;
 function requestMeasure() {
   if (measurePending) return;
   measurePending = true;
-  requestAnimationFrame(() => { measurePending = false; measure(); });
+  requestAnimationFrame(() => { measurePending = false; measure(); wake(); });
 }
 
 addEventListener('resize', requestMeasure, { passive: true });
@@ -544,6 +572,8 @@ if (window.ResizeObserver) new ResizeObserver(requestMeasure).observe(document.b
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(requestMeasure);
 
 measure();
-requestAnimationFrame(frame);
+['scroll', 'mousemove', 'touchstart', 'touchmove', 'resize'].forEach(ev =>
+  addEventListener(ev, wake, { passive: true }));
+wake();
 
 })();
