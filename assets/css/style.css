@@ -995,3 +995,34 @@ section{ position:relative; }
   letter-spacing:.2em; text-transform:uppercase; opacity:.34;
 }
 @media (prefers-reduced-motion:reduce){ .marquee--rev .marquee__track{ animation:none; } }
+
+/* ═══ ODKAZY Z PROJEKTŮ A POPTÁVKA ═══ */
+/* dva odkazy pod projektem v showcase: detail v portfoliu + živý web / Instagram */
+.shot__links{ display:flex; flex-wrap:wrap; gap:.5rem 1.6rem; margin-top:.5rem; }
+.shot__links .shot__link{ margin-top:0; }
+
+/* štítek na kartě v portfoliu: říká, že v detailu je odkaz ven (sám odkazem není) */
+.item__ext{
+  display:inline-block; margin-left:.7rem; margin-bottom:.5rem;
+  font-family:'JetBrains Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+
+/* odkaz v detailu projektu */
+.lb__link{
+  display:inline-flex; align-items:center; gap:.5rem; margin-top:.9rem;
+  font-size:.86rem; color:var(--ink); border-bottom:1px solid var(--line-2); padding-bottom:.25rem;
+  transition:border-color .35s,gap .35s var(--ease);
+}
+.lb__link[hidden]{ display:none; }
+.lb__link i{ font-style:normal; color:var(--neon-2); }
+.lb__link:hover{ border-color:var(--neon-2); gap:.8rem; }
+
+/* rezervace hovoru je hlavní alternativa k formuláři, proto plné tlačítko */
+.brief__links a.is-primary{ background:var(--neon); border-color:var(--neon); color:#0b0714; font-weight:500; }
+.brief__links a.is-primary:hover{ background:#B673F8; border-color:#B673F8; color:#0b0714; }
+
+/* dotazník ke stažení u příloh ve formuláři */
+.form__hint{ font-size:.8rem; line-height:1.55; color:var(--ink-2); }
+.form__hint a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--line-2); text-underline-offset:.22em; transition:text-decoration-color .2s; }
+.form__hint a:hover{ text-decoration-color:var(--neon-2); }

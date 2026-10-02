@@ -177,7 +177,12 @@ document.addEventListener('click', e => {
   if (href.startsWith('tel:')) return track('contact_click', { typ: 'telefon' });
   if (/linkedin\.com/i.test(href)) return track('contact_click', { typ: 'linkedin' });
   if (/calendar\.google\.com\/calendar\/appointments/.test(href)) return track('booking_click', { kde: a.closest('.thanks') ? 'dekuji' : 'poptavka' });
-  if (a.closest('.brief__links')) return track('dotaznik_download', { format: /\.pdf$/i.test(href) ? 'pdf' : 'docx' });
+  if (/assets\/dotaznik\//.test(href)) return track('dotaznik_download', { format: /\.pdf$/i.test(href) ? 'pdf' : 'docx' });
+  if (a.dataset.ext) {
+    // odkaz z projektu ven (živý web, Instagram): v showcase i v detailu projektu
+    const nazev = a.closest('.shot') ? a.closest('.shot').querySelector('h3') : document.getElementById('lbTitle');
+    return track('project_link', { projekt: text(nazev) + ' > ' + a.dataset.ext });
+  }
 
   const kde =
     a.closest('.hero__cta') || a.closest('.hero__reveal') ? 'hero' :

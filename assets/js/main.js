@@ -165,7 +165,8 @@ $$('.filter').forEach(btn => btn.addEventListener('click', () => {
 const lb = $('#lb');
 if (lb && items.length) {
   const lbImg = $('#lbImg'), lbTitle = $('#lbTitle'), lbMeta = $('#lbMeta'),
-        lbDesc = $('#lbDesc'), lbCount = $('#lbCount');
+        lbDesc = $('#lbDesc'), lbCount = $('#lbCount'),
+        lbLink = $('#lbLink'), lbLinkTxt = $('#lbLinkTxt');
   let lbIndex = 0;
   const visibleItems = () => items.filter(i => !i.classList.contains('is-hidden'));
 
@@ -175,6 +176,18 @@ if (lb && items.length) {
     lbTitle.textContent = el.dataset.title;
     lbMeta.textContent = el.dataset.meta;
     lbDesc.textContent = el.dataset.desc;
+    // odkaz na živý web nebo Instagram jen u projektů, které ho mají (data-url v prace.html)
+    if (lbLink) {
+      const url = el.dataset.url;
+      lbLink.hidden = !url;
+      if (url) {
+        lbLink.href = url;
+        lbLink.dataset.ext = el.dataset.urlType || 'web';
+        lbLinkTxt.textContent = el.dataset.urlLabel || 'Živý web';
+      } else {
+        lbLink.removeAttribute('href');
+      }
+    }
     if (lbCount) {
       const list = visibleItems();
       lbCount.textContent = `${list.indexOf(el) + 1} / ${list.length}`;

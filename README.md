@@ -32,7 +32,7 @@ assets/fonts/ — písma Space Grotesk, Inter a JetBrains Mono, hostovaná pří
 
 assets/img/ — obrázky projektů, každý ve velké (1600 px) a malé (-800) verzi. Podsložka ring jsou desky 3D prstence na úvodu, podsložka loga jsou loga klientů.
 
-assets/dotaznik/ — dotazník značky ke stažení, ve verzi DOCX i PDF. Když ho budeš měnit, nahraj obě — PDF se z Wordu udělá přes Soubor, Uložit jako, PDF.
+assets/dotaznik/ — dotazník značky ke stažení, ve verzi DOCX i PDF. Odkazy na dotazník jsou ve formuláři u příloh (index.html) a na kartě na stránce po odeslání (dekuji.html). Když ho budeš měnit, nahraj obě — PDF se z Wordu udělá přes Soubor, Uložit jako, PDF.
 
 ## Tohle nikdy nemaž a nepřesouvej
 
@@ -61,6 +61,16 @@ Jak o citaci požádat, ať za něco stojí: nechtěj "napiš mi referenci", z t
 ## Ceny v ceníku
 
 Ceny jsou záměrně rozmazané a ukážou se až po najetí myší na kartu (na mobilu po klepnutí na cenu, na pár sekund). Řídí to CSS u .plan__price-val a krátký skript v main.js. Pozor na pravidla typu filter:none s !important na .plan__price-val nebo display:none na .plan__price-hint — cenu by odkryla napořád. Jednou se to při aktualizaci stalo.
+
+## Odkazy z projektů ven
+
+U vybraných projektů vede odkaz na živý web nebo Instagram klienta (Therrapia, Česká lékárnická komora, Young Lions, Divadlo PONEC, Czech Dance Platform). Odkaz je na dvou místech a obě je potřeba držet stejná:
+
+V prace.html má položka projektu (značka figure s třídou item) tři údaje: data-url (adresa), data-url-label (text odkazu, např. Živý web, Web komory, Instagram) a data-url-type (web nebo instagram). Z nich se v detailu projektu sám vykreslí odkaz. Na kartě je navíc malý štítek (span s třídou item__ext), který jen říká, že v detailu odkaz je.
+
+V index.html je u stejného projektu ve „vybraných pracích" druhý odkaz vedle „Prohlédnout projekt" (má údaj data-ext s hodnotou web nebo instagram).
+
+Přidání dalšího projektu: doplň tři údaje a štítek v prace.html a případně odkaz v index.html. Odkazy se otevírají v novém okně a kliky se měří jako událost project_link. Odkaz dávej jen tam, kde je na cílové stránce tvoje práce opravdu vidět.
 
 ## Rezervace hovoru
 
@@ -138,7 +148,7 @@ Při přidávání další události drž pravidlo jedné vlastnosti (viz koment
 
 ## Verze CSS a JS
 
-V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100203). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
+V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100205). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
 
 ## Pás klientů
 
