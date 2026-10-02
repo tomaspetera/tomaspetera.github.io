@@ -136,8 +136,7 @@ if (burger && menu) {
 }
 
 /* ═══════════ 4. PÁS LOG ═══════════ */
-const track = $('.marquee__track');
-if (track) track.append(...[...track.children].map(c => c.cloneNode(true)));
+$$('.marquee__track').forEach(track => track.append(...[...track.children].map(c => c.cloneNode(true))));
 
 /* ═══════════ 5. CENY — odhalit najetím / klepnutím ═══════════ */
 $$('[data-price]').forEach(plan => {

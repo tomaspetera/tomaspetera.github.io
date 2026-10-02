@@ -24,6 +24,10 @@ assets/js/main.js — animace, filtr portfolia, lightbox, obsluha formuláře
 
 assets/js/stats.js — měření návštěvnosti (Umami), viz sekci Měření návštěvnosti níž. Když ho smažeš, web funguje dál, jen přestane měřit.
 
+assets/js/quiz.js — kvíz „Co tvoje značka potřebuje?" mezi ceníkem a poptávkou. Otázky, texty doporučení a pravidla, který balíček se doporučí, jsou na začátku souboru. Název služby ve výsledku musí přesně odpovídat možnostem v poptávkovém formuláři, jinak se předvyplnění nepovede.
+
+assets/js/efekty.js — spotlight v portfoliu (jen s myší), dešifrování drobných štítků a změna váhy písma u druhého řádku nadpisů při scrollu. Při nastavení „omezit animace" v systému se nespustí nic. Když soubor smažeš, web funguje dál, jen bez těchto efektů.
+
 assets/fonts/ — písma Space Grotesk, Inter a JetBrains Mono, hostovaná přímo u nás (ne na Googlu). Jsou zúžená na české znaky a používané váhy. Nemaž je, web na nich stojí.
 
 assets/img/ — obrázky projektů, každý ve velké (1600 px) a malé (-800) verzi. Podsložka ring jsou desky 3D prstence na úvodu, podsložka loga jsou loga klientů.
@@ -108,6 +112,8 @@ dotaznik_download (format), contact_click (typ: email, telefon, linkedin), conta
 
 engaged_30s a engaged_120s — jen aktivní čas, kdy je záložka vidět a návštěvník něco udělal za posledních 10 s.
 
+quiz_start, quiz_answer (odpoved, ve tvaru "otázka > možnost"), quiz_result (balicek) — průchod kvízem. Volby se neposílají s vazbou na člověka. Kvíz jednomu průchodu přidá zhruba 11 událostí.
+
 js_error (kde) — když se na něčím zařízení rozbije skript nebo se nenačte obrázek či soubor z webu. Nejvýš 3 hlášení na načtení stránky, cizí skripty a rozšíření prohlížeče se nehlásí. Jestli se někdy objeví, je to signál, že se má web opravit.
 
 Mimo to Umami (díky data-performance) posílá jedno hlášení o rychlosti na načtení stránky: LCP, INP, CLS, TTFB. Najdeš je v Umami v části Performance a ukazují skutečnou rychlost u návštěvníků, ne laboratorní test.
@@ -118,7 +124,7 @@ Nejspolehlivější měřítko poptávky je zobrazení stránky /dekuji.html, na
 
 Ověřeno v účtu 2. 10. 2026 (ověř si aktuální podmínky v Umami, Nastavení, Billing): 100 000 událostí měsíčně, 1 web, 6 měsíců historie. Upozornění e-mailem, když se blížíš limitu, je zapnuté. Spotřebu najdeš v Umami v Nastavení, Usage.
 
-Počítá se každé zobrazení stránky jako 1 událost a každá vlastní událost jako 1 plus 1 za každou uloženou vlastnost. Proto má každá událost nejvýš jednu vlastnost. Návštěvník, který projde celý web, spotřebuje zhruba 20 až 30 událostí, ten, kdo hned odejde, 1 až 3. Co se stane po překročení limitu v bezplatném tarifu, ceník nerozepisuje, proto občas zkontroluj spotřebu v Usage. Kdyby limit nestačil, nejdřív vypni showcase_view.
+Počítá se každé zobrazení stránky jako 1 událost a každá vlastní událost jako 1 plus 1 za každou uloženou vlastnost. Proto má každá událost nejvýš jednu vlastnost. Návštěvník, který projde celý web včetně kvízu, spotřebuje zhruba 20 až 45 událostí, ten, kdo hned odejde, 1 až 3. Co se stane po překročení limitu v bezplatném tarifu, ceník nerozepisuje, proto občas zkontroluj spotřebu v Usage. Kdyby limit nestačil, nejdřív vypni showcase_view.
 
 Co v bezplatném tarifu není: vyloučení IP adres (Pro), e-mailové reporty (Pro), přístup přes API (Pro), nahrávky návštěv a heatmapy (Business). Funnely, cíle, Journeys, Retention, Segmenty, UTM, Performance i vlastní přehledy (Boards) jsou k dispozici.
 
@@ -128,7 +134,7 @@ Při přidávání další události drž pravidlo jedné vlastnosti (viz koment
 
 ## Verze CSS a JS
 
-V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100202). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
+V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100203). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
 
 ## Pás klientů
 

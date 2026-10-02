@@ -150,7 +150,7 @@ if ('IntersectionObserver' in window) {
     jednou('sekce:' + z.target.id, 'section_view', { sekce: z.target.id });
     io.unobserve(z.target);
   }), { rootMargin: '-45% 0px -45% 0px', threshold: 0 });     // sekce se počítá, když protne střed obrazovky
-  ['about', 'showcase', 'services', 'process', 'pricing', 'reference', 'contact', 'work', 'thanks']
+  ['about', 'showcase', 'services', 'process', 'pricing', 'quiz', 'reference', 'contact', 'work', 'thanks']
     .forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
 }
 
@@ -186,6 +186,7 @@ document.addEventListener('click', e => {
     a.closest('.plan') ? 'cenik' :
     a.closest('.showcase__foot') ? 'showcase' :
     a.closest('.shot') ? 'showcase-projekt' :
+    a.closest('.quiz') ? 'kviz' :
     a.closest('.contact-cta') ? 'konec-portfolia' :
     a.closest('.thanks__cta') ? 'dekuji' :
     a.closest('.footer') ? 'paticka' : null;
@@ -197,6 +198,12 @@ document.addEventListener('click', e => {
   if (kde === 'cenik') kam = text(a.closest('.plan').querySelector('h3'));
   if (kde === 'showcase-projekt') kam = text(a.closest('.shot').querySelector('h3'));
   track('cta_click', { cil: kde + ' > ' + kam });
+});
+
+/* Události od ostatních skriptů webu (kvíz): posílají je přes „stats:event", odesílání zůstává na jednom místě */
+window.addEventListener('stats:event', e => {
+  const d = e.detail;
+  if (d && typeof d.name === 'string') track(d.name, d.data);
 });
 
 /* Kopírování kontaktu: část lidí e-mail ani telefon neklikne, jen je zkopíruje */

@@ -903,3 +903,95 @@ section{ position:relative; }
 /* Odkazy na zásady zpracování údajů: v malém šedém textu by jinak nebyly poznat jako odkaz. */
 .footer__bar span a,.form__note a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:.22em;transition:color .2s,text-decoration-color .2s}
 .footer__bar span a:hover,.form__note a:hover{color:var(--ink);text-decoration-color:var(--neon-2)}
+
+/* ═══ KVÍZ „Co tvoje značka potřebuje?" ═══ */
+.quiz{ padding:0 0 7rem; }
+.quiz__card{
+  position:relative; overflow:hidden;
+  display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(1.8rem,4.5vw,4.5rem); align-items:center;
+  padding:clamp(1.6rem,4vw,3.4rem); border:1px solid var(--line-2); border-radius:14px;
+  background:linear-gradient(155deg,rgba(168,85,247,.08),rgba(10,8,16,.55) 58%);
+}
+.quiz__card::before{
+  content:''; position:absolute; inset:0; opacity:0; transition:opacity .5s; pointer-events:none;
+  background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%),rgba(168,85,247,.10),transparent 60%);
+}
+.quiz__card:hover::before{ opacity:1; }
+.quiz__head .h2{ font-size:clamp(1.7rem,3.3vw,2.7rem); margin-bottom:1.1rem; }
+.quiz__panel{ position:relative; min-height:22rem; display:flex; flex-direction:column; justify-content:center; }
+
+.quiz__step{ animation:quizIn .5s var(--ease) both; }
+.quiz__step.is-still{ animation:none; }
+@keyframes quizIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+
+.quiz__meta{
+  display:flex; align-items:center; gap:1rem; margin-bottom:1.3rem;
+  font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.2em; color:var(--muted);
+}
+.quiz__prog{ display:flex; gap:.35rem; width:7rem; }
+.quiz__prog i{ flex:1; height:2px; border-radius:2px; background:var(--line); transition:background .4s; }
+.quiz__prog i.on{ background:var(--neon); }
+.quiz__q{ font-size:clamp(1.3rem,2.3vw,1.8rem); margin-bottom:1.4rem; outline:none; }
+
+.quiz__opts{ display:grid; gap:.7rem; }
+.quiz__opt{
+  display:grid; grid-template-columns:auto 1fr; gap:1.1rem; align-items:center; text-align:left; width:100%;
+  padding:1rem 1.2rem; border:1px solid var(--line); border-radius:10px; color:var(--ink);
+  background:rgba(5,4,9,.45); cursor:pointer;
+  transition:border-color .3s,background .3s,transform .45s var(--ease);
+}
+.quiz__opt:hover,.quiz__opt:focus-visible{ border-color:rgba(168,85,247,.55); background:var(--neon-dim); transform:translateX(5px); outline:none; }
+.quiz__opt.is-picked{ border-color:var(--neon); background:rgba(168,85,247,.16); }
+.quiz__opt b{ font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:400; letter-spacing:.14em; color:var(--neon-2); }
+.quiz__opt strong{ display:block; font-weight:500; font-size:.98rem; }
+.quiz__opt em{ display:block; margin-top:.15rem; font-style:normal; font-size:.84rem; color:var(--ink-2); }
+
+.quiz__back{
+  margin-top:1.3rem; width:fit-content; font-size:.8rem; color:var(--muted);
+  border-bottom:1px solid var(--line); padding-bottom:.15rem; transition:color .3s,border-color .3s;
+}
+.quiz__back:hover{ color:var(--ink); border-color:var(--line-2); }
+
+.quiz__label{
+  font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.9rem;
+}
+.quiz__result-name{ font-size:clamp(1.8rem,3.6vw,2.8rem); color:var(--neon-2); margin-bottom:1rem; outline:none; }
+.quiz__why{ color:var(--ink-2); font-size:.97rem; line-height:1.65; max-width:52ch; }
+.quiz__chips{ list-style:none; display:flex; flex-wrap:wrap; gap:.5rem; margin:1.3rem 0 .4rem; }
+.quiz__chips li{
+  padding:.3rem .8rem; border:1px solid var(--line-2); border-radius:100px;
+  font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.06em; color:var(--ink-2);
+}
+.quiz__note{ margin-top:1rem; font-size:.8rem; color:var(--muted); max-width:52ch; }
+.quiz__cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.6rem; }
+
+@media (max-width:900px){
+  .quiz{ padding-bottom:5rem; }
+  .quiz__card{ grid-template-columns:1fr; }
+  .quiz__panel{ min-height:0; }
+}
+@media (prefers-reduced-motion:reduce){
+  .quiz__step{ animation:none; }
+  .quiz__opt:hover,.quiz__opt:focus-visible{ transform:none; }
+}
+
+/* ═══ EFEKTY: spotlight, štítky, druhý pás ═══ */
+/* text jen pro čtečky obrazovky (animovaná kopie štítku je aria-hidden) */
+.vh{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
+
+/* portfolio ztlumené, pod kurzorem v plné barvě (jen myš) */
+.spot-veil{
+  position:fixed; inset:0; z-index:500; pointer-events:none; opacity:0; transition:opacity .4s;
+  background:radial-gradient(circle 230px at var(--sx,50%) var(--sy,50%),transparent 0,transparent 30%,rgba(5,4,9,.72) 100%);
+}
+.spot-veil.on{ opacity:1; }
+
+/* druhý pás slov jede opačným směrem */
+.marquee--rev{ margin-top:1.3rem; }
+.marquee--rev .marquee__track{ animation-direction:reverse; animation-duration:74s; }
+.logo--slovo{
+  font-family:'JetBrains Mono',monospace; font-weight:400; font-size:clamp(.7rem,1.05vw,.84rem);
+  letter-spacing:.2em; text-transform:uppercase; opacity:.34;
+}
+@media (prefers-reduced-motion:reduce){ .marquee--rev .marquee__track{ animation:none; } }

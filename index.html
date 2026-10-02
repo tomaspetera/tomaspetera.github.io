@@ -37,7 +37,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin-ext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/ring/younglions.webp">
-<link rel="stylesheet" href="assets/css/style.css?v=2026100202">
+<link rel="stylesheet" href="assets/css/style.css?v=2026100203">
 
 <style>
   /* Řádek "Grafický designér · Praha" je nově uvnitř <h1> — kvůli vyhledávačům.
@@ -278,6 +278,19 @@
       <span class="logo">Kreativní kancl</span>
       <span class="logo">Viadukt Karlín</span>
       <span class="logo">Mitogena</span>
+    </div>
+  </div>
+  <!-- Druhý pás jede opačným směrem; slova jsou z nabídky v ceníku. Čistě dekorace, proto aria-hidden. -->
+  <div class="marquee marquee--rev" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="logo logo--slovo">Vizuální identita</span>
+      <span class="logo logo--slovo">Logo a logomanuál</span>
+      <span class="logo logo--slovo">Kampaně</span>
+      <span class="logo logo--slovo">Art direction</span>
+      <span class="logo logo--slovo">Packaging</span>
+      <span class="logo logo--slovo">Obalový design</span>
+      <span class="logo logo--slovo">Web a digitál</span>
+      <span class="logo logo--slovo">Šablony pro sociální sítě</span>
     </div>
   </div>
 </section>
@@ -552,6 +565,22 @@
   </div>
 </section>
 
+<!-- ══════ KVÍZ ══════ -->
+<section class="quiz" id="quiz" aria-labelledby="quizTitle">
+  <div class="container">
+    <div class="quiz__card reveal" data-spot>
+      <div class="quiz__head">
+        <p class="eyebrow">Nevíš, co potřebuješ?</p>
+        <h2 class="h2" id="quizTitle">Tři otázky,<br><span class="accent">jedno doporučení.</span></h2>
+        <p class="muted">Za půl minuty zjistíš, který balíček ti nejspíš sedí. Na konci ti rovnou předvyplním poptávku.</p>
+      </div>
+      <div class="quiz__panel" id="quizPanel" aria-live="polite">
+        <noscript><p class="muted">Kvíz potřebuje JavaScript. Napiš mi rovnou <a href="#contact">do poptávky</a>.</p></noscript>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div><!-- /.flow -->
 
 <!-- ══════ POPTÁVKA ══════ -->
@@ -666,7 +695,9 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=2026100202"></script>
-<script src="assets/js/stats.js?v=2026100202"></script>
+<script src="assets/js/main.js?v=2026100203"></script>
+<script src="assets/js/efekty.js?v=2026100203" defer></script>
+<script src="assets/js/quiz.js?v=2026100203"></script>
+<script src="assets/js/stats.js?v=2026100203"></script>
 </body>
 </html>
