@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stránka nenalezena — Tomáš Petera</title>
+<meta name="description" content="Tuhle stránku jsem nenašel. Vrať se na úvod nebo do portfolia.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#050409">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon512.png">
+<link rel="apple-touch-icon" href="/appletouchicon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jetbrains-mono-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/style.css?v=2026100202">
+
+<style>
+  /* Jen to, co tahle stránka potřebuje navíc — zbytek jede na style.css. */
+  .lost{ padding-bottom:7rem; }
+  .lost__inner{ max-width:44rem; }
+  .lost__cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.5rem; }
+</style>
+</head>
+
+<body>
+
+<a href="#lost" class="skip">Přeskočit na obsah</a>
+
+<div class="loader" id="loader">
+  <div class="loader__mark">TP</div>
+  <div class="loader__bar"><span id="loaderBar"></span></div>
+</div>
+
+<div class="cursor" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress"><span id="progressBar"></span></div>
+
+<header class="nav" id="nav">
+  <a href="/" class="nav__logo" data-cursor="hover">Tomáš&nbsp;Petera<i>®</i></a>
+  <nav class="nav__links">
+    <a href="/prace.html" data-cursor="hover">Práce</a>
+    <a href="/#services" data-cursor="hover">Služby</a>
+    <a href="/#pricing" data-cursor="hover">Ceník</a>
+  </nav>
+  <a href="/#contact" class="btn btn--sm" data-cursor="hover" data-magnetic><span>Poptávka</span></a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu">
+  <a href="/">Domů</a>
+  <a href="/prace.html">Práce</a>
+  <a href="/#about">O mně</a>
+  <a href="/#services">Služby</a>
+  <a href="/#pricing">Ceník</a>
+  <a href="/#contact">Poptávka</a>
+</div>
+
+
+<main id="top">
+
+<section class="page-head lost" id="lost">
+  <div class="container lost__inner">
+    <p class="eyebrow reveal">Chyba 404</p>
+    <h1 class="page-head__title reveal">Tady nic není.<br><span class="accent">Zbytek webu ano.</span></h1>
+    <p class="lead reveal">Odkaz je nejspíš starý nebo s překlepem. Vrať se na úvod, nebo se rovnou podívej na moje projekty.</p>
+    <div class="lost__cta reveal">
+      <a href="/prace.html" class="btn btn--primary" data-cursor="hover" data-magnetic><span>Prohlédnout portfolio</span></a>
+      <a href="/" class="btn btn--ghost" data-cursor="hover" data-magnetic><span>Zpět na úvod</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <b>Tomáš Petera<i>&#174;</i></b>
+      <p>Vizuální identity, kampaně, obaly a weby.<br>Praha, Česká republika.<br>IČO: 09863303</p>
+    </div>
+    <div class="footer__col">
+      <h4>Web</h4>
+      <a href="/prace.html">Práce</a><a href="/#about">O mně</a><a href="/#services">Služby</a><a href="/#pricing">Ceník</a>
+    </div>
+    <div class="footer__col">
+      <h4>Kontakt</h4>
+      <a href="mailto:petera.tomas11@gmail.com">petera.tomas11@gmail.com</a>
+      <a href="tel:+420722221334">+420 722 221 334</a>
+      <a href="https://www.linkedin.com/in/tomaspetera" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer__col">
+      <h4>Praha</h4>
+      <p class="clock" id="clock">--:--</p>
+      <p class="footer__status"><span class="dot"></span> Beru nové projekty</p>
+    </div>
+  </div>
+  <div class="footer__bar container">
+    <span>&#169; <span id="year">2026</span> Tomáš Petera</span>
+    <span>Návštěvnost měřím bez cookies a bez osobních údajů. <a href="/soukromi.html" data-cursor="hover">Zásady zpracování údajů</a></span>
+    <a href="#top" data-cursor="hover">Zpět nahoru &#8593;</a>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js?v=2026100202"></script>
+<script src="/assets/js/stats.js?v=2026100202"></script>
+</body>
+</html>

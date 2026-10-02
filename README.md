@@ -14,6 +14,10 @@ prace.html — portfolio, 18 projektů
 
 dekuji.html — stránka, na kterou se návštěvník dostane po odeslání poptávky
 
+soukromi.html — zásady zpracování osobních údajů (formulář, měření návštěvnosti). Odkaz je v patičce všech stránek a pod formulářem.
+
+404.html — stránka pro neexistující adresy. GitHub Pages ji zobrazí sám. Musí mít všechny cesty absolutní (začínají lomítkem), protože se zobrazuje na jakékoli hloubce adresy, a proto ji nepřesouvej ani nepřejmenovávej.
+
 assets/css/style.css — veškerý vzhled webu
 
 assets/js/main.js — animace, filtr portfolia, lightbox, obsluha formuláře
@@ -54,11 +58,15 @@ Jak o citaci požádat, ať za něco stojí: nechtěj "napiš mi referenci", z t
 
 Ceny jsou záměrně rozmazané a ukážou se až po najetí myší na kartu (na mobilu po klepnutí na cenu, na pár sekund). Řídí to CSS u .plan__price-val a krátký skript v main.js. Pozor na pravidla typu filter:none s !important na .plan__price-val nebo display:none na .plan__price-hint — cenu by odkryla napořád. Jednou se to při aktualizaci stalo.
 
+## Zásady zpracování údajů
+
+Text v soukromi.html vychází z toho, jak web dnes funguje: poptávky jdou přes FormSubmit.co do Gmailu, statistiky měří Umami Cloud (EU) bez cookies, web běží na GitHub Pages. Poptávky bez zakázky se podle textu drží nejvýš 3 roky a statistiky 6 měsíců. Kdykoli se něco z toho změní (jiný formulářový nástroj, jiné měření, jiná doba uchování, nové cookies), uprav text i datum „Platné od“ dole na stránce. Text nepsal právník, nech si ho jednou zkontrolovat.
+
 ## Měření návštěvnosti
 
 Skript assets/js/stats.js měří chování návštěvníků bez cookies a bez osobních údajů. Měří se jen na tomaspetera.cz (ne na lokálním náhledu) a respektuje se nastavení Do Not Track. Kdyby v něm byla konstanta PROVIDER prázdná, je zcela vypnutý: nic nenačítá a nic neodesílá.
 
-Stav: zapnuto, nástroj Umami Cloud (region EU), web tomaspetera.cz, bezplatný tarif Hobby. Statistiky vidíš jen po přihlášení do Umami. U webu je v Nastavení sekce Share, ta je záměrně prázdná. Nikdy v ní nic nepřidávej, vznikl by veřejný odkaz na tvoje čísla. Kdybys někdy přecházel na jiný nástroj (Plausible a GoatCounter jsou ve skriptu připravené): z jeho „tracking code" opiš adresu skriptu a atributy do PROVIDER a zvyš číslo ?v= u stats.js ve třech HTML stránkách. Věta o měření v patičce je na všech třech stránkách.
+Stav: zapnuto, nástroj Umami Cloud (region EU), web tomaspetera.cz, bezplatný tarif Hobby. Statistiky vidíš jen po přihlášení do Umami. U webu je v Nastavení sekce Share, ta je záměrně prázdná. Nikdy v ní nic nepřidávej, vznikl by veřejný odkaz na tvoje čísla. Kdybys někdy přecházel na jiný nástroj (Plausible a GoatCounter jsou ve skriptu připravené): z jeho „tracking code" opiš adresu skriptu a atributy do PROVIDER a zvyš číslo ?v= u stats.js ve všech HTML stránkách (index, prace, dekuji, soukromi, 404). Věta o měření v patičce je na všech stránkách.
 
 ## Vypnutí měření pro tebe
 
@@ -120,7 +128,7 @@ Při přidávání další události drž pravidlo jedné vlastnosti (viz koment
 
 ## Verze CSS a JS
 
-V index.html, prace.html a dekuji.html jsou odkazy na style.css a main.js s číslem verze (?v=20261002). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech třech souborech (třeba na dnešní datum).
+V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100202). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
 
 ## Pás klientů
 

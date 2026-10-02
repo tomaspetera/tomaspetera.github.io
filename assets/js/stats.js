@@ -4,7 +4,7 @@
 
    Sám o sobě nic neodesílá: dokud dole není vyplněné PROVIDER, nic se
    nenačítá, nic se neposlouchá a nic se neodesílá. Zapnutí = vyplnit jednu
-   konstantu a zvýšit číslo ?v= u tohoto souboru ve třech HTML stránkách.
+   konstantu a zvýšit číslo ?v= u tohoto souboru ve všech HTML stránkách webu.
    ═══════════════════════════════════════════════════ */
 (() => {
 'use strict';

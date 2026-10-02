@@ -899,3 +899,7 @@ section{ position:relative; }
 @media(max-width:800px){.shot__media{height:auto;max-height:none}.item--wide{grid-column:auto}}
 
 .hero__sub{max-width:660px}.item p{line-height:1.6}
+
+/* Odkazy na zásady zpracování údajů: v malém šedém textu by jinak nebyly poznat jako odkaz. */
+.footer__bar span a,.form__note a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:.22em;transition:color .2s,text-decoration-color .2s}
+.footer__bar span a:hover,.form__note a:hover{color:var(--ink);text-decoration-color:var(--neon-2)}
