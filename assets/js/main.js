@@ -124,19 +124,36 @@ $$('[data-spot]').forEach(el => {
 /* ═══════════ 3. NAVIGACE ═══════════ */
 const nav = $('#nav'), burger = $('#burger'), menu = $('#menu');
 if (burger && menu) {
-  burger.addEventListener('click', () => {
-    const on = menu.classList.toggle('on');
+  const setMenu = on => {
+    menu.classList.toggle('on', on);
     burger.classList.toggle('on', on);
     document.body.classList.toggle('is-locked', on);
+    burger.setAttribute('aria-expanded', on ? 'true' : 'false');     // čtečka obrazovky ohlásí, jestli je menu otevřené
+  };
+  burger.setAttribute('aria-controls', 'menu');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.addEventListener('click', () => setMenu(!menu.classList.contains('on')));
+  $$('#menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('on')) { setMenu(false); burger.focus(); }
   });
-  $$('#menu a').forEach(a => a.addEventListener('click', () => {
-    menu.classList.remove('on'); burger.classList.remove('on');
-    document.body.classList.remove('is-locked');
-  }));
 }
 
+/* Odkazy, které se otevírají v novém okně, to oznámí i čtečce obrazovky. */
+$$('a[target="_blank"]').forEach(a => {
+  if (a.querySelector('.vh')) return;
+  const s = document.createElement('span');
+  s.className = 'vh';
+  s.textContent = ' (otevře se v novém okně)';
+  a.appendChild(s);
+});
+
 /* ═══════════ 4. PÁS LOG ═══════════ */
-$$('.marquee__track').forEach(track => track.append(...[...track.children].map(c => c.cloneNode(true))));
+$$('.marquee__track').forEach(track => track.append(...[...track.children].map(c => {
+  const k = c.cloneNode(true);
+  k.setAttribute('aria-hidden', 'true');          // kopie je jen kvůli nekonečné smyčce, čtečka ji číst nemá
+  return k;
+})));
 
 /* ═══════════ 5. CENY — odhalit najetím / klepnutím ═══════════ */
 $$('[data-price]').forEach(plan => {
@@ -144,6 +161,13 @@ $$('[data-price]').forEach(plan => {
   const hint = $('.plan__price-hint', plan);
   if (!price) return;
   if (!hasHover && hint) hint.childNodes[hint.childNodes.length - 1].textContent = 'Klepni pro cenu';
+
+  // ovládání z klávesnice: cena je „tlačítko", na které se dá dojít tabulátorem
+  price.tabIndex = 0;
+  price.setAttribute('role', 'button');
+  price.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); price.click(); }
+  });
 
   let timer = 0;
   price.addEventListener('click', () => {
@@ -155,9 +179,11 @@ $$('[data-price]').forEach(plan => {
 
 /* ═══════════ 6. FILTR + LIGHTBOX (jen prace.html) ═══════════ */
 const items = $$('.item');
+$$('.filter').forEach(b => b.setAttribute('aria-pressed', b.classList.contains('is-on') ? 'true' : 'false'));
 $$('.filter').forEach(btn => btn.addEventListener('click', () => {
-  $$('.filter').forEach(b => b.classList.remove('is-on'));
+  $$('.filter').forEach(b => { b.classList.remove('is-on'); b.setAttribute('aria-pressed', 'false'); });
   btn.classList.add('is-on');
+  btn.setAttribute('aria-pressed', 'true');
   const f = btn.dataset.filter;
   items.forEach(it => it.classList.toggle('is-hidden', f !== 'all' && !it.dataset.cat.split(' ').includes(f)));
 }));
@@ -195,12 +221,18 @@ if (lb && items.length) {
       if (n !== el) { const im = new Image(); im.src = n.dataset.img; }
     });
   };
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-labelledby', 'lbTitle');
+  let lbOpener = null;                       // odkud se detail otevřel — tam se po zavření vrátí fokus
   const open = el => {
+    lbOpener = el;
     lbIndex = visibleItems().indexOf(el);
     paint(el);
     lb.classList.add('on');
     lb.setAttribute('aria-hidden', 'false');
     document.body.classList.add('is-locked');
+    setTimeout(() => { const z = $('#lbClose'); if (z && lb.classList.contains('on')) z.focus(); }, 60);
   };
   const step = dir => {
     const list = visibleItems();
@@ -212,7 +244,19 @@ if (lb && items.length) {
     lb.classList.remove('on');
     lb.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('is-locked');
+    if (lbOpener && document.contains(lbOpener)) lbOpener.focus({ preventScroll: true });
+    lbOpener = null;
   };
+  // tabulátor zůstává uvnitř otevřeného detailu
+  lb.addEventListener('keydown', e => {
+    if (e.key !== 'Tab' || !lb.classList.contains('on')) return;
+    const f = $$('button, a[href]', lb).filter(x => !x.hidden && x.offsetParent !== null);
+    if (!f.length) return;
+    const prvni = f[0], posledni = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === prvni) { e.preventDefault(); posledni.focus(); }
+    else if (!e.shiftKey && document.activeElement === posledni) { e.preventDefault(); prvni.focus(); }
+    else if (!lb.contains(document.activeElement)) { e.preventDefault(); prvni.focus(); }
+  });
 
   items.forEach(el => {
     if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
