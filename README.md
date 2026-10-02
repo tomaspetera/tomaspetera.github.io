@@ -18,6 +18,8 @@ soukromi.html — zásady zpracování osobních údajů (formulář, měření 
 
 404.html — stránka pro neexistující adresy. GitHub Pages ji zobrazí sám. Musí mít všechny cesty absolutní (začínají lomítkem), protože se zobrazuje na jakékoli hloubce adresy, a proto ji nepřesouvej ani nepřejmenovávej.
 
+linkedin.html — vstupní adresa pro odkaz v sekci Featured na LinkedInu (tomaspetera.cz/linkedin). Návštěvníka hned pošle na úvod se značkou utm_source=linkedin a utm_medium=featured. Existuje proto, že LinkedIn u vloženého odkazu ukládá kanonickou adresu stránky a značku z adresy úvodní stránky zahodí. Záměrně nemá kanonickou adresu ani og:url, nepřidávej je. Když ji smažeš, odkaz na LinkedInu přestane fungovat.
+
 assets/css/style.css — veškerý vzhled webu
 
 assets/js/main.js — animace, filtr portfolia, lightbox, obsluha formuláře
@@ -103,6 +105,8 @@ Portfolio nebo životopis v PDF: https://tomaspetera.cz/prace.html?utm_source=pd
 Vizitka nebo QR kód: https://tomaspetera.cz/?utm_source=vizitka&utm_medium=qr
 
 Konkrétní nabídka: https://tomaspetera.cz/prace.html?utm_source=nabidka&utm_medium=email&utm_campaign=2026-10
+
+LinkedIn, odkaz v sekci Featured: https://tomaspetera.cz/linkedin (přesměruje na úvod se značkou, viz linkedin.html)
 
 Pravidla: malá písmena bez diacritiky, pro stejný kanál pořád stejný název (jinak se rozpadne na dvě řádky v přehledu) a do utm_campaign nikdy jméno klienta ani jiný osobní údaj. Dej tam kód nebo datum. Odkazy bez značek fungují dál, jen u nich uvidíš méně o zdroji (Umami pozná alespoň odkazující web, pokud ho prohlížeč pošle).
 
