@@ -62,6 +62,10 @@ Jak o citaci požádat, ať za něco stojí: nechtěj "napiš mi referenci", z t
 
 Ceny jsou záměrně rozmazané a ukážou se až po najetí myší na kartu (na mobilu po klepnutí na cenu, na pár sekund). Řídí to CSS u .plan__price-val a krátký skript v main.js. Pozor na pravidla typu filter:none s !important na .plan__price-val nebo display:none na .plan__price-hint — cenu by odkryla napořád. Jednou se to při aktualizaci stalo.
 
+## Rezervace hovoru
+
+Tlačítko „Vybrat termín“ (v poptávce na úvodní stránce a na stránce po odeslání) vede na rezervační stránku v Google Kalendáři, tedy „Rozvrh schůzek“ (v kalendáři vlevo Booking pages, Úvodní hovor (30 min)). Dny, hodiny, délku hovoru, předstih (48 hodin) i horizont (30 dní) měníš tam, ne na webu, odkaz zůstává stejný. Termíny, které už máš v kalendáři obsazené, se nenabízejí. Rezervace se potvrzuje automaticky (ruční schvalování bezplatný Google nemá), proto ji případně odmítni nebo smaž v kalendáři. Odkaz se otevírá v novém okně a záměrně není vložený do stránky: vložení by načetlo cookies Googlu a přestala by platit věta „bez cookies“. Kliky se měří jako událost booking_click (kde: poptavka nebo dekuji). Kdyby se odkaz změnil, přepiš ho v index.html a dekuji.html.
+
 ## Zásady zpracování údajů
 
 Text v soukromi.html vychází z toho, jak web dnes funguje: poptávky jdou přes FormSubmit.co do Gmailu, statistiky měří Umami Cloud (EU) bez cookies, web běží na GitHub Pages. Poptávky bez zakázky se podle textu drží nejvýš 3 roky a statistiky 6 měsíců. Kdykoli se něco z toho změní (jiný formulářový nástroj, jiné měření, jiná doba uchování, nové cookies), uprav text i datum „Platné od“ dole na stránce. Text nepsal právník, nech si ho jednou zkontrolovat.
