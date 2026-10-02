@@ -522,15 +522,15 @@ function frame() {
     const tilt = -5 - heroP * 12 + mNY * 5;
     const back = -heroP * 340;                            // prstenec couvá do dálky
     ringEl.style.transform =
-      `translateZ(${back.toFixed(1)}px) rotateX(${tilt.toFixed(2)}deg) rotateY(${rot.toFixed(2)}deg)`;
+      `translateZ(${back.toFixed(1)}px) rotateX(${tilt.toFixed(2)}deg) translateZ(var(--posun, 0px)) rotateY(${rot.toFixed(2)}deg)`;
     ringWrap.style.opacity = (1 - clamp((heroP - .68) / .24)).toFixed(3);
 
     // krytí desek podle toho, jak jsou natočené k divákovi
     if (Math.abs(rot - lastRot) > .2) {
       lastRot = rot;
-      const RAD = Math.PI / 180;
+      const RAD = Math.PI / 180, KROK = 360 / faces.length;
       faces.forEach((f, i) => {
-        const c = Math.cos((i * 30 + rot) * RAD);
+        const c = Math.cos((i * KROK + rot) * RAD);
         f.style.opacity = c <= 0 ? '0' : (.18 + .82 * Math.pow(c, .7)).toFixed(3);
       });
     }

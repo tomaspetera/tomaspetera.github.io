@@ -53,7 +53,7 @@
 
   --ink:     #E8E6F0;
   --ink-2:   #A29CB8;
-  --muted:   #6B6583;
+  --muted:   #7F7899;
 
   --neon:    #A855F7;
   --neon-2:  #C4A0F0;
@@ -265,7 +265,9 @@ section{ position:relative; }
 
 .ring-wrap{
   --fw: clamp(190px, 23vw, 340px);            /* šířka jedné desky */
-  --r:  calc(var(--fw) * 1.92);               /* poloměr prstence  */
+  --n:  16;                                   /* počet desek – musí sedět s HTML */
+  --r:  calc(var(--fw) * 2.586);              /* poloměr prstence: fw / (2·tan(180°/n)) + malá mezera */
+  --posun: calc(var(--fw) * -.666);           /* o kolik prstenec couvne, aby přední deska byla stejně velká jako při 12 deskách (poloměr 1,92) */
   position:absolute; inset:0; z-index:0;
   perspective:1600px; perspective-origin:50% 46%;
   display:grid; place-items:center;
@@ -277,7 +279,7 @@ section{ position:relative; }
 }
 .ring__face{
   position:absolute; inset:0;
-  transform:rotateY(calc(var(--i) * 30deg)) translateZ(var(--r));
+  transform:rotateY(calc(var(--i) * 360deg / var(--n))) translateZ(var(--r));
   backface-visibility:hidden;                 /* odvrácené desky zmizí */
   border-radius:10px; overflow:hidden;
   border:1px solid rgba(255,255,255,.075);
@@ -382,7 +384,7 @@ section{ position:relative; }
 .logo{
   font-family:'Space Grotesk',sans-serif; font-weight:500;
   font-size:clamp(.98rem,1.6vw,1.28rem); letter-spacing:-.015em;
-  color:var(--ink-2); opacity:.5; white-space:nowrap;
+  color:var(--ink-2); opacity:.75; white-space:nowrap;
   transition:opacity .45s,color .45s;
 }
 .logo:hover{ opacity:1; color:var(--neon-2); }
@@ -736,7 +738,7 @@ section{ position:relative; }
   transition:border-color .35s,background .35s;
 }
 .form select{ appearance:none; cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6583' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237F7899' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-position:right 1rem center;
 }
 .form select option{ background:var(--bg-2); color:var(--ink); }

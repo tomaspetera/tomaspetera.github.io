@@ -10,7 +10,7 @@ Stránky leží v kořeni, všechno ostatní v assets.
 
 index.html — jednostránkovka: hero, o mně, práce, služby, proces, ceník, poptávka
 
-prace.html — portfolio, 20 projektů
+prace.html — portfolio, 22 projektů
 
 dekuji.html — stránka, na kterou se návštěvník dostane po odeslání poptávky
 
@@ -32,7 +32,7 @@ assets/js/efekty.js — spotlight v portfoliu (jen s myší), dešifrování dro
 
 assets/fonts/ — písma Space Grotesk, Inter a JetBrains Mono, hostovaná přímo u nás (ne na Googlu). Jsou zúžená na české znaky a používané váhy. Nemaž je, web na nich stojí.
 
-assets/img/ — obrázky projektů, každý ve velké (1600 px) a malé (-800) verzi. Podsložka ring jsou desky 3D prstence na úvodu, podsložka loga jsou loga klientů.
+assets/img/ — obrázky projektů, každý ve velké (1600 px) a malé (-800) verzi. Podsložka ring jsou desky 3D prstence na úvodu (640×360 px, teď jich je 16), podsložka loga jsou loga klientů. Když do prstence přidáš nebo z něj ubereš desku, uprav ve style.css u .ring-wrap počet --n, poloměr --r a posun --posun; vzorec je v komentáři hned vedle.
 
 assets/dotaznik/ — dotazník značky ke stažení, ve verzi DOCX i PDF. Odkazy na dotazník jsou ve formuláři u příloh (index.html) a na kartě na stránce po odeslání (dekuji.html). Když ho budeš měnit, nahraj obě — PDF se z Wordu udělá přes Soubor, Uložit jako, PDF.
 
