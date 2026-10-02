@@ -800,8 +800,8 @@ section{ position:relative; }
 
 /* ═══ LIGHTBOX ═══ */
 .lb{
-  position:fixed; inset:0; z-index:9800; background:rgba(4,3,8,.96);
-  backdrop-filter:blur(12px); display:grid; place-items:center; padding:var(--pad);
+  position:fixed; inset:0; z-index:9800; background:#040308;
+  display:grid; place-items:center; padding:var(--pad);
   opacity:0; visibility:hidden; transition:opacity .45s var(--ease),visibility .45s;
 }
 .lb.on{ opacity:1; visibility:visible; }
@@ -1036,3 +1036,17 @@ section{ position:relative; }
 .form__hint{ font-size:.8rem; line-height:1.55; color:var(--ink-2); }
 .form__hint a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--line-2); text-underline-offset:.22em; transition:text-decoration-color .2s; }
 .form__hint a:hover{ text-decoration-color:var(--neon-2); }
+
+/* ═══ LISTOVÁNÍ V DETAILU NA MOBILU ═══ */
+/* po přejetí prstem se obsah vrátí plynule (při tažení přechod vypíná skript) */
+.lb__box{ transition:transform .3s var(--ease); }
+/* vodorovné tahy patří listování: prohlížeč je nesmí brát jako gesto „zpět“ ani jako posun stránky */
+.lb{ touch-action:pan-y pinch-zoom; overscroll-behavior:contain; }
+/* šipky byly na mobilu schované a projekt šel jen zavřít a otevřít další.
+   Teď jsou dole v rozích, na dosah palce; listovat jde i přejetím prstem. */
+@media (max-width:860px){
+  .lb{ padding-bottom:5.2rem; }
+  .lb__nav{ display:grid; top:auto; bottom:1.2rem; margin-top:0; width:48px; height:48px; background:rgba(4,3,8,.6); }
+  .lb__nav--prev{ left:1.2rem; }
+  .lb__nav--next{ right:1.2rem; }
+}

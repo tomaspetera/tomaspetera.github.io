@@ -10,7 +10,7 @@ Stránky leží v kořeni, všechno ostatní v assets.
 
 index.html — jednostránkovka: hero, o mně, práce, služby, proces, ceník, poptávka
 
-prace.html — portfolio, 18 projektů
+prace.html — portfolio, 20 projektů
 
 dekuji.html — stránka, na kterou se návštěvník dostane po odeslání poptávky
 
@@ -148,7 +148,7 @@ Při přidávání další události drž pravidlo jedné vlastnosti (viz koment
 
 ## Verze CSS a JS
 
-V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100206). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
+V index.html, prace.html, dekuji.html, soukromi.html a 404.html jsou odkazy na style.css a main.js s číslem verze (?v=2026100207). GitHub Pages posílá soubory s 10minutovou cache, takže bez toho by návštěvník po aktualizaci chvíli viděl nový HTML se starým CSS. Kdykoli změníš style.css nebo main.js, přepiš to číslo ve všech těchto souborech (třeba na dnešní datum).
 
 ## Pás klientů
 

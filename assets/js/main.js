@@ -188,10 +188,12 @@ if (lb && items.length) {
         lbLink.removeAttribute('href');
       }
     }
-    if (lbCount) {
-      const list = visibleItems();
-      lbCount.textContent = `${list.indexOf(el) + 1} / ${list.length}`;
-    }
+    const list = visibleItems(), i = list.indexOf(el);
+    if (lbCount) lbCount.textContent = `${i + 1} / ${list.length}`;
+    // sousední projekty se přednačtou, ať je listování plynulé a obrázek neproblikne
+    if (list.length > 1) [list[(i + 1) % list.length], list[(i - 1 + list.length) % list.length]].forEach(n => {
+      if (n !== el) { const im = new Image(); im.src = n.dataset.img; }
+    });
   };
   const open = el => {
     lbIndex = visibleItems().indexOf(el);
@@ -223,6 +225,29 @@ if (lb && items.length) {
   $('#lbPrev').addEventListener('click', () => step(-1));
   $('#lbNext').addEventListener('click', () => step(1));
   lb.addEventListener('click', e => { if (e.target === lb) close(); });
+
+  // Na dotykových zařízeních se listuje přejetím prstem doleva nebo doprava.
+  // Svislý pohyb a dva prsty (zvětšení) necháváme být.
+  const lbBox = $('.lb__box');
+  let tx = 0, ty = 0, tahne = false;
+  const pustit = () => { tahne = false; if (lbBox) { lbBox.style.transition = ''; lbBox.style.transform = ''; } };
+  lb.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) { pustit(); return; }
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY; tahne = true;
+    if (lbBox) lbBox.style.transition = 'none';
+  }, { passive: true });
+  lb.addEventListener('touchmove', e => {
+    if (!tahne || e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - tx, dy = e.touches[0].clientY - ty;
+    if (lbBox && Math.abs(dx) > Math.abs(dy)) lbBox.style.transform = `translateX(${(dx * .35).toFixed(1)}px)`;
+  }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (!tahne) return;
+    const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+    pustit();
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4) step(dx < 0 ? 1 : -1);
+  }, { passive: true });
+  lb.addEventListener('touchcancel', pustit, { passive: true });
   addEventListener('keydown', e => {
     if (!lb.classList.contains('on')) return;
     if (e.key === 'Escape') close();
