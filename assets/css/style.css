@@ -521,6 +521,9 @@ section{ position:relative; }
   transition:transform .9s var(--ease), filter .7s;
   filter:saturate(.94) brightness(.94);
 }
+/* Než se obrázek stáhne, je pod ním jeho drobný rozmazaný náhled (pár desítek bajtů přímo v HTML),
+   takže dlaždice není prázdná. Jakmile se obrázek načte, náhled překryje. */
+.item img,.shot__media img{ background-size:cover; background-position:center; background-repeat:no-repeat; }
 .item:hover{ border-color:var(--line-2); }
 .item:hover img{ transform:scale(1.035); filter:saturate(1) brightness(1); }
 .item.is-hidden{ display:none; }
@@ -832,6 +835,7 @@ section{ position:relative; }
   transform:scale(.97); transition:transform .55s var(--ease);
 }
 .lb.on .lb__box img{ transform:scale(1); }
+.lb__box img{ background-size:contain; background-position:center; background-repeat:no-repeat; }
 .lb__box figcaption{ display:grid; grid-template-columns:auto 1fr; gap:2.5rem; align-items:start; }
 .lb__meta{ font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--neon-2); }
 .lb__box h3{ font-size:1.6rem; margin-top:.4rem; }

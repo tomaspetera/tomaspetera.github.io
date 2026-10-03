@@ -107,6 +107,42 @@ else if (loader) {
   }
 }
 
+/* Obrázky projektů (přehled v portfoliu, výběr prací na úvodu) se načítají líně. Samotné líné
+   načítání ale začne stahovat až těsně před tím, než obrázek vjede do okna, a na pomalejším
+   připojení pak člověk kouká na prázdné místo. Proto se po načtení stránky dotahují na pozadí
+   jeden po druhém v pořadí, v jakém jdou za sebou. Kdo šetří data nebo je na 2G, toho se to netýká. */
+{
+  const cekaji = $$('.item img[loading="lazy"], .shot__media img[loading="lazy"]');
+  const spoj = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+  const typ = String(spoj.effectiveType || '');
+  const setri = !!spoj.saveData || typ === 'slow-2g' || typ === '2g';
+  // Pomalé připojení (3G a horší, režim úspory dat): stačí nejmenší verze obrázku, je třikrát lehčí.
+  if (setri || typ === '3g') cekaji.forEach(im => {
+    const male = (im.getAttribute('srcset') || '').split(',').map(s => s.trim()).filter(s => /-800\.webp /.test(s));
+    if (male.length) im.setAttribute('srcset', male.join(', '));
+  });
+  if (cekaji.length && !setri) {
+    const NAJEDNOU = typ === '3g' ? 1 : 2;
+    let i = 0, bezi = 0;
+    const dalsi = () => {
+      while (bezi < NAJEDNOU && i < cekaji.length) {
+        const im = cekaji[i++];
+        if (im.complete) continue;                       // už je načtený (nebo se nepovedl)
+        bezi++;
+        let hotovo = false;
+        const dal = () => { if (hotovo) return; hotovo = true; bezi--; dalsi(); };
+        im.addEventListener('load', dal, { once: true });
+        im.addEventListener('error', dal, { once: true });
+        setTimeout(dal, 12000);                           // kdyby se spojení zaseklo, fronta nezůstane stát
+        im.loading = 'eager';
+      }
+    };
+    const start = () => setTimeout(dalsi, 700);
+    if (document.readyState === 'complete') start();
+    else addEventListener('load', start, { once: true });
+  }
+}
+
 /* ═══════════ 2. KURZOR + MAGNETICKÁ TLAČÍTKA ═══════════ */
 const dot = $('#cursorDot'), ring = $('#cursorRing');
 let mx = vw / 2, my = vh / 2, rx = mx, ry = my;
@@ -212,6 +248,8 @@ $$('.filter').forEach(btn => btn.addEventListener('click', () => {
 
 const lb = $('#lb');
 if (lb && items.length) {
+  const LB_SIZES = '(max-width: 1240px) 100vw, 1200px';
+  const lbSrcset = src => src.replace(/\.webp$/, '-1200.webp') + ' 1200w, ' + src + ' 1600w';
   const lbImg = $('#lbImg'), lbTitle = $('#lbTitle'), lbMeta = $('#lbMeta'),
         lbDesc = $('#lbDesc'), lbCount = $('#lbCount'),
         lbLink = $('#lbLink'), lbLinkTxt = $('#lbLinkTxt');
@@ -219,6 +257,12 @@ if (lb && items.length) {
   const visibleItems = () => items.filter(i => !i.classList.contains('is-hidden'));
 
   const paint = el => {
+    // Detail nabízí prohlížeči i střední velikost: telefon tak použije obrázek, který už má
+    // z přehledu, a nestahuje znovu ten největší. Než se větší verze načte, je pod ní ta z přehledu.
+    const maly = el.querySelector('img');
+    lbImg.style.backgroundImage = maly && maly.complete && maly.naturalWidth ? 'url("' + (maly.currentSrc || maly.src) + '")' : (maly ? maly.style.backgroundImage : '');
+    lbImg.sizes = LB_SIZES;
+    lbImg.srcset = lbSrcset(el.dataset.img);
     lbImg.src = el.dataset.img;
     lbImg.alt = el.dataset.title;
     lbTitle.textContent = el.dataset.title;
@@ -240,7 +284,7 @@ if (lb && items.length) {
     if (lbCount) lbCount.textContent = `${i + 1} / ${list.length}`;
     // sousední projekty se přednačtou, ať je listování plynulé a obrázek neproblikne
     if (list.length > 1) [list[(i + 1) % list.length], list[(i - 1 + list.length) % list.length]].forEach(n => {
-      if (n !== el) { const im = new Image(); im.src = n.dataset.img; }
+      if (n !== el) { const im = new Image(); im.sizes = LB_SIZES; im.srcset = lbSrcset(n.dataset.img); im.src = n.dataset.img; }
     });
   };
   lb.setAttribute('role', 'dialog');
