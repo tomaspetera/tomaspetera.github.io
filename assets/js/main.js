@@ -107,6 +107,23 @@ else if (loader) {
   }
 }
 
+/* Obrázek projektu se ukáže až celý. Dokud se stahuje, má jeho dlaždice třídu is-loading (klidná
+   plocha s jemným odleskem, viz style.css) a obrázek je průhledný; po načtení a dekódování se
+   třída odebere a obrázek se plynule prolne. Co je načtené už teď, zůstává vidět hned. */
+$$('.item img, .shot__media img').forEach(im => {
+  if (im.complete && im.naturalWidth) return;
+  const obal = im.closest('.item, .shot__media');
+  if (!obal) return;
+  obal.classList.add('is-loading');
+  let hotovo = false;
+  const ukaz = () => { if (hotovo) return; hotovo = true; obal.classList.remove('is-loading'); };
+  im.addEventListener('load', () => {
+    // decode() počká, až je obrázek připravený k vykreslení celý; kdyby selhal, ukáže se i tak
+    (im.decode ? im.decode() : Promise.resolve()).then(ukaz, ukaz);
+  }, { once: true });
+  im.addEventListener('error', ukaz, { once: true });
+});
+
 /* Obrázky projektů (přehled v portfoliu, výběr prací na úvodu) se načítají líně. Samotné líné
    načítání ale začne stahovat až těsně před tím, než obrázek vjede do okna, a na pomalejším
    připojení pak člověk kouká na prázdné místo. Proto se po načtení stránky dotahují na pozadí
@@ -260,7 +277,7 @@ if (lb && items.length) {
     // Detail nabízí prohlížeči i střední velikost: telefon tak použije obrázek, který už má
     // z přehledu, a nestahuje znovu ten největší. Než se větší verze načte, je pod ní ta z přehledu.
     const maly = el.querySelector('img');
-    lbImg.style.backgroundImage = maly && maly.complete && maly.naturalWidth ? 'url("' + (maly.currentSrc || maly.src) + '")' : (maly ? maly.style.backgroundImage : '');
+    lbImg.style.backgroundImage = maly && maly.complete && maly.naturalWidth ? 'url("' + (maly.currentSrc || maly.src) + '")' : '';
     lbImg.sizes = LB_SIZES;
     lbImg.srcset = lbSrcset(el.dataset.img);
     lbImg.src = el.dataset.img;

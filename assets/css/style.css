@@ -518,12 +518,21 @@ section{ position:relative; }
 .item--wide{ grid-column:span 2; }
 .item img{
   width:100%; height:100%; object-fit:cover;
-  transition:transform .9s var(--ease), filter .7s;
+  transition:opacity .6s var(--ease), transform .9s var(--ease), filter .7s;
   filter:saturate(.94) brightness(.94);
 }
-/* Než se obrázek stáhne, je pod ním jeho drobný rozmazaný náhled (pár desítek bajtů přímo v HTML),
-   takže dlaždice není prázdná. Jakmile se obrázek načte, náhled překryje. */
-.item img,.shot__media img{ background-size:cover; background-position:center; background-repeat:no-repeat; }
+/* Načítání obrázku projektu: dokud se stahuje, je dlaždice klidná tmavá plocha, přes kterou pomalu
+   přejíždí jemný odlesk. Obrázek se ukáže až celý a plynule se prolne, takže se nikdy nevykresluje
+   po kouscích. Třídu is-loading přidává a odebírá main.js; bez JavaScriptu je obrázek vidět normálně. */
+.shot__media img{ transition:opacity .6s var(--ease); }      /* .item img má průhlednost v přechodech už výš */
+.item.is-loading img,.shot__media.is-loading img{ opacity:0; }
+.shot__media{ position:relative; }
+.item.is-loading::after,.shot__media.is-loading::after{
+  content:''; position:absolute; top:0; left:0; width:100%; aspect-ratio:16/9; pointer-events:none;
+  background:linear-gradient(100deg, transparent 32%, rgba(196,160,240,.075) 50%, transparent 68%);
+  transform:translateX(-100%); animation:nacitani 1.9s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes nacitani{ to{ transform:translateX(100%); } }
 .item:hover{ border-color:var(--line-2); }
 .item:hover img{ transform:scale(1.035); filter:saturate(1) brightness(1); }
 .item.is-hidden{ display:none; }
