@@ -37,7 +37,8 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin-ext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/ring/younglions.webp">
-<link rel="stylesheet" href="assets/css/style.css?v=2026100209">
+<link rel="stylesheet" href="assets/css/style.css?v=2026100210">
+<noscript><style>.loader{display:none}</style></noscript>
 
 <style>
   /* Řádek "Grafický designér · Praha" je nově uvnitř <h1> — kvůli vyhledávačům.
@@ -196,18 +197,20 @@
   <div class="hero__stage">
     <div class="ring-wrap" id="ringWrap" aria-hidden="true">
       <div class="ring" id="ring">
+        <!-- Desky 5–11 jsou při načtení vzadu a nejsou vidět, proto mají data-src: stáhnou se až po načtení
+             stránky nebo při prvním posunu (main.js), aby na pomalém připojení nebrzdily styly, písma a první desku. -->
         <div class="ring__face" style="--i:0"><img src="assets/img/ring/younglions.webp" alt="" width="640" height="360" decoding="async" fetchpriority="high"></div>
         <div class="ring__face" style="--i:1"><img src="assets/img/ring/kemp-stary-sad.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
         <div class="ring__face" style="--i:2"><img src="assets/img/ring/mitogena.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
         <div class="ring__face" style="--i:3"><img src="assets/img/ring/lekiq.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
         <div class="ring__face" style="--i:4"><img src="assets/img/ring/clnk.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:5"><img src="assets/img/ring/therrapia.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:6"><img src="assets/img/ring/ponec.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:7"><img src="assets/img/ring/cdp.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:8"><img src="assets/img/ring/ameliora.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:9"><img src="assets/img/ring/ecoffee.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:10"><img src="assets/img/ring/den-usmevu.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
-        <div class="ring__face" style="--i:11"><img src="assets/img/ring/sisters-conspiracy.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:5"><img data-src="assets/img/ring/therrapia.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:6"><img data-src="assets/img/ring/ponec.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:7"><img data-src="assets/img/ring/cdp.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:8"><img data-src="assets/img/ring/ameliora.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:9"><img data-src="assets/img/ring/ecoffee.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:10"><img data-src="assets/img/ring/den-usmevu.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
+        <div class="ring__face" style="--i:11"><img data-src="assets/img/ring/sisters-conspiracy.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
         <div class="ring__face" style="--i:12"><img src="assets/img/ring/fits.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
         <div class="ring__face" style="--i:13"><img src="assets/img/ring/kutna-hora.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
         <div class="ring__face" style="--i:14"><img src="assets/img/ring/drip-it.webp" alt="" width="640" height="360" decoding="async" fetchpriority="low"></div>
@@ -246,7 +249,6 @@
 <div class="flow" id="flow">
   <svg class="guide" id="guide" aria-hidden="true" fill="none">
     <path id="guidePath" stroke="url(#guideGrad)" stroke-width="1.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-    <circle id="guideDot" r="3.5" fill="#C77DFF"/>
     <defs>
       <linearGradient id="guideGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#A855F7" stop-opacity=".03"/>
@@ -255,6 +257,9 @@
       </linearGradient>
     </defs>
   </svg>
+  <!-- Tečka na konci čáry. Je mimo SVG, aby se dala posouvat přes transform: prohlížeč ji pak jen přesune
+       a nemusí při každém posunu znovu rozvrhovat a překreslovat tisíce pixelů vysoké SVG. -->
+  <span class="guide-dot" id="guideDot" aria-hidden="true"></span>
 
 <!-- ══════ KLIENTI — pás log ══════ -->
 <section class="brands">
@@ -699,8 +704,8 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=2026100209"></script>
-<script src="assets/js/efekty.js?v=2026100203" defer></script>
+<script src="assets/js/main.js?v=2026100210"></script>
+<script src="assets/js/efekty.js?v=2026100210" defer></script>
 <script src="assets/js/quiz.js?v=2026100203"></script>
 <script src="assets/js/stats.js?v=2026100208"></script>
 </body>

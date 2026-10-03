@@ -81,6 +81,7 @@ const desifrovat = new IntersectionObserver((zaznamy) => {
 
 function spust(el) {
   const cil = el._text, kos = el._kos, n = cil.length;
+  const uzel = kos.firstChild;            // textový uzel: přepisuje se jen jeho obsah, levnější než textContent
   const start = performance.now(), DOBA = 650;
   let posledni = 0;
   const krok = (t) => {
@@ -93,7 +94,7 @@ function spust(el) {
       const c = cil[i];
       s += (i < hotovo || c === ' ' || c === '—' || c === '·' || c === '?') ? c : ZNAKY[(Math.random() * ZNAKY.length) | 0];
     }
-    kos.textContent = p < 1 ? s : cil;
+    if (uzel) uzel.data = p < 1 ? s : cil; else kos.textContent = p < 1 ? s : cil;
     if (p < 1) requestAnimationFrame(krok);
   };
   requestAnimationFrame(krok);
@@ -121,10 +122,13 @@ stitky.forEach(el => {
 const nadpisy = $$('.h2 .accent, .page-head__title .accent').map(el => ({ el, top: 0, vidi: false, w: 600 }));
 if (nadpisy.length) {
   let planovano = false;
-  const zmer = () => nadpisy.forEach(p => { p.top = p.el.getBoundingClientRect().top + scrollY; });
+  // Poloha stránky a výška okna se čtou při události scroll (a při měření), ne uvnitř snímku: ve snímku
+  // už main.js mezitím přepsal styly a čtení by prohlížeč nutilo přepočítat rozvržení navíc.
+  // Při startu se nečte nic, první hodnoty doplní pozorovatel níž.
+  let sy = 0, vh = 0;
+  const zmer = () => { sy = scrollY; vh = innerHeight; nadpisy.forEach(p => { p.top = p.el.getBoundingClientRect().top + sy; }); };
   const aplikuj = () => {
     planovano = false;
-    const sy = scrollY, vh = innerHeight;
     nadpisy.forEach(p => {
       if (!p.vidi) return;
       const prog = clamp((vh * .98 - (p.top - sy)) / (vh * .55));
@@ -133,13 +137,15 @@ if (nadpisy.length) {
     });
   };
   const plan = () => { if (!planovano) { planovano = true; requestAnimationFrame(aplikuj); } };
+  const priScrollu = () => { sy = scrollY; plan(); };
   const io = new IntersectionObserver(zaznamy => {
     zaznamy.forEach(z => { nadpisy.find(p => p.el === z.target).vidi = z.isIntersecting; });
+    sy = scrollY; vh = innerHeight;      // pozorovatel se volá po rozvržení, čtení tady nic nestojí
     plan();
   }, { rootMargin: '12% 0px 12% 0px' });
   nadpisy.forEach(p => io.observe(p.el));
   const znovu = () => { zmer(); plan(); };
-  addEventListener('scroll', plan, { passive: true });
+  addEventListener('scroll', priScrollu, { passive: true });
   addEventListener('resize', znovu, { passive: true });
   addEventListener('load', znovu);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(znovu);

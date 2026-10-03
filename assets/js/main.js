@@ -24,6 +24,9 @@ let mouseNX = 0, mouseNY = 0, mNX = 0, mNY = 0;
 /* ═══════════ 1. PRELOADER ═══════════ */
 const loader = $('#loader');
 const loaderBar = $('#loaderBar');
+// Když skript dorazil tak pozdě, že načítací obrazovku už schovala pojistka v CSS (velmi
+// pomalé připojení), obsah je dávno vidět a úvodní animace se znovu nespouští.
+const POZDE = !!loader && getComputedStyle(loader).visibility === 'hidden';
 
 function bootHero() {
   $$('.hero__title .split').forEach((el, i) => {
@@ -37,7 +40,7 @@ function bootHero() {
   });
 }
 
-if (!REDUCED) {
+if (!REDUCED && !POZDE) {
   $$('.hero__title .split').forEach(el => {
     el.style.transform = 'translateY(110%)';
     el.style.transition = 'transform 1.2s cubic-bezier(.22,1,.36,1)';
@@ -55,7 +58,8 @@ if (!REDUCED) {
    jak rychle byl web opravdu načtený, a přesně o tu dobu se odkládalo zobrazení
    obsahu. Google tenhle okamžik měří jako LCP. Teď má plnění pevnou délku
    a čeká se navíc jen na fonty, aby text nepřeskočil. Vizuálně stejné. */
-if (loader) {
+if (loader && POZDE) loader.classList.add('done');
+else if (loader) {
   const START = performance.now();
   const SPAN  = 420;   // jak dlouho se bar plní
   const CAP   = 900;   // na fonty čekáme nejdéle takhle dlouho
@@ -83,6 +87,24 @@ if (loader) {
   // Pojistka: requestAnimationFrame v záložce na pozadí neběží. Ať se stane
   // cokoli, loader nesmí zůstat viset přes obsah.
   setTimeout(finish, 3000);
+}
+
+/* Desky prstence, které při načtení nejsou vidět, se stahují až po načtení stránky
+   (nebo hned při prvním posunu, protože ten prstenec roztáčí). Na pomalém mobilu
+   tak nezabírají linku stylům, písmům a první desce. */
+{
+  const odlozene = $$('.ring__face img[data-src]');
+  if (odlozene.length) {
+    let hotovo = false;
+    const nacti = () => {
+      if (hotovo) return;
+      hotovo = true;
+      odlozene.forEach(im => { im.src = im.dataset.src; im.removeAttribute('data-src'); });
+    };
+    if (document.readyState === 'complete') nacti();
+    else addEventListener('load', () => setTimeout(nacti, 150), { once: true });
+    addEventListener('scroll', nacti, { passive: true, once: true });
+  }
 }
 
 /* ═══════════ 2. KURZOR + MAGNETICKÁ TLAČÍTKA ═══════════ */
@@ -356,12 +378,19 @@ setTimeout(() => {
 /* ═══════════ 9. HODINY, ROK, KOTVY ═══════════ */
 const clock = $('#clock');
 if (clock) {
+  // Formátovač času se vytváří jen jednou a až po načtení stránky: jeho první použití
+  // stojí na pomalém mobilu desítky milisekund a hodiny jsou až v patičce.
+  let fmt = null;
   const paint = () => {
-    clock.textContent = new Date().toLocaleTimeString('cs-CZ', {
-      timeZone: 'Europe/Prague', hour: '2-digit', minute: '2-digit'
-    });
+    if (!fmt) {
+      try { fmt = new Intl.DateTimeFormat('cs-CZ', { timeZone: 'Europe/Prague', hour: '2-digit', minute: '2-digit' }); }
+      catch (e) { fmt = { format: d => d.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' }) }; }
+    }
+    clock.textContent = fmt.format(new Date());
   };
-  paint(); setInterval(paint, 15000);
+  const startClock = () => { paint(); setInterval(paint, 15000); };
+  if (document.readyState === 'complete') setTimeout(startClock, 600);
+  else addEventListener('load', () => setTimeout(startClock, 600), { once: true });
 }
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -422,6 +451,7 @@ let sectionTops = [];            // pozice sekcí pro boční tečky (čtou se j
 
 /* vlnovka přes celou šířku — vede od klientů dolů k formuláři */
 let lastGuideW = 0, lastGuideH = 0;
+let guideX = [], guideY = [], guideS = [];   // body čáry a délka od začátku k nim (pro polohu tečky)
 
 function buildGuide() {
   if (!flow || !guide || !guidePath) return;
@@ -439,13 +469,17 @@ function buildGuide() {
   // Méně průchodů = linka řeže text méně často.
   const N = 140, mid = w * .5, amp = w * .40;
   let d = '';
+  guideX = []; guideY = []; guideS = [];
   for (let i = 0; i <= N; i++) {
     const t = i / N;
-    const x = mid + Math.sin(t * Math.PI * 2.5) * amp;
-    d += (i ? ' L' : 'M') + x.toFixed(1) + ' ' + (t * h).toFixed(1);
+    // stejné zaokrouhlení jako v cestě, ať tečka sedí přesně na čáře
+    const x = +(mid + Math.sin(t * Math.PI * 2.5) * amp).toFixed(1), y = +(t * h).toFixed(1);
+    d += (i ? ' L' : 'M') + x + ' ' + y;
+    guideS.push(i ? guideS[i - 1] + Math.hypot(x - guideX[i - 1], y - guideY[i - 1]) : 0);
+    guideX.push(x); guideY.push(y);
   }
   guidePath.setAttribute('d', d);
-  guideLen = guidePath.getTotalLength();
+  guideLen = guideS[N];
   guidePath.style.strokeDasharray = guideLen;
   guidePath.style.strokeDashoffset = guideLen;
 }
@@ -612,13 +646,19 @@ function frame() {
     if (Math.abs(p - guideP) > .0003 || ((p === 0 || p === 1) && p !== guideP)) {
       guideP = p;
       guidePath.style.strokeDashoffset = guideLen * (1 - p);
-      if (p > 0 && p < 1) {
-        const pt = guidePath.getPointAtLength(guideLen * p);
-        guideDot.setAttribute('cx', pt.x);
-        guideDot.setAttribute('cy', pt.y);
-        guideDot.style.opacity = 1;
-      } else {
-        guideDot.style.opacity = 0;
+      if (guideDot) {
+        if (p > 0 && p < 1) {
+          // bod na čáře v dané délce: půlením najdu úsek a dopočítám polohu v něm
+          const s = guideLen * p;
+          let lo = 0, hi = guideS.length - 1;
+          while (hi - lo > 1) { const m = (lo + hi) >> 1; if (guideS[m] <= s) lo = m; else hi = m; }
+          const k = (s - guideS[lo]) / ((guideS[hi] - guideS[lo]) || 1);
+          const x = guideX[lo] + (guideX[hi] - guideX[lo]) * k, y = guideY[lo] + (guideY[hi] - guideY[lo]) * k;
+          guideDot.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+          guideDot.style.opacity = 1;
+        } else {
+          guideDot.style.opacity = 0;
+        }
       }
     }
   }

@@ -110,6 +110,10 @@ section{ position:relative; }
   transition:opacity .9s var(--ease), visibility .9s;
 }
 .loader.done{ opacity:0; visibility:hidden; }
+/* Pojistka: kdyby se main.js nenačetl nebo spadl, načítací obrazovka sama zmizí po 4 s.
+   Normálně ji main.js schová mnohem dřív třídou .done, takže tohle nikdo neuvidí. */
+.loader{ animation:loader-pojistka .6s 4s forwards; }
+@keyframes loader-pojistka{ to{ opacity:0; visibility:hidden; } }
 .loader__mark{ font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:1.8rem; letter-spacing:-.03em; }
 .loader__bar{ width:min(180px,45vw); height:1px; background:rgba(255,255,255,.1); overflow:hidden; }
 .loader__bar span{ display:block; height:100%; width:0; background:var(--neon); }
@@ -188,7 +192,7 @@ section{ position:relative; }
 .totop{
   position:fixed; right:clamp(1rem,2.4vw,2rem); bottom:clamp(1rem,2.4vw,2rem);
   z-index:900; width:44px; height:44px; border-radius:50%;
-  border:1px solid var(--line); background:rgba(10,8,16,.8); backdrop-filter:blur(10px);
+  border:1px solid var(--line); background:rgba(10,8,16,.8); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
   color:var(--ink-2); font-size:1rem; display:grid; place-items:center;
   opacity:0; pointer-events:none; transform:translateY(10px);
   transition:opacity .45s var(--ease),transform .45s var(--ease),border-color .35s,color .35s;
@@ -258,10 +262,16 @@ section{ position:relative; }
 }
 .menu a{ font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:clamp(1.9rem,8vw,2.8rem); letter-spacing:-.03em; }
 .menu a:hover{ color:var(--neon-2); }
+/* Telefon na šířku: šest odkazů by se na nízkou obrazovku nevešlo a horní by byly mimo ni.
+   Odkazy se zmenší, začnou pod hlavičkou a menu se dá v nouzi i posunout. */
+@media (max-height:520px){
+  .menu{ justify-content:flex-start; overflow-y:auto; padding-top:4.6rem; padding-bottom:1.5rem; }
+  .menu a{ font-size:clamp(1.3rem,7vh,1.9rem); line-height:1.5; }
+}
 
 /* ═══ HERO — 3D prstenec z projektů ═══ */
 .hero{ height:300vh; }
-.hero__stage{ position:sticky; top:0; height:100svh; overflow:hidden; }
+.hero__stage{ position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; }
 
 .ring-wrap{
   --fw: clamp(190px, 23vw, 340px);            /* šířka jedné desky */
@@ -362,7 +372,11 @@ section{ position:relative; }
      linka nerušila text, se stará nízké krytí níž. */
 }
 #guidePath{ opacity:.55; }
-#guideDot{ filter:drop-shadow(0 0 8px rgba(196,160,240,.75)); opacity:.75; }
+.guide-dot{
+  position:absolute; top:0; left:0; z-index:0; width:7px; height:7px; margin:-3.5px 0 0 -3.5px;
+  border-radius:50%; background:#C77DFF; filter:drop-shadow(0 0 8px rgba(196,160,240,.75));
+  opacity:0; pointer-events:none; will-change:transform;
+}
 
 /* ═══ KLIENTI — pás log ═══ */
 .brands{ padding:5rem 0 3.5rem; border-top:1px solid var(--line); }
@@ -421,13 +435,13 @@ section{ position:relative; }
 /* ═══ VYBRANÉ PRÁCE — jedna po druhé ═══ */
 .showcase{ height:600vh; }
 .showcase__sticky{
-  position:sticky; top:0; height:100svh; overflow:hidden;
+  position:sticky; top:0; height:100vh; height:100svh; overflow:hidden;
   display:flex; flex-direction:column; justify-content:center;
 }
 .showcase__head{ position:absolute; top:5.5rem; left:0; right:0; }
 .showcase__head .eyebrow{ margin:0; }
 
-.showcase__stage{ position:relative; width:100%; height:min(66svh,600px); }
+.showcase__stage{ position:relative; width:100%; height:min(66vh,600px); height:min(66svh,600px); }
 .shot{
   position:absolute; inset:0; margin-inline:auto; max-width:var(--max);
   padding-inline:var(--pad);
@@ -742,6 +756,11 @@ section{ position:relative; }
   background-repeat:no-repeat; background-position:right 1rem center;
 }
 .form select option{ background:var(--bg-2); color:var(--ink); }
+/* iPhone a iPad přiblíží stránku při klepnutí do pole s písmem menším než 16 px a samy ji
+   nevrátí. Podmínka platí jen pro Safari na iOS, jinde zůstává velikost beze změny. */
+@supports (-webkit-touch-callout:none){
+  .form input,.form textarea,.form select{ font-size:16px; }
+}
 .form input::placeholder,.form textarea::placeholder{ color:#413b57; }
 .form input:focus,.form textarea:focus,.form select:focus{
   outline:none; border-color:rgba(168,85,247,.65); background:rgba(168,85,247,.03);
@@ -807,9 +826,9 @@ section{ position:relative; }
   opacity:0; visibility:hidden; transition:opacity .45s var(--ease),visibility .45s;
 }
 .lb.on{ opacity:1; visibility:visible; }
-.lb__box{ width:min(1200px,100%); max-height:88svh; display:flex; flex-direction:column; gap:1.4rem; }
+.lb__box{ width:min(1200px,100%); max-height:88vh; max-height:88svh; display:flex; flex-direction:column; gap:1.4rem; }
 .lb__box img{
-  width:100%; max-height:66svh; object-fit:contain; border-radius:4px;
+  width:100%; max-height:66vh; max-height:66svh; object-fit:contain; border-radius:4px;
   transform:scale(.97); transition:transform .55s var(--ease);
 }
 .lb.on .lb__box img{ transform:scale(1); }
@@ -856,7 +875,7 @@ section{ position:relative; }
   .svc__row{ grid-template-columns:auto 1fr; gap:1.5rem; }
   .svc__tags{ grid-column:2; flex-direction:row; flex-wrap:wrap; gap:.9rem; text-align:left; margin-top:.4rem; }
   .shot{ grid-template-columns:1fr; align-content:center; gap:1.4rem; }
-  .shot__media{ height:min(42svh,340px); }
+  .shot__media{ height:min(42vh,340px); height:min(42svh,340px); }
 }
 @media (max-width:860px){
   .nav__links{ display:none; }
@@ -889,7 +908,7 @@ section{ position:relative; }
   *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   .js .reveal{ opacity:1; transform:none; }
   html{ scroll-behavior:auto; }
-  .hero{ height:100svh; }
+  .hero{ height:100vh; height:100svh; }
   .showcase{ height:auto; }
   .showcase__sticky{ position:static; height:auto; padding-block:4rem; }
   .showcase__head{ position:static; }
