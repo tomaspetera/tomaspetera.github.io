@@ -107,56 +107,29 @@ else if (loader) {
   }
 }
 
-/* Obrázek projektu se ukáže až celý. Dokud se stahuje, má jeho dlaždice třídu is-loading (klidná
-   plocha s jemným odleskem, viz style.css) a obrázek je průhledný; po načtení a dekódování se
-   třída odebere a obrázek se plynule prolne. Co je načtené už teď, zůstává vidět hned. */
-$$('.item img, .shot__media img').forEach(im => {
-  if (im.complete && im.naturalWidth) return;
-  const obal = im.closest('.item, .shot__media');
-  if (!obal) return;
-  obal.classList.add('is-loading');
-  let hotovo = false;
-  const ukaz = () => { if (hotovo) return; hotovo = true; obal.classList.remove('is-loading'); };
-  im.addEventListener('load', () => {
-    // decode() počká, až je obrázek připravený k vykreslení celý; kdyby selhal, ukáže se i tak
-    (im.decode ? im.decode() : Promise.resolve()).then(ukaz, ukaz);
-  }, { once: true });
-  im.addEventListener('error', ukaz, { once: true });
-});
+/* Start images near the viewport immediately, without waiting for window.load.
+   Keep native lazy loading as a no-JS fallback; never download the whole gallery
+   in a background queue or hide the embedded preview while the image loads. */
+if ('IntersectionObserver' in window) {
+  const nearImages = new IntersectionObserver(entries => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (!isIntersecting) return;
+      target.loading = 'eager';
+      nearImages.unobserve(target);
+    });
+  }, { rootMargin: '1000px 0px' });
+  $$('.item img[loading="lazy"]').forEach(im => nearImages.observe(im));
 
-/* Obrázky projektů (přehled v portfoliu, výběr prací na úvodu) se načítají líně. Samotné líné
-   načítání ale začne stahovat až těsně před tím, než obrázek vjede do okna, a na pomalejším
-   připojení pak člověk kouká na prázdné místo. Proto se po načtení stránky dotahují na pozadí
-   jeden po druhém v pořadí, v jakém jdou za sebou. Kdo šetří data nebo je na 2G, toho se to netýká. */
-{
-  const cekaji = $$('.item img[loading="lazy"], .shot__media img[loading="lazy"]');
-  const spoj = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
-  const typ = String(spoj.effectiveType || '');
-  const setri = !!spoj.saveData || typ === 'slow-2g' || typ === '2g';
-  // Pomalé připojení (3G a horší, režim úspory dat): stačí nejmenší verze obrázku, je třikrát lehčí.
-  if (setri || typ === '3g') cekaji.forEach(im => {
-    const male = (im.getAttribute('srcset') || '').split(',').map(s => s.trim()).filter(s => /-800\.webp /.test(s));
-    if (male.length) im.setAttribute('srcset', male.join(', '));
-  });
-  if (cekaji.length && !setri) {
-    const NAJEDNOU = typ === '3g' ? 1 : 2;
-    let i = 0, bezi = 0;
-    const dalsi = () => {
-      while (bezi < NAJEDNOU && i < cekaji.length) {
-        const im = cekaji[i++];
-        if (im.complete) continue;                       // už je načtený (nebo se nepovedl)
-        bezi++;
-        let hotovo = false;
-        const dal = () => { if (hotovo) return; hotovo = true; bezi--; dalsi(); };
-        im.addEventListener('load', dal, { once: true });
-        im.addEventListener('error', dal, { once: true });
-        setTimeout(dal, 12000);                           // kdyby se spojení zaseklo, fronta nezůstane stát
-        im.loading = 'eager';
-      }
-    };
-    const start = () => setTimeout(dalsi, 700);
-    if (document.readyState === 'complete') start();
-    else addEventListener('load', start, { once: true });
+  // Slides share a sticky stage. Load all six when the section approaches,
+  // even when later slides are hidden by the animation.
+  const section = $('#showcase');
+  if (section) {
+    const nearShowcase = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      $$('.shot__media img', section).forEach(im => { im.loading = 'eager'; });
+      nearShowcase.disconnect();
+    }, { rootMargin: '1400px 0px' });
+    nearShowcase.observe(section);
   }
 }
 
@@ -265,23 +238,40 @@ $$('.filter').forEach(btn => btn.addEventListener('click', () => {
 
 const lb = $('#lb');
 if (lb && items.length) {
-  const LB_SIZES = '(max-width: 1240px) 100vw, 1200px';
-  const lbSrcset = src => src.replace(/\.webp$/, '-1200.webp') + ' 1200w, ' + src + ' 1600w';
-  const lbImg = $('#lbImg'), lbTitle = $('#lbTitle'), lbMeta = $('#lbMeta'),
+  const LB_SIZES = '(max-width: 760px) 94vw, min(94vw, 117.33vh, 1200px)';
+  const lbSrcset = src => src.replace(/\.webp$/, '-800.webp') + ' 800w, ' + src.replace(/\.webp$/, '-1200.webp') + ' 1200w, ' + src + ' 1600w';
+  let lbImg = $('#lbImg');
+  const lbTitle = $('#lbTitle'), lbMeta = $('#lbMeta'),
         lbDesc = $('#lbDesc'), lbCount = $('#lbCount'),
         lbLink = $('#lbLink'), lbLinkTxt = $('#lbLinkTxt');
-  let lbIndex = 0;
+  let lbIndex = 0, imageRequest = 0;
   const visibleItems = () => items.filter(i => !i.classList.contains('is-hidden'));
 
   const paint = el => {
-    // Detail nabízí prohlížeči i střední velikost: telefon tak použije obrázek, který už má
-    // z přehledu, a nestahuje znovu ten největší. Než se větší verze načte, je pod ní ta z přehledu.
-    const maly = el.querySelector('img');
-    lbImg.style.backgroundImage = maly && maly.complete && maly.naturalWidth ? 'url("' + (maly.currentSrc || maly.src) + '")' : '';
-    lbImg.sizes = LB_SIZES;
-    lbImg.srcset = lbSrcset(el.dataset.img);
-    lbImg.src = el.dataset.img;
-    lbImg.alt = el.dataset.title;
+    const request = ++imageRequest;
+    const small = el.querySelector('img');
+    // A fresh node keeps an old decoded frame or request out of the next slide.
+    const next = new Image();
+    next.id = 'lbImg';
+    next.alt = el.dataset.title;
+    next.width = 1600;
+    next.height = 900;
+    next.decoding = 'async';
+    next.fetchPriority = 'high';
+    next.style.backgroundImage = small ? small.style.backgroundImage : '';
+    next.onerror = () => {
+      if (request !== imageRequest) return;
+      next.onerror = null;
+      next.removeAttribute('srcset');
+      next.removeAttribute('sizes');
+      next.src = el.dataset.img;
+    };
+    next.sizes = LB_SIZES;
+    next.srcset = lbSrcset(el.dataset.img);
+    next.src = el.dataset.img.replace(/\.webp$/, '-800.webp');
+    lbImg.onerror = null;
+    lbImg.replaceWith(next);
+    lbImg = next;
     lbTitle.textContent = el.dataset.title;
     lbMeta.textContent = el.dataset.meta;
     lbDesc.textContent = el.dataset.desc;
@@ -299,10 +289,7 @@ if (lb && items.length) {
     }
     const list = visibleItems(), i = list.indexOf(el);
     if (lbCount) lbCount.textContent = `${i + 1} / ${list.length}`;
-    // sousední projekty se přednačtou, ať je listování plynulé a obrázek neproblikne
-    if (list.length > 1) [list[(i + 1) % list.length], list[(i - 1 + list.length) % list.length]].forEach(n => {
-      if (n !== el) { const im = new Image(); im.sizes = LB_SIZES; im.srcset = lbSrcset(n.dataset.img); im.src = n.dataset.img; }
-    });
+
   };
   lb.setAttribute('role', 'dialog');
   lb.setAttribute('aria-modal', 'true');
@@ -324,6 +311,7 @@ if (lb && items.length) {
     paint(list[lbIndex]);
   };
   const close = () => {
+    imageRequest++;
     lb.classList.remove('on');
     lb.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('is-locked');
