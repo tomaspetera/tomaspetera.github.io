@@ -305,8 +305,8 @@ section{ position:relative; }
 /* ztmavení pod textem, ať je titulek čitelný přes projekty */
 .hero__scrim{
   position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:radial-gradient(56% 44% at 50% 48%,
-    rgba(5,4,9,.93), rgba(5,4,9,.6) 55%, transparent 78%);
+  background:radial-gradient(65% 57% at 50% 52%,
+    rgba(5,4,9,.96), rgba(5,4,9,.82) 55%, rgba(5,4,9,.15) 85%, transparent 100%);
 }
 
 .hero__content{
@@ -521,18 +521,8 @@ section{ position:relative; }
   transition:opacity .6s var(--ease), transform .9s var(--ease), filter .7s;
   filter:saturate(.94) brightness(.94);
 }
-/* Načítání obrázku projektu: dokud se stahuje, je dlaždice klidná tmavá plocha, přes kterou pomalu
-   přejíždí jemný odlesk. Obrázek se ukáže až celý a plynule se prolne, takže se nikdy nevykresluje
-   po kouscích. Třídu is-loading přidává a odebírá main.js; bez JavaScriptu je obrázek vidět normálně. */
-.shot__media img{ transition:opacity .6s var(--ease); }      /* .item img má průhlednost v přechodech už výš */
-.item.is-loading img,.shot__media.is-loading img{ opacity:0; }
+/* Inline low-resolution previews stay visible during image loading. */
 .shot__media{ position:relative; }
-.item.is-loading::after,.shot__media.is-loading::after{
-  content:''; position:absolute; top:0; left:0; width:100%; aspect-ratio:16/9; pointer-events:none;
-  background:linear-gradient(100deg, transparent 32%, rgba(196,160,240,.075) 50%, transparent 68%);
-  transform:translateX(-100%); animation:nacitani 1.9s cubic-bezier(.4,0,.2,1) infinite;
-}
-@keyframes nacitani{ to{ transform:translateX(100%); } }
 .item:hover{ border-color:var(--line-2); }
 .item:hover img{ transform:scale(1.035); filter:saturate(1) brightness(1); }
 .item.is-hidden{ display:none; }
@@ -1084,3 +1074,6 @@ section{ position:relative; }
   .lb__nav--prev{ left:1.2rem; }
   .lb__nav--next{ right:1.2rem; }
 }
+
+/* Readable supporting copy over the animated project ring. */
+.hero__sub{ color:#e3dfe9; text-shadow:0 2px 8px #050409; }
