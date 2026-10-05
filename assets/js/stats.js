@@ -266,6 +266,7 @@ if (form) {
   });
   // posloucháme až po main.js, takže vidíme, jestli odeslání zablokoval (příliš velké přílohy)
   form.addEventListener('submit', e => {
+    if (form.dataset.emailVerification === 'true') return; // Sent event comes from the server-confirmed flow.
     if (e.defaultPrevented) return track('form_blocked');             // jediný důvod: příliš velké přílohy
     const sluzba = form.elements['Služba'];
     track('form_submit', { sluzba: sluzba ? sluzba.value : '' });
