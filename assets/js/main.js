@@ -371,6 +371,73 @@ if (lb && items.length) {
   });
 }
 
+/* Email format checks and opt-in typo correction. No address is sent to a lookup service.
+   Syntax checks cannot prove that a mailbox exists or belongs to the visitor. */
+const contactEmail = document.querySelector('form.form input[name="email"]');
+if (contactEmail) {
+  const en = document.documentElement.lang === 'en';
+  const hint = document.getElementById('emailHelp');
+  const corrections = {
+    'gmial.com': 'gmail.com', 'gamil.com': 'gmail.com', 'gmai.com': 'gmail.com',
+    'gmail.con': 'gmail.com', 'gmail.cmo': 'gmail.com', 'gnail.com': 'gmail.com',
+    'seznam.czz': 'seznam.cz', 'seznma.cz': 'seznam.cz', 'seznam.zc': 'seznam.cz',
+    'outlok.com': 'outlook.com', 'outlook.con': 'outlook.com',
+    'hotmial.com': 'hotmail.com', 'hotmai.com': 'hotmail.com',
+    'yahoo.con': 'yahoo.com', 'icloud.con': 'icloud.com'
+  };
+  function validateEmail() {
+    contactEmail.setCustomValidity('');
+    const value = contactEmail.value;
+    if (!value) return; // The existing required attribute handles empty input.
+    const parts = value.split('@');
+    const local = parts[0];
+    const domain = parts[1] || '';
+    const labels = domain.split('.');
+    const invalid = parts.length !== 2 || local.length > 64 || value.length > 254 ||
+      local.startsWith('.') || local.endsWith('.') || local.includes('..') ||
+      labels.length < 2 || labels.some(label => !/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i.test(label)) ||
+      !/[a-z]/i.test(labels[labels.length - 1]);
+    if (invalid || contactEmail.validity.typeMismatch) contactEmail.setCustomValidity(en
+      ? 'Enter a complete email address, for example name@company.com.'
+      : 'Zadej úplnou e-mailovou adresu, například jmeno@firma.cz.');
+  }
+  function hideSuggestion() {
+    if (hint) { hint.hidden = true; hint.textContent = ''; }
+  }
+  contactEmail.addEventListener('input', () => { hideSuggestion(); validateEmail(); });
+  contactEmail.addEventListener('blur', () => {
+    contactEmail.value = contactEmail.value.trim();
+    validateEmail();
+    hideSuggestion();
+    if (!hint || !contactEmail.validity.valid) return;
+    const at = contactEmail.value.lastIndexOf('@');
+    const suggestedDomain = corrections[contactEmail.value.slice(at + 1).toLowerCase()];
+    if (!suggestedDomain) return;
+    const address = contactEmail.value.slice(0, at + 1) + suggestedDomain;
+    hint.append(document.createTextNode(en ? 'Possible typo. Did you mean ' : 'Možný překlep. Nemyslíš '));
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = address + '?';
+    button.style.cssText = 'color:var(--neon);text-decoration:underline;overflow-wrap:anywhere';
+    button.addEventListener('click', () => {
+      contactEmail.value = address;
+      contactEmail.dispatchEvent(new Event('input', { bubbles: true }));
+      contactEmail.dispatchEvent(new Event('change', { bubbles: true }));
+      contactEmail.focus();
+    });
+    hint.append(button);
+    hint.hidden = false;
+  });
+  contactEmail.form.addEventListener('submit', e => {
+    contactEmail.value = contactEmail.value.trim();
+    validateEmail();
+    if (!contactEmail.validity.valid) {
+      e.preventDefault();
+      contactEmail.reportValidity();
+    }
+  });
+}
+
 /* ═══════════ 7. PŘÍLOHY V POPTÁVCE ═══════════ */
 const LIMIT = 10 * 1024 * 1024;
 const fileInput = $('#attach');
