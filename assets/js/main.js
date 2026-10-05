@@ -192,7 +192,7 @@ $$('a[target="_blank"]').forEach(a => {
   if (a.querySelector('.vh')) return;
   const s = document.createElement('span');
   s.className = 'vh';
-  s.textContent = ' (otevře se v novém okně)';
+  s.textContent = (document.documentElement.lang === "en" ? " (opens in a new window)" : " (otevře se v novém okně)");
   a.appendChild(s);
 });
 
@@ -282,7 +282,7 @@ if (lb && items.length) {
       if (url) {
         lbLink.href = url;
         lbLink.dataset.ext = el.dataset.urlType || 'web';
-        lbLinkTxt.textContent = el.dataset.urlLabel || 'Živý web';
+        lbLinkTxt.textContent = el.dataset.urlLabel || (document.documentElement.lang === "en" ? "Visit website" : "Živý web");
       } else {
         lbLink.removeAttribute('href');
       }
@@ -332,7 +332,7 @@ if (lb && items.length) {
   items.forEach(el => {
     if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
     el.setAttribute('role', 'button');
-    el.setAttribute('aria-label', 'Otevřít projekt ' + el.dataset.title);
+    el.setAttribute('aria-label', (document.documentElement.lang === "en" ? "Open project " : "Otevřít projekt ") + el.dataset.title);
     el.addEventListener('click', () => open(el));
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el); } });
   });
@@ -375,7 +375,7 @@ if (lb && items.length) {
 const LIMIT = 10 * 1024 * 1024;
 const fileInput = $('#attach');
 const fileTxt = $('#fileTxt');
-const IDLE_TXT = 'Přiložit vyplněný dotazník nebo podklady';
+const IDLE_TXT = (document.documentElement.lang === "en" ? "Attach your questionnaire or project files" : "Přiložit vyplněný dotazník nebo podklady");
 
 if (fileInput && fileTxt) {
   const wrap = fileInput.closest('.file');
@@ -394,9 +394,9 @@ if (fileInput && fileTxt) {
     wrap.classList.add('has-file');
     wrap.classList.toggle('is-over', over);
 
-    if (over) fileTxt.textContent = `Přílohy mají ${mb} MB — limit je 10 MB`;
+    if (over) fileTxt.textContent = (document.documentElement.lang === "en" ? `Attachments total ${mb} MB — the limit is 10 MB` : `Přílohy mají ${mb} MB — limit je 10 MB`);
     else if (files.length === 1) fileTxt.textContent = `${files[0].name} · ${mb} MB`;
-    else fileTxt.textContent = `${files.length} ${files.length < 5 ? 'soubory' : 'souborů'} · ${mb} MB`;
+    else fileTxt.textContent = (document.documentElement.lang === "en" ? `${files.length} files · ${mb} MB` : `${files.length} ${files.length < 5 ? 'soubory' : 'souborů'} · ${mb} MB`);
   });
 
   fileInput.form.addEventListener('submit', e => {
