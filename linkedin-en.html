@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+  Vstupní adresa pro odkaz „Featured" na LinkedInu: tomaspetera.cz/linkedin
+
+  LinkedIn si u vloženého odkazu ukládá „kanonickou" adresu stránky. Úvodní
+  stránka má kanonickou adresu bez značek, takže z odkazu
+  tomaspetera.cz/?utm_source=linkedin zbylo vždy jen tomaspetera.cz a v měření
+  nešlo poznat, že návštěvník přišel z LinkedInu.
+
+  Tahle stránka proto ZÁMĚRNĚ nemá kanonickou adresu (značku link canonical)
+  ani adresu pro sdílení (og url). Nepřidávej je sem. Návštěvníka
+  hned pošle na úvodní stránku se značkou zdroje. Náhled odkazu (titulek,
+  popis, obrázek) je stejný jako u úvodní stránky. Sama se neměří, ať se
+  návštěva nepočítá dvakrát.
+-->
+<title>Tomáš Petera — Graphic Designer in Prague</title>
+<meta name="description" content="Graphic design for brands that want to stand out. Tomáš Petera — visual identities, campaigns, packaging and websites. Explore my work and let&#x27;s talk about your project.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#050409">
+<meta property="og:title" content="Tomáš Petera — Graphic Designer in Prague">
+<meta property="og:description" content="Graphic design for brands that want to stand out. Tomáš Petera — visual identities, campaigns, packaging and websites. Explore my work and let&#x27;s talk about your project.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tomáš Petera">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://tomaspetera.cz/og-cover.jpg">
+<meta property="og:image:alt" content="Tomáš Petera — graphic designer, Prague">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+<script>location.replace('/en.html?utm_source=linkedin&utm_medium=featured');</script>
+
+<style>
+  html,body{ height:100%; margin:0; }
+  body{ display:grid; place-items:center; background:#050409; color:#A29CB8; font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  a{ color:#C4A0F0; }
+</style>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon96.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/appletouchicon.png">
+</head>
+
+<body>
+<!-- Vidí to jen ten, komu neběží JavaScript. -->
+<p>Continue to <a href="/en.html?utm_source=linkedin&amp;utm_medium=featured">tomaspetera.cz</a></p>
+</body>
+</html>
