@@ -640,8 +640,10 @@
 
       <div class="form__row">
         <label><span>Jméno</span><input type="text" name="Jméno" placeholder="Jan Novák" autocomplete="name" required></label>
-        <label><span>E-mail</span><input type="email" name="email" placeholder="jan@firma.cz" autocomplete="email" required></label>
+        <label><span>E-mail</span><input type="email" name="email" maxlength="254" spellcheck="false" autocapitalize="none" aria-describedby="emailHelp" placeholder="jan@firma.cz" autocomplete="email" required></label>
       </div>
+      <p class="form__hint" id="emailHelp" hidden aria-live="polite"></p>
+      <label><span>Telefon (nepovinný)</span><input type="tel" name="Telefon" autocomplete="tel" inputmode="tel" maxlength="40" placeholder="+420 777 123 456"></label>
       <label><span>Co potřebuješ</span>
         <select name="Služba">
           <option>Vizuální identita</option>
@@ -705,7 +707,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=20261005-language"></script>
+<script src="assets/js/main.js?v=20261005-contact"></script>
 <script src="assets/js/efekty.js?v=2026100210" defer></script>
 <script src="assets/js/quiz.js?v=2026100203"></script>
 <script src="assets/js/stats.js?v=2026100208"></script>
