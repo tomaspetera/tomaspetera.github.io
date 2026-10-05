@@ -1077,3 +1077,10 @@ section{ position:relative; }
 
 /* Readable supporting copy over the animated project ring. */
 .hero__sub{ color:#e3dfe9; text-shadow:0 2px 8px #050409; }
+
+/* Language links: static pages, shared assets, no translation runtime. */
+.nav__lang{display:flex;align-items:center;gap:.35rem;flex-shrink:0;font-size:.72rem;letter-spacing:.04em;color:var(--muted)}
+.nav__lang a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:26px;color:var(--ink-2)}
+.nav__lang a[aria-current="true"],.nav__lang a:hover{color:var(--neon)}
+.nav__lang a:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
+@media(max-width:860px){.nav{column-gap:.75rem}.nav__lang{margin-left:auto}.nav .burger{margin-left:0;flex-shrink:0}}
