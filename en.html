@@ -627,17 +627,12 @@
       FORMULÁŘ — FormSubmit.co (zdarma, umí přílohy do 10 MB).
       ⚠️ Po prvním odeslání potvrď aktivační e-mail, pak nahraď adresu hashovaným kódem.
     -->
-    <form class="form reveal" action="https://formsubmit.co/petera.tomas11@gmail.com"
+    <form class="form reveal" action="https://petera-contact.peteratom857857.workers.dev/submit" data-email-verification="true" data-turnstile-sitekey="0x4AAAAAAFOn-SndQte1cYbS"
           method="POST" enctype="multipart/form-data">
-
-      <input type="hidden" name="_subject" value="New enquiry from the English website">
-      <input type="hidden" name="_next" value="https://tomaspetera.cz/thanks-en.html">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
       <div class="form__row">
-        <label><span>Name</span><input type="text" name="Jméno" placeholder="Your name" autocomplete="name" required></label>
+        <label><span>Name</span><input type="text" name="Jméno" maxlength="150" placeholder="Your name" autocomplete="name" required></label>
         <label><span>Email</span><input type="email" name="email" maxlength="254" spellcheck="false" autocapitalize="none" aria-describedby="emailHelp" placeholder="you@company.com" autocomplete="email" required></label>
       </div>
       <p class="form__hint" id="emailHelp" hidden aria-live="polite"></p>
@@ -652,7 +647,7 @@
           <option>Not sure yet</option>
         </select>
       </label>
-      <label><span>About your project</span><textarea name="Zpráva" rows="4" placeholder="What are you planning, who is it for and when do you need it? Include your budget if you have one in mind." required></textarea></label>
+      <label><span>About your project</span><textarea name="Zpráva" maxlength="12000" rows="4" placeholder="What are you planning, who is it for and when do you need it? Include your budget if you have one in mind." required></textarea></label>
 
       <div class="file" data-cursor="hover">
         <input type="file" id="attach" name="attachment" multiple
@@ -660,13 +655,21 @@
         <label for="attach" class="file__label">
           <span class="file__plus" aria-hidden="true">+</span>
           <span class="file__txt" id="fileTxt" aria-live="polite">Attach your questionnaire or project files</span>
-          <em class="file__hint">DOCX, PDF, images, ZIP · up to 10 MB in total</em>
+          <em class="file__hint">DOCX, PDF, images, ZIP · up to 10 files / 10 MB in total</em>
         </label>
       </div>
       <!-- Dotazník je pomůcka k poptávce, proto je tady u příloh a ne jako samostatná karta. -->
       <p class="form__hint">Not sure what to write? Download the brand questionnaire in Czech (<a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx" data-cursor="hover">DOCX</a> or <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">PDF</a>), complete it and attach it. It's optional.</p>
 
-      <button type="submit" class="btn btn--primary btn--lg btn--full" data-cursor="hover" data-magnetic><span>Let's discuss your project</span></button>
+      <div id="contactChallenge" hidden></div>
+      <div id="emailVerification" hidden>
+        <label><span>Verification code</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-describedby="verificationStatus" disabled></label>
+        <button type="button" id="resendCode" class="btn btn--sm">Send a new code</button>
+      </div>
+      <p id="verificationStatus" class="form__hint" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p class="form__hint">We will email you a six-digit code. Your enquiry is sent only after you enter it.</p>
+      <noscript><p>Email verification needs JavaScript. You can also contact me directly by email.</p></noscript>
+      <button type="submit" class="btn btn--primary btn--lg btn--full" data-cursor="hover" data-magnetic><span>Send verification code</span></button>
       <p class="form__note">No-obligation enquiry · We'll refine the brief together</p>
       <p class="form__note">I'll only use your details to respond to your enquiry. <a href="privacy-en.html" data-cursor="hover">How I handle your data</a></p>
     </form>
@@ -708,6 +711,7 @@
 <script src="assets/js/main.js?v=20261005-contact"></script>
 <script src="assets/js/efekty.js?v=2026100210" defer></script>
 <script src="assets/js/quiz-en.js?v=20261005-language"></script>
-<script src="assets/js/stats.js?v=2026100208"></script>
+<script src="assets/js/verify-email.js?v=20261005-otp" defer></script>
+<script src="assets/js/stats.js?v=20261005-otp"></script>
 </body>
 </html>

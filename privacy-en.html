@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Privacy Policy — Tomáš Petera</title>
-<meta name="description" content="How I handle enquiry form data and website analytics. No cookies, anonymous statistics.">
+<meta name="description" content="How I handle enquiry form data and website analytics. Email verification and anonymous statistics.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tomaspetera.cz/privacy-en.html">
 <meta name="theme-color" content="#050409">
@@ -92,7 +92,7 @@
     <a href="en.html" class="back" data-cursor="hover"><i>&#8592;</i> Back to home</a>
     <p class="eyebrow reveal">Privacy</p>
     <h1 class="page-head__title reveal">How I handle <span class="accent">your data</span></h1>
-    <p class="lead reveal">In plain language: I only use your form details to handle your enquiry. This website uses no cookies, and visit statistics are anonymous.</p>
+    <p class="lead reveal">In plain language: I only use your form details to handle your enquiry. Visit statistics are anonymous. The form verifies your email address before sending.</p>
 
     <h2>1. Who processes your data</h2>
     <p>The controller is Tomáš Petera, business ID 09863303, Prague, Czech Republic. For questions about your data, contact me at <a href="mailto:petera.tomas11@gmail.com">petera.tomas11@gmail.com</a> or call <a href="tel:+420722221334">+420 722 221 334</a>.</p>
@@ -109,12 +109,13 @@
     <p>Providing your data is voluntary, but I cannot reply without your name and email. There is no automated decision-making or profiling.</p>
 
     <h2>3. Cookies and website analytics</h2>
-    <p>This website uses no cookies or other tracking technologies stored on your device. Fonts are hosted directly on the website and are not loaded from Google.</p>
+    <p>Visit analytics use no cookies. When you request an email code, Cloudflare Turnstile checks technical browser and network information to prevent automated abuse. Fonts are hosted directly on the website and are not loaded from Google.</p>
     <p>I measure visits using Umami Cloud (European region). According to its own statement, it uses no cookies, collects no personal data and anonymises the data. Statistics include which sections are viewed, clicks, quiz choices, device and browser type, country and website load times. Your name, email and form message are not sent to analytics. Statistics are retained for no more than 6 months. I respect your browser's Do Not Track setting, which disables measurement.</p>
 
     <h2>4. Who receives your data</h2>
     <ul>
-      <li><b>FormSubmit.co</b> — the service that sends form submissions to my email inbox. Its privacy policy is available at <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener">formsubmit.co/privacy.pdf</a>.</li>
+      <li><b>Cloudflare (Workers, D1, Turnstile)</b> — processes the enquiry form, stores protected verification records and checks for automated abuse. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare privacy policy</a>.</li>
+      <li><b>Resend</b> — sends verification codes and enquiries to my inbox. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend privacy policy</a>.</li>
       <li><b>Google (Gmail, Calendar, Meet)</b> — my email inbox for enquiries, the calendar for call bookings and the video call service. Clicking “Choose a time” opens Google Calendar, which is governed by Google's policies.</li>
       <li><b>Umami</b> — anonymous visit statistics (Umami Cloud).</li>
       <li><b>GitHub (GitHub Pages)</b> — website hosting. When you visit a page, the hosting provider may process technical data such as your IP address.</li>
@@ -127,7 +128,7 @@
       <li><b>Client project:</b> for the duration of our work together and then for the period required by law (for example, accounting and tax records).</li>
       <li><b>Visit statistics:</b> up to 6 months.</li>
     </ul>
-    <p>FormSubmit.co's own policies determine how long that service retains a message.</p>
+    <p>The verification code is valid for 10 minutes. Protected verification records contain no plain email address or message; they expire after 24 hours and are removed by daily cleanup. Resend retains sent-email data for 30 days on the free plan. Cloudflare also processes technical information necessary to operate and protect the service, under its own policies.</p>
 
     <h2>6. Your rights</h2>
     <p>You can request access to your data, correction or deletion, restriction of processing and data portability. You can also object to processing based on legitimate interests. Simply email <a href="mailto:petera.tomas11@gmail.com">petera.tomas11@gmail.com</a>. If you believe I am mishandling your data, you can complain to the Czech Office for Personal Data Protection (<a href="https://www.uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zásady zpracování osobních údajů — Tomáš Petera</title>
-<meta name="description" content="Jak nakládám s údaji z poptávkového formuláře a s měřením návštěvnosti. Bez cookies, anonymní statistiky.">
+<meta name="description" content="Jak nakládám s údaji z poptávkového formuláře a s měřením návštěvnosti. Ověřování e-mailu a anonymní statistiky.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tomaspetera.cz/soukromi.html">
 <meta name="theme-color" content="#050409">
@@ -92,7 +92,7 @@
     <a href="index.html" class="back" data-cursor="hover"><i>&#8592;</i> Zpět na hlavní stránku</a>
     <p class="eyebrow reveal">Soukromí</p>
     <h1 class="page-head__title reveal">Jak nakládám <span class="accent">s tvými údaji</span></h1>
-    <p class="lead reveal">Krátce a bez právničiny. Údaje z formuláře použiju jen k vyřízení tvé poptávky, web nepoužívá cookies a návštěvnost měřím anonymně.</p>
+    <p class="lead reveal">Krátce a bez právničiny. Údaje z formuláře použiju jen k vyřízení tvé poptávky, návštěvnost měřím anonymně a formulář před odesláním ověří tvůj e-mail.</p>
 
     <h2>1. Kdo údaje zpracovává</h2>
     <p>Správcem je Tomáš Petera, IČO 09863303, Praha, Česká republika. Na cokoli kolem svých údajů se můžeš zeptat na <a href="mailto:petera.tomas11@gmail.com">petera.tomas11@gmail.com</a> nebo na telefonu <a href="tel:+420722221334">+420 722 221 334</a>.</p>
@@ -109,12 +109,13 @@
     <p>Poskytnutí údajů je dobrovolné, ale bez jména a e-mailu bych ti nemohl odpovědět. Nedochází k automatizovanému rozhodování ani k profilování.</p>
 
     <h2>3. Cookies a měření návštěvnosti</h2>
-    <p>Web nepoužívá cookies ani jiné sledovací technologie ukládané do tvého zařízení. Písma jsou hostovaná přímo na webu, nenačítám je z Googlu.</p>
+    <p>Měření návštěvnosti nepoužívá cookies. Při vyžádání e-mailového kódu Cloudflare Turnstile kontroluje technické údaje prohlížeče a připojení, aby bránil automatickému zneužívání. Písma jsou hostovaná přímo na webu, nenačítám je z Googlu.</p>
     <p>Návštěvnost měřím nástrojem Umami Cloud (evropská oblast). Podle svého prohlášení nepoužívá cookies, nesbírá osobní údaje a data anonymizuje. Zaznamenává se například to, které části stránky se zobrazily, na co se kliklo, jaké možnosti lidé v kvízu vybírají, typ zařízení a prohlížeče, země a jak rychle se web načetl. Jméno, e-mail ani text z formuláře se do statistik neposílají. Statistiky se uchovávají nejvýš 6 měsíců. Nastavení „Do Not Track“ ve tvém prohlížeči respektuju, měření se tím vypne.</p>
 
     <h2>4. Komu údaje předávám</h2>
     <ul>
-      <li><b>FormSubmit.co</b> — služba, která odeslání formuláře přenese do mé e-mailové schránky. Její zásady najdeš na <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener">formsubmit.co/privacy.pdf</a>.</li>
+      <li><b>Cloudflare (Workers, D1, Turnstile)</b> — zpracování formuláře, ukládání chráněných ověřovacích záznamů a kontrola proti automatickému zneužívání. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Zásady Cloudflare</a>.</li>
+      <li><b>Resend</b> — odesílání ověřovacích kódů a poptávek do mé schránky. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Zásady Resendu</a>.</li>
       <li><b>Google (Gmail, Kalendář, Meet)</b> — moje e-mailová schránka, ve které poptávky přijímám, kalendář s rezervacemi hovorů a videohovor. Po kliknutí na „Vybrat termín“ se otevře stránka Google Kalendáře a řídí se zásadami Googlu.</li>
       <li><b>Umami</b> — anonymní statistiky návštěvnosti (Umami Cloud).</li>
       <li><b>GitHub (GitHub Pages)</b> — hosting webu. Při zobrazení stránky může provozovatel hostingu zpracovat technické údaje, například IP adresu.</li>
@@ -127,7 +128,7 @@
       <li><b>Zakázka:</b> po dobu spolupráce a poté po dobu, kterou stanoví právní předpisy (například účetní a daňové doklady).</li>
       <li><b>Statistiky návštěvnosti:</b> nejvýš 6 měsíců.</li>
     </ul>
-    <p>Jak dlouho zprávu uchovává služba FormSubmit.co, určují její vlastní zásady.</p>
+    <p>Ověřovací kód platí 10 minut. Chráněné ověřovací záznamy neobsahují čitelnou e-mailovou adresu ani zprávu; po 24 hodinách vyprší a odstraní je denní úklid. Resend na bezplatném tarifu uchovává údaje o odeslaných e-mailech 30 dní. Cloudflare také zpracovává technické informace potřebné k provozu a ochraně služby podle svých zásad.</p>
 
     <h2>6. Tvoje práva</h2>
     <p>Můžeš po mně chtít přístup ke svým údajům, jejich opravu nebo výmaz, omezení zpracování a přenesení údajů. Můžeš také vznést námitku proti zpracování z oprávněného zájmu. Stačí napsat na <a href="mailto:petera.tomas11@gmail.com">petera.tomas11@gmail.com</a>. Pokud si myslíš, že s údaji nakládám špatně, můžeš podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://www.uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>

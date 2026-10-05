@@ -629,17 +629,12 @@
       FORMULÁŘ — FormSubmit.co (zdarma, umí přílohy do 10 MB).
       ⚠️ Po prvním odeslání potvrď aktivační e-mail, pak nahraď adresu hashovaným kódem.
     -->
-    <form class="form reveal" action="https://formsubmit.co/petera.tomas11@gmail.com"
+    <form class="form reveal" action="https://petera-contact.peteratom857857.workers.dev/submit" data-email-verification="true" data-turnstile-sitekey="0x4AAAAAAFOn-SndQte1cYbS"
           method="POST" enctype="multipart/form-data">
-
-      <input type="hidden" name="_subject" value="Nová poptávka z webu">
-      <input type="hidden" name="_next" value="https://tomaspetera.cz/dekuji.html">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
       <div class="form__row">
-        <label><span>Jméno</span><input type="text" name="Jméno" placeholder="Jan Novák" autocomplete="name" required></label>
+        <label><span>Jméno</span><input type="text" name="Jméno" maxlength="150" placeholder="Jan Novák" autocomplete="name" required></label>
         <label><span>E-mail</span><input type="email" name="email" maxlength="254" spellcheck="false" autocapitalize="none" aria-describedby="emailHelp" placeholder="jan@firma.cz" autocomplete="email" required></label>
       </div>
       <p class="form__hint" id="emailHelp" hidden aria-live="polite"></p>
@@ -654,7 +649,7 @@
           <option>Zatím nevím</option>
         </select>
       </label>
-      <label><span>O projektu</span><textarea name="Zpráva" rows="4" placeholder="Co chystáš, pro koho a do kdy? Pokud máš představu o rozpočtu, připiš ji." required></textarea></label>
+      <label><span>O projektu</span><textarea name="Zpráva" maxlength="12000" rows="4" placeholder="Co chystáš, pro koho a do kdy? Pokud máš představu o rozpočtu, připiš ji." required></textarea></label>
 
       <div class="file" data-cursor="hover">
         <input type="file" id="attach" name="attachment" multiple
@@ -662,13 +657,21 @@
         <label for="attach" class="file__label">
           <span class="file__plus" aria-hidden="true">+</span>
           <span class="file__txt" id="fileTxt" aria-live="polite">Přiložit vyplněný dotazník nebo podklady</span>
-          <em class="file__hint">DOCX, PDF, obrázky, ZIP · dohromady max 10 MB</em>
+          <em class="file__hint">DOCX, PDF, obrázky, ZIP · nejvýš 10 souborů / dohromady 10 MB</em>
         </label>
       </div>
       <!-- Dotazník je pomůcka k poptávce, proto je tady u příloh a ne jako samostatná karta. -->
       <p class="form__hint">Nevíš, co napsat? Stáhni si dotazník značky (<a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx" data-cursor="hover">DOCX</a> nebo <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">PDF</a>), vyplň ho a přilož. Je dobrovolný.</p>
 
-      <button type="submit" class="btn btn--primary btn--lg btn--full" data-cursor="hover" data-magnetic><span>Pojďme probrat projekt</span></button>
+      <div id="contactChallenge" hidden></div>
+      <div id="emailVerification" hidden>
+        <label><span>Ověřovací kód</span><input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-describedby="verificationStatus" disabled></label>
+        <button type="button" id="resendCode" class="btn btn--sm">Poslat nový kód</button>
+      </div>
+      <p id="verificationStatus" class="form__hint" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p class="form__hint">Na e-mail ti pošleme šestimístný kód. Poptávku odešleme až po jeho zadání.</p>
+      <noscript><p>Ověření e-mailu potřebuje JavaScript. Můžeš mi také napsat přímo e-mailem.</p></noscript>
+      <button type="submit" class="btn btn--primary btn--lg btn--full" data-cursor="hover" data-magnetic><span>Odeslat ověřovací kód</span></button>
       <p class="form__note">Nezávazná poptávka · Zadání doladíme společně</p>
       <p class="form__note">Údaje z formuláře použiju jen k vyřízení poptávky. <a href="soukromi.html" data-cursor="hover">Jak s nimi nakládám</a></p>
     </form>
@@ -710,6 +713,7 @@
 <script src="assets/js/main.js?v=20261005-contact"></script>
 <script src="assets/js/efekty.js?v=2026100210" defer></script>
 <script src="assets/js/quiz.js?v=2026100203"></script>
-<script src="assets/js/stats.js?v=2026100208"></script>
+<script src="assets/js/verify-email.js?v=20261005-otp" defer></script>
+<script src="assets/js/stats.js?v=20261005-otp"></script>
 </body>
 </html>
