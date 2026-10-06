@@ -828,9 +828,9 @@ section{ position:relative; }
   opacity:0; visibility:hidden; transition:opacity .45s var(--ease),visibility .45s;
 }
 .lb.on{ opacity:1; visibility:visible; }
-.lb__box{ width:min(1200px,100%); max-height:88vh; max-height:88svh; display:flex; flex-direction:column; gap:1.4rem; }
+.lb__box{ width:min(1200px,100%); max-height:88vh; max-height:88svh; overflow-y:auto; overscroll-behavior:contain; display:flex; flex-direction:column; gap:1.4rem; }
 .lb__box img{
-  width:100%; max-height:66vh; max-height:66svh; object-fit:contain; border-radius:4px;
+  flex-shrink:0; width:100%; max-height:66vh; max-height:66svh; object-fit:contain; border-radius:4px;
   transform:scale(.97); transition:transform .55s var(--ease);
 }
 .lb.on .lb__box img{ transform:scale(1); }
