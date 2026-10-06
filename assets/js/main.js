@@ -287,6 +287,17 @@ if (lb && items.length) {
         lbLink.removeAttribute('href');
       }
     }
+    const secondary = $('#lbSecondary');
+    if (secondary) {
+      secondary.hidden = !el.dataset.urlSecondary;
+      if (el.dataset.urlSecondary) {
+        secondary.href = el.dataset.urlSecondary;
+        secondary.textContent = el.dataset.urlSecondaryLabel + ' ↗';
+      } else {
+        secondary.removeAttribute('href');
+        secondary.textContent = '';
+      }
+    }
     const list = visibleItems(), i = list.indexOf(el);
     if (lbCount) lbCount.textContent = `${i + 1} / ${list.length}`;
 
