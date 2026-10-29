@@ -18,7 +18,7 @@
     code: text('Kód nesouhlasí. Zkus ho zadat znovu.', 'The code does not match. Please try again.'),
     expired: text('Kód už vypršel. Vyžádej si nový.', 'This code has expired. Request a new one.'),
     attempts: text('Počet pokusů je vyčerpaný. Vyžádej si nový kód.', 'Too many attempts. Request a new code.'),
-    limit: text('Dosáhli jsme limitu odesílání. Zkus to později nebo mi napiš přímo e-mailem.', 'The sending limit has been reached. Try later or email me directly.'),
+    limit: text('Limit odesílání je teď vyčerpaný. Zkus to později, nebo mi napiš přímo e-mailem.', 'The sending limit has been reached. Try later or email me directly.'),
     challenge: text('Dokonči prosím kontrolu proti spamu a zkus to znovu.', 'Please complete the spam check and try again.'),
     size: text('Přílohy mohou mít dohromady nejvýš 10 MB a nejvýš 10 souborů.', 'Attach no more than 10 files, totalling up to 10 MB.'),
     file: text('Některá příloha nemá podporovaný formát.', 'An attachment has an unsupported format.'),
@@ -78,7 +78,7 @@
     challenge = result.challenge; verifiedAddress = address;
     group.hidden = false; code.disabled = false; code.required = true; code.value = ''; label();
     captcha.hidden = true;
-    say(text('Kód jsme odeslali na ', 'We sent a code to ') + address + text('. Platí 10 minut. Zkontroluj i spam.', '. It is valid for 10 minutes. Check your spam folder too.'));
+    say(text('Kód jsem poslal na ', 'I’ve sent a code to ') + address + text('. Platí 10 minut. Zkontroluj i spam.', '. It is valid for 10 minutes. Check your spam folder too.'));
     code.focus();
   }
   async function run(action) {

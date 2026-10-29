@@ -4,21 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Enquiry sent — Tomáš Petera</title>
-<meta name="description" content="Thanks for your enquiry. I&#x27;ll get back to you within 24 hours.">
+<title>Enquiry sent | Tomáš Petera</title>
+<meta name="description" content="Thanks for your enquiry. I’ll get back to you within 24 hours.">
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#12100D">
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin-ext.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-ext.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin-ext.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=20261029-language">
-<noscript><style>.loader{display:none}</style></noscript>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/unbounded.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=20261029-klid">
 
 <style>
-  /* Jediné, co tahle stránka potřebuje navíc — zbytek jede na tvém style.css. */
   /* jen spodek — horní odsazení drží .page-head, jinak by obsah
      zalezl pod pevnou hlavičku */
   .thanks{ padding-bottom:6rem; }
@@ -30,7 +24,7 @@
     max-width:44rem;
   }
   .thanks__next h2{
-    font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:600;
+    font-family:'Unbounded',sans-serif; font-size:1rem; font-weight:500;
     letter-spacing:-.01em; margin-bottom:1rem;
   }
   .thanks__steps{ list-style:none; display:grid; gap:.9rem; }
@@ -39,7 +33,7 @@
     color:var(--ink-2); font-size:.97rem;
   }
   .thanks__steps b{
-    font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.14em;
+    font-size:.7rem; letter-spacing:.02em;
     color:var(--neon-2); font-weight:400;
   }
 </style>
@@ -58,24 +52,16 @@
 
 <a href="#thanks" class="skip">Skip to content</a>
 
-<div class="loader" id="loader">
-  <div class="loader__mark">TP</div>
-  <div class="loader__bar"><span id="loaderBar"></span></div>
-</div>
 
-<div class="cursor" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="grain" aria-hidden="true"></div>
-<div class="progress"><span id="progressBar"></span></div>
 
 <header class="nav" id="nav">
-  <a href="en.html" class="nav__logo" data-cursor="hover">Tomáš&nbsp;Petera<i>®</i></a>
+  <a href="en.html" class="nav__logo">Tomáš&nbsp;Petera<i>®</i></a>
   <nav class="nav__links">
-    <a href="work-en.html" data-cursor="hover">Work</a>
-    <a href="en.html#services" data-cursor="hover">Services</a>
-    <a href="en.html#pricing" data-cursor="hover">Pricing</a>
+    <a href="work-en.html">Work</a>
+    <a href="en.html#services">Services</a>
+    <a href="en.html#pricing">Pricing</a>
   </nav>
-  <a href="en.html#contact" class="btn btn--sm" data-cursor="hover" data-magnetic><span>Let's talk</span></a>
+  <a href="en.html#contact" class="btn btn--sm"><span>Let’s talk</span></a>
   <nav class="nav__lang" aria-label="Language"><a href="/dekuji.html" lang="cs" hreflang="cs" aria-label="Čeština">CZ</a><span aria-hidden="true">/</span><a href="/thanks-en.html" lang="en" hreflang="en" aria-label="English" aria-current="true">EN</a></nav>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
 </header>
@@ -86,29 +72,29 @@
   <a href="en.html#about">About</a>
   <a href="en.html#services">Services</a>
   <a href="en.html#pricing">Pricing</a>
-  <a href="en.html#contact">Let's talk</a>
+  <a href="en.html#contact">Let’s talk</a>
 </div>
 
 <main id="top">
 
 <section class="page-head thanks" id="thanks">
   <div class="container thanks__inner">
-    <a href="en.html" class="back" data-cursor="hover"><i>&#8592;</i> Back to home</a>
-    <p class="eyebrow reveal">Enquiry sent</p>
-    <h1 class="page-head__title reveal">Thanks for your message.<br><span class="accent">It's over to me now.</span></h1>
-    <p class="lead reveal">Your enquiry has been sent. I'll read your brief and reply to the email address you provided. Together, we'll clarify what you need and agree on the next steps.</p>
+    <a href="en.html" class="back"><i>&#8592;</i> Back to home</a>
+    <p class="eyebrow">Enquiry sent</p>
+    <h1 class="page-head__title reveal">Thanks for your message.<br>It’s over to me now.</h1>
+    <p class="lead">Your enquiry has been sent. I’ll read your brief and reply to the email address you provided. Together, we’ll clarify what you need and agree on the next steps.</p>
 
-    <div class="thanks__next reveal">
+    <div class="thanks__next">
       <h2>What happens next</h2>
       <ul class="thanks__steps">
-        <li><b>01</b><span>I'll email you to agree on the next step.</span></li>
-        <li><b>02</b><span>We'll arrange a short, free, no-obligation call about your brand, audience and budget.</span></li>
-        <li><b>03</b><span>I'll prepare a proposal with a clear scope, price and timeline.</span></li>
+        <li><b>01</b><span>I’ll email you to agree on the next step.</span></li>
+        <li><b>02</b><span>We’ll arrange a short, free, no-obligation call about your brand, audience and budget.</span></li>
+        <li><b>03</b><span>I’ll prepare a proposal with a clear scope, price and timeline.</span></li>
       </ul>
     </div>
 
     <!-- ── REZERVACE HOVORU — Google Kalendář (rozvrh schůzek), otevírá se v novém okně ── -->
-    <div class="brief reveal" data-spot>
+    <div class="brief">
       <span class="brief__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M8 3v4M16 3v4M3.5 10h17"/>
@@ -117,34 +103,34 @@
       <div class="brief__text">
         <b>Ready to talk? Book a call</b>
         <em>30 minutes · Google Meet · Mondays and Fridays</em>
-        <p>Choose an available time and let's talk about your project. You'll receive the call link by email. Please book at least 48 hours ahead.</p>
+        <p>Choose an available time and let’s talk about your project. You’ll receive the call link by email. Please book at least 48 hours ahead.</p>
         <span class="brief__links">
-          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2lQOGA2t-JJVEKWHF6NmJk4d18JD1EE6JEv0ar5DN4d3z3gwg9J94sS6iQbrUNA9orx3Tcb2SC?gv=true" target="_blank" rel="noopener" class="is-primary" data-cursor="hover">Book a free call</a>
+          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2lQOGA2t-JJVEKWHF6NmJk4d18JD1EE6JEv0ar5DN4d3z3gwg9J94sS6iQbrUNA9orx3Tcb2SC?gv=true" target="_blank" rel="noopener" class="is-primary">Book a free call</a>
         </span>
       </div>
     </div>
 
     <!-- Karta je <div>, ne <a> — uvnitř jsou dva odkazy a odkaz v odkazu
          je neplatné HTML. -->
-    <div class="brief reveal" data-spot>
+    <div class="brief">
       <span class="brief__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/>
         </svg>
       </span>
       <div class="brief__text">
-        <b>While you wait — download the brand questionnaire (Czech)</b>
+        <b>While you wait, download the brand questionnaire (Czech)</b>
         <em>36 questions · free</em>
-        <p>Fill it in at your own pace and send it with your reply. It will help us clarify the brief. It's optional.</p>
+        <p>Fill it in at your own pace and send it with your reply. It will help us clarify the brief. It’s optional.</p>
         <span class="brief__links">
-          <a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx" data-cursor="hover">Download DOCX</a>
-          <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf" data-cursor="hover">Download PDF</a>
+          <a href="assets/dotaznik/dotaznik-znacka.docx" download="Zakladni-informace-o-znacce.docx">Download DOCX</a>
+          <a href="assets/dotaznik/dotaznik-znacka.pdf" download="Zakladni-informace-o-znacce.pdf">Download PDF</a>
         </span>
       </div>
     </div>
-    <div class="thanks__cta reveal">
-      <a href="work-en.html" class="btn btn--primary" data-cursor="hover" data-magnetic><span>Explore the portfolio</span></a>
-      <a href="en.html" class="btn btn--ghost" data-cursor="hover" data-magnetic><span>Back to the website</span></a>
+    <div class="thanks__cta">
+      <a href="work-en.html" class="btn btn--primary"><span>Explore the portfolio</span></a>
+      <a href="en.html" class="btn btn--ghost"><span>Back to the website</span></a>
     </div>
   </div>
 </section>
@@ -168,19 +154,18 @@
       <a href="https://www.linkedin.com/in/tomaspetera" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <div class="footer__col">
-      <h4 aria-level="2">Prague</h4>
-      <p class="clock" id="clock">--:--</p>
-      <p class="footer__status"><span class="dot"></span> Available for new projects</p>
+      <h4 aria-level="2">Availability</h4>
+      <p class="footer__status">Available for new projects</p>
     </div>
   </div>
   <div class="footer__bar container">
     <span>&#169; <span id="year">2026</span> Tomáš Petera</span>
-    <span>I measure visits without cookies or personal data. <a href="privacy-en.html" data-cursor="hover">Privacy policy</a></span>
-    <a href="#top" data-cursor="hover">Back to top ↑</a>
+    <span>I measure visits without cookies or personal data. <a href="privacy-en.html">Privacy policy</a></span>
+    <a href="#top">Back to top ↑</a>
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=20261005-contact"></script>
-<script src="assets/js/stats.js?v=20261029"></script>
+<script src="assets/js/main.js?v=20261029-klid"></script>
+<script src="assets/js/stats.js?v=20261029-klid"></script>
 </body>
 </html>

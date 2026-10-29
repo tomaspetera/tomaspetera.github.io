@@ -185,10 +185,9 @@ document.addEventListener('click', e => {
   }
 
   const kde =
-    a.closest('.hero__cta') || a.closest('.hero__reveal') ? 'hero' :
+    a.closest('.hero__cta') ? 'hero' :
     a.closest('.nav') ? 'hlavicka' :
     a.closest('#menu') ? 'menu' :
-    a.closest('#dots') ? 'tecky' :
     a.closest('.plan') ? 'cenik' :
     a.closest('.showcase__foot') ? 'showcase' :
     a.closest('.shot') ? 'showcase-projekt' :

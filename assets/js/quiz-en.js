@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   Kvíz „Co tvoje značka potřebuje?" — 3 otázky, doporučený balíček
+   Kvíz „Co tvoje značka potřebuje?" — tři otázky, doporučený rozsah
    a předvyplněná poptávka. Vanilla JS, nic se neukládá.
 
    Měření: události posílá stats.js (tenhle skript jen vyvolá
@@ -58,15 +58,15 @@ const BALICKY = {
   },
   web: {
     nazev: "Campaign · packaging · web", sluzba: 'Web',
-    proc: "Bring your existing brand to the web with a design that fits. This package covers website design, frontend development and ongoing collaboration."
+    proc: "Bring your existing brand to the web with a design that fits. This option covers website design, frontend development and ongoing collaboration."
   },
   packaging: {
     nazev: "Campaign · packaging · web", sluzba: 'Packaging',
-    proc: "Bring your brand to packaging and print. This package covers packaging design, product ranges and ongoing collaboration."
+    proc: "Bring your brand to packaging and print. This option covers packaging design, product ranges and ongoing collaboration."
   },
   kampan: {
     nazev: "Campaign · packaging · web", sluzba: "Campaign",
-    proc: "Put your brand to work in a campaign. This package covers the campaign, art direction and ongoing collaboration."
+    proc: "Put your brand to work in a campaign. This option covers the campaign, art direction and ongoing collaboration."
   }
 };
 
@@ -119,7 +119,6 @@ function vykresli(zamerit) {
     q.moznosti.forEach((m, i) => {
       const b = el('button', 'quiz__opt' + (odpovedi[q.klic] === m.id ? ' is-picked' : ''));
       b.type = 'button';
-      b.setAttribute('data-cursor', 'hover');
       b.appendChild(el('b', null, 'ABC'[i]));
       const t = el('span');
       t.appendChild(el('strong', null, m.nadpis));
@@ -138,7 +137,6 @@ function vykresli(zamerit) {
     if (krok > 0) {
       const zpet = el('button', 'quiz__back', "← Back");
       zpet.type = 'button';
-      zpet.setAttribute('data-cursor', 'hover');
       zpet.addEventListener('click', () => { krok--; vykresli(true); });
       stranka.appendChild(zpet);
     }
@@ -166,17 +164,14 @@ function vykresli(zamerit) {
   const akce = el('div', 'quiz__cta');
   const pokracuj = el('a', 'btn btn--primary', "Discuss your project");
   pokracuj.href = '#contact';
-  pokracuj.setAttribute('data-cursor', 'hover');
   pokracuj.addEventListener('click', () => predvyplnit(r));
   const cenik = el('a', 'btn btn--ghost', "View pricing");
   cenik.href = '#pricing';
-  cenik.setAttribute('data-cursor', 'hover');
   akce.appendChild(pokracuj); akce.appendChild(cenik);
   stranka.appendChild(akce);
 
   const znovu = el('button', 'quiz__back', "↺ Start again");
   znovu.type = 'button';
-  znovu.setAttribute('data-cursor', 'hover');
   znovu.addEventListener('click', () => {
     Object.keys(odpovedi).forEach(k => delete odpovedi[k]);
     krok = 0; zacato = false;
@@ -199,7 +194,7 @@ function predvyplnit(r) {
     const o = odpovedi;
     msg.value = PREFIX + "brand: " + moznost(OTAZKY[0], o.faze).kratce +
       "; first use: " + moznost(OTAZKY[1], o.misto).kratce +
-      "; timing: " + moznost(OTAZKY[2], o.termin).kratce + ". Recommended package: " + r.nazev + '.';
+      "; timing: " + moznost(OTAZKY[2], o.termin).kratce + ". Recommended option: " + r.nazev + '.';
     msg.dispatchEvent(new Event('input', { bubbles: true }));
   }
 }

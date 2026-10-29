@@ -11,7 +11,6 @@ const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp  = (a, b, t) => a + (b - a) * t;
-const easeOut = t => 1 - Math.pow(1 - t, 3);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasHover = matchMedia('(hover: hover)').matches;
 
@@ -21,74 +20,7 @@ let vw = innerWidth, vh = innerHeight;
 let heroP = 0;
 let mouseNX = 0, mouseNY = 0, mNX = 0, mNY = 0;
 
-/* ═══════════ 1. PRELOADER ═══════════ */
-const loader = $('#loader');
-const loaderBar = $('#loaderBar');
-// Když skript dorazil tak pozdě, že načítací obrazovku už schovala pojistka v CSS (velmi
-// pomalé připojení), obsah je dávno vidět a úvodní animace se znovu nespouští.
-const POZDE = !!loader && getComputedStyle(loader).visibility === 'hidden';
-
-function bootHero() {
-  $$('.hero__title .split').forEach((el, i) => {
-    el.style.transform = 'translateY(0)';
-    el.style.transitionDelay = (.09 * i) + 's';
-  });
-  ['.hero__eyebrow', '.hero__sub', '.hero__cta'].forEach((sel, i) => {
-    const el = $(sel);
-    if (!el) return;
-    setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 420 + i * 130);
-  });
-}
-
-if (!REDUCED && !POZDE) {
-  $$('.hero__title .split').forEach(el => {
-    el.style.transform = 'translateY(110%)';
-    el.style.transition = 'transform 1.2s cubic-bezier(.22,1,.36,1)';
-  });
-  ['.hero__eyebrow', '.hero__sub', '.hero__cta'].forEach(sel => {
-    const el = $(sel);
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 1s var(--ease), transform 1s cubic-bezier(.22,1,.36,1)';
-  });
-}
-
-/* Bar dřív běžel na náhodném čísle — doskákal za 0,8 až 2 s bez ohledu na to,
-   jak rychle byl web opravdu načtený, a přesně o tu dobu se odkládalo zobrazení
-   obsahu. Google tenhle okamžik měří jako LCP. Teď má plnění pevnou délku
-   a čeká se navíc jen na fonty, aby text nepřeskočil. Vizuálně stejné. */
-if (loader && POZDE) loader.classList.add('done');
-else if (loader) {
-  const START = performance.now();
-  const SPAN  = 420;   // jak dlouho se bar plní
-  const CAP   = 900;   // na fonty čekáme nejdéle takhle dlouho
-
-  let fontsOk = !(document.fonts && document.fonts.ready);
-  if (!fontsOk) document.fonts.ready.then(() => { fontsOk = true; });
-
-  let finished = false;
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    if (loaderBar) loaderBar.style.width = '100%';
-    setTimeout(() => { loader.classList.add('done'); bootHero(); }, 120);
-  };
-
-  const tick = () => {
-    if (finished) return;
-    const t = performance.now() - START;
-    if (loaderBar) loaderBar.style.width = (easeOut(Math.min(1, t / SPAN)) * 100).toFixed(1) + '%';
-    if (t >= SPAN && (fontsOk || t >= CAP)) { finish(); return; }
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-
-  // Pojistka: requestAnimationFrame v záložce na pozadí neběží. Ať se stane
-  // cokoli, loader nesmí zůstat viset přes obsah.
-  setTimeout(finish, 3000);
-}
-
+/* ═══════════ 1. OBRÁZKY ═══════════ */
 /* Desky prstence, které při načtení nejsou vidět, se stahují až po načtení stránky
    (nebo hned při prvním posunu, protože ten prstenec roztáčí). Na pomalém mobilu
    tak nezabírají linku stylům, písmům a první desce. */
@@ -133,41 +65,13 @@ if ('IntersectionObserver' in window) {
   }
 }
 
-/* ═══════════ 2. KURZOR + MAGNETICKÁ TLAČÍTKA ═══════════ */
-const dot = $('#cursorDot'), ring = $('#cursorRing');
-let mx = vw / 2, my = vh / 2, rx = mx, ry = my;
-
-if (hasHover && dot && ring) {
+/* ═══════════ 2. MYŠ: jemné natočení prstence na úvodu ═══════════ */
+if (hasHover && $('#ring')) {
   addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    mouseNX = (mx / vw) * 2 - 1;
-    mouseNY = (my / vh) * 2 - 1;
-    dot.style.transform = `translate(${mx}px, ${my}px)`;
+    mouseNX = (e.clientX / vw) * 2 - 1;
+    mouseNY = (e.clientY / vh) * 2 - 1;
   }, { passive: true });
-
-  $$('[data-cursor]').forEach(el => {
-    const mode = el.dataset.cursor;
-    el.addEventListener('mouseenter', () => ring.classList.add(mode));
-    el.addEventListener('mouseleave', () => ring.classList.remove(mode));
-  });
 }
-
-$$('[data-magnetic]').forEach(el => {
-  if (REDUCED || !hasHover) return;
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    el.style.transform = `translate(${(e.clientX - r.left - r.width/2) * .22}px, ${(e.clientY - r.top - r.height/2) * .34}px)`;
-  });
-  el.addEventListener('mouseleave', () => { el.style.transform = ''; });
-});
-
-$$('[data-spot]').forEach(el => {
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  });
-});
 
 /* ═══════════ 3. NAVIGACE ═══════════ */
 const nav = $('#nav'), burger = $('#burger'), menu = $('#menu');
@@ -472,7 +376,7 @@ if (fileInput && fileTxt) {
     wrap.classList.add('has-file');
     wrap.classList.toggle('is-over', over);
 
-    if (over) fileTxt.textContent = (document.documentElement.lang === "en" ? `Attachments total ${mb} MB — the limit is 10 MB` : `Přílohy mají ${mb} MB — limit je 10 MB`);
+    if (over) fileTxt.textContent = (document.documentElement.lang === "en" ? `Attachments total ${mb} MB (limit 10 MB)` : `Přílohy mají ${mb} MB (limit je 10 MB)`);
     else if (files.length === 1) fileTxt.textContent = `${files[0].name} · ${mb} MB`;
     else fileTxt.textContent = (document.documentElement.lang === "en" ? `${files.length} files · ${mb} MB` : `${files.length} ${files.length < 5 ? 'soubory' : 'souborů'} · ${mb} MB`);
   });
@@ -502,23 +406,7 @@ setTimeout(() => {
   });
 }, 5000);
 
-/* ═══════════ 9. HODINY, ROK, KOTVY ═══════════ */
-const clock = $('#clock');
-if (clock) {
-  // Formátovač času se vytváří jen jednou a až po načtení stránky: jeho první použití
-  // stojí na pomalém mobilu desítky milisekund a hodiny jsou až v patičce.
-  let fmt = null;
-  const paint = () => {
-    if (!fmt) {
-      try { fmt = new Intl.DateTimeFormat('cs-CZ', { timeZone: 'Europe/Prague', hour: '2-digit', minute: '2-digit' }); }
-      catch (e) { fmt = { format: d => d.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' }) }; }
-    }
-    clock.textContent = fmt.format(new Date());
-  };
-  const startClock = () => { paint(); setInterval(paint, 15000); };
-  if (document.readyState === 'complete') setTimeout(startClock, 600);
-  else addEventListener('load', () => setTimeout(startClock, 600), { once: true });
-}
+/* ═══════════ 9. ROK, KOTVY ═══════════ */
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -532,11 +420,8 @@ $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
 }));
 
 /* ═══════════ 10. PRVKY PRO SMYČKU ═══════════ */
-const progressBar = $('#progressBar');
 const heroSection = $('#hero');
 const heroContent = $('#heroContent');
-const heroReveal = $('#heroReveal');
-const heroHint = $('#heroHint');
 const ringWrap = $('#ringWrap');
 const ringEl = $('#ring');
 const faces = $$('.ring__face');
@@ -546,25 +431,19 @@ const timelineSteps = $$('.timeline .step');
 const showcase = $('#showcase');
 const shots = $$('.showcase .shot');
 const showcaseFill = $('#showcaseFill');
-const flow = $('#flow');
-const guide = $('#guide');
-const guidePath = $('#guidePath');
-const guideDot = $('#guideDot');
 
-/* orientace — boční tečky, zvýraznění v hlavičce, zpět nahoru */
-const dotsNav = $('#dots');
-const dotLinks = $$('#dots a');
+/* orientace: zvýraznění v hlavičce a zpět nahoru */
 const toTop = $('#toTop');
 const navLinks = $$('.nav__links a[href^="#"]');
-const sections = dotLinks
-  .map(a => document.querySelector(a.getAttribute('href')))
+const sections = ['hero', 'about', 'showcase', 'services', 'process', 'pricing', 'contact']
+  .map(id => document.getElementById(id))
   .filter(Boolean);
 let activeIdx = -1;
 
 if (toTop) toTop.addEventListener('click', () =>
   scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }));
 
-let heroRange = 1, heroTop = 0, guideLen = 0, lastRot = 999;
+let heroRange = 1, heroTop = 0, lastRot = 999;
 
 /* Pozice sekcí v dokumentu se počítají jednou v measure().
    Animace pak běží na tlumené hodnotě scrollu (sySmooth) místo
@@ -573,43 +452,7 @@ let heroRange = 1, heroTop = 0, guideLen = 0, lastRot = 999;
 let sySmooth = scrollY, smoothInit = false;
 let showcaseTop = 0, showcaseH = 0;
 let timelineTop = 0, timelineH = 0;
-let flowTop = 0, flowH = 0;
-let sectionTops = [];            // pozice sekcí pro boční tečky (čtou se jen v measure)
-
-/* vlnovka přes celou šířku — vede od klientů dolů k formuláři */
-let lastGuideW = 0, lastGuideH = 0;
-let guideX = [], guideY = [], guideS = [];   // body čáry a délka od začátku k nim (pro polohu tečky)
-
-function buildGuide() {
-  if (!flow || !guide || !guidePath) return;
-  const h = flow.offsetHeight, w = flow.offsetWidth;
-  if (!h || !w) return;
-  // ResizeObserver umí střílet často — přepočítávej jen při skutečné změně,
-  // getTotalLength() na dlouhé cestě není zadarmo
-  if (w === lastGuideW && h === lastGuideH) return;
-  lastGuideW = w; lastGuideH = h;
-
-  guide.setAttribute('width', w);
-  guide.setAttribute('height', h);
-  guide.setAttribute('viewBox', `0 0 ${w} ${h}`);
-
-  // Méně průchodů = linka řeže text méně často.
-  const N = 140, mid = w * .5, amp = w * .40;
-  let d = '';
-  guideX = []; guideY = []; guideS = [];
-  for (let i = 0; i <= N; i++) {
-    const t = i / N;
-    // stejné zaokrouhlení jako v cestě, ať tečka sedí přesně na čáře
-    const x = +(mid + Math.sin(t * Math.PI * 2.5) * amp).toFixed(1), y = +(t * h).toFixed(1);
-    d += (i ? ' L' : 'M') + x + ' ' + y;
-    guideS.push(i ? guideS[i - 1] + Math.hypot(x - guideX[i - 1], y - guideY[i - 1]) : 0);
-    guideX.push(x); guideY.push(y);
-  }
-  guidePath.setAttribute('d', d);
-  guideLen = guideS[N];
-  guidePath.style.strokeDasharray = guideLen;
-  guidePath.style.strokeDashoffset = guideLen;
-}
+let sectionTops = [];            // pozice sekcí pro zvýraznění v hlavičce (čtou se jen v measure)
 
 function measure() {
   vw = innerWidth; vh = innerHeight;
@@ -626,19 +469,14 @@ function measure() {
     timelineTop = timeline.getBoundingClientRect().top + sy;
     timelineH = timeline.offsetHeight;
   }
-  if (flow) {
-    flowTop = flow.getBoundingClientRect().top + sy;
-    flowH = flow.offsetHeight;
-  }
   sectionTops = sections.map(el => el.getBoundingClientRect().top + sy);
-  buildGuide();
 }
 
 /* ═══════════ 11. HLAVNÍ SMYČKA ═══════════ */
 /* Smyčka běží jen tehdy, když se něco hýbe. Jakmile se scroll, myš i dojezdy
    ustálí, po ~20 klidných snímcích se zastaví (nulová zátěž procesoru a baterie)
    a znovu ji probudí scroll, pohyb myši, dotyk nebo změna velikosti okna. */
-let running = false, idleFrames = 0, guideP = -1;
+let running = false, idleFrames = 0;
 function wake() {
   idleFrames = 0;
   if (!running) { running = true; requestAnimationFrame(frame); }
@@ -646,9 +484,7 @@ function wake() {
 
 function frame() {
   const sy = scrollY;
-  const docH = document.documentElement.scrollHeight - vh;
 
-  if (progressBar) progressBar.style.transform = 'scaleX(' + clamp(sy / (docH || 1)).toFixed(4) + ')';
   if (nav) nav.classList.toggle('stuck', sy > 40);
 
   // ── kde právě jsem ────────────────────────────────
@@ -660,11 +496,9 @@ function frame() {
     }
     if (idx !== activeIdx) {
       activeIdx = idx;
-      dotLinks.forEach((a, i) => a.classList.toggle('is-on', i === idx));
-      const id = dotLinks[idx].getAttribute('href');
+      const id = '#' + sections[idx].id;
       navLinks.forEach(a => a.classList.toggle('is-here', a.getAttribute('href') === id));
     }
-    if (dotsNav) dotsNav.classList.toggle('on', sy > vh * .6);
   }
   if (toTop) toTop.classList.toggle('on', sy > vh * 1.4);
 
@@ -679,12 +513,12 @@ function frame() {
 
   // ── 3D prstenec ───────────────────────────────────
   if (ringEl && ringWrap) {
-    const rot  = -heroP * 400 + mNX * 14;                 // otáčení scrollem + myš
+    const rot  = -heroP * 160 + mNX * 14;                 // otáčení scrollem + myš
     const tilt = -5 - heroP * 12 + mNY * 5;
-    const back = -heroP * 340;                            // prstenec couvá do dálky
+    const back = -heroP * 240;                            // prstenec couvá do dálky
     ringEl.style.transform =
       `translateZ(${back.toFixed(1)}px) rotateX(${tilt.toFixed(2)}deg) translateZ(var(--posun, 0px)) rotateY(${rot.toFixed(2)}deg)`;
-    ringWrap.style.opacity = (1 - clamp((heroP - .68) / .24)).toFixed(3);
+    ringWrap.style.opacity = (1 - .35 * clamp((heroP - .5) / .5)).toFixed(3);   // ke konci jen ztlumí a odjede se scénou
 
     // krytí desek podle toho, jak jsou natočené k divákovi
     if (Math.abs(rot - lastRot) > .2) {
@@ -699,19 +533,10 @@ function frame() {
 
   // ── text v hero ───────────────────────────────────
   if (heroContent && !REDUCED) {
-    const o = 1 - clamp((heroP - .04) / .3);
+    const o = 1 - clamp((heroP - .05) / .4);
     heroContent.style.opacity = o;
     heroContent.style.transform = `translateY(${-heroP * 60}px)`;
     heroContent.style.pointerEvents = o < .05 ? 'none' : '';
-
-    if (heroHint) heroHint.style.opacity = 1 - clamp(heroP / .1);
-
-    if (heroReveal) {
-      const rv = clamp((heroP - .74) / .2);
-      heroReveal.style.opacity = rv;
-      heroReveal.style.transform = `translateY(${(1 - easeOut(rv)) * 30}px)`;
-      heroReveal.classList.toggle('on', rv > .6);
-    }
   }
 
   // ── showcase — projekty jeden po druhém ───────────
@@ -745,8 +570,6 @@ function frame() {
           cap.style.opacity = clamp(1 - dist / .3);
           cap.style.transform = `translateY(${(-local * 26).toFixed(1)}px)`;
         }
-        const img = shot.firstElementChild && shot.firstElementChild.firstElementChild;
-        if (img) img.style.transform = `scale(1.06) translateY(${(local * 22).toFixed(1)}px)`;
       });
 
       if (showcaseFill) showcaseFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
@@ -764,41 +587,9 @@ function frame() {
     }
   }
 
-  // ── vodicí linka ──────────────────────────────────
-  if (guideLen && flow) {
-    const top = flowTop - sySmooth;
-    const p = clamp((vh * .62 - top) / Math.max(1, flowH - vh * .25));
-    // Překresluje se jen při znatelné změně (a vždy na krajích). SVG je vysoké
-    // tisíce pixelů, takže každé zbytečné přepsání stojí vykreslení celé linky.
-    if (Math.abs(p - guideP) > .0003 || ((p === 0 || p === 1) && p !== guideP)) {
-      guideP = p;
-      guidePath.style.strokeDashoffset = guideLen * (1 - p);
-      if (guideDot) {
-        if (p > 0 && p < 1) {
-          // bod na čáře v dané délce: půlením najdu úsek a dopočítám polohu v něm
-          const s = guideLen * p;
-          let lo = 0, hi = guideS.length - 1;
-          while (hi - lo > 1) { const m = (lo + hi) >> 1; if (guideS[m] <= s) lo = m; else hi = m; }
-          const k = (s - guideS[lo]) / ((guideS[hi] - guideS[lo]) || 1);
-          const x = guideX[lo] + (guideX[hi] - guideX[lo]) * k, y = guideY[lo] + (guideY[hi] - guideY[lo]) * k;
-          guideDot.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
-          guideDot.style.opacity = 1;
-        } else {
-          guideDot.style.opacity = 0;
-        }
-      }
-    }
-  }
-
-  if (hasHover && !REDUCED && ring) {
-    rx = lerp(rx, mx, .18); ry = lerp(ry, my, .18);
-    ring.style.transform = `translate(${rx.toFixed(2)}px, ${ry.toFixed(2)}px)`;
-  }
-
   // ustálilo se všechno, co doplouvá? pak smyčku po chvíli uspíme
   const moving = Math.abs(sy - sySmooth) > .05 ||
-                 Math.abs(mNX - mouseNX) > .001 || Math.abs(mNY - mouseNY) > .001 ||
-                 (hasHover && !REDUCED && (Math.abs(rx - mx) > .1 || Math.abs(ry - my) > .1));
+                 Math.abs(mNX - mouseNX) > .001 || Math.abs(mNY - mouseNY) > .001;
   idleFrames = moving ? 0 : idleFrames + 1;
   if (idleFrames > 20) { running = false; return; }
   requestAnimationFrame(frame);

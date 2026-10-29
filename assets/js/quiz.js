@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   Kvíz „Co tvoje značka potřebuje?" — 3 otázky, doporučený balíček
+   Kvíz „Co tvoje značka potřebuje?" — tři otázky, doporučený rozsah
    a předvyplněná poptávka. Vanilla JS, nic se neukládá.
 
    Měření: události posílá stats.js (tenhle skript jen vyvolá
@@ -21,15 +21,15 @@ const OTAZKY = [
     moznosti: [
       { id: 'nova',     nadpis: 'Teprve vzniká',                  popis: 'Nemám ještě logo ani pravidla.',          kratce: 'teprve vzniká' },
       { id: 'nesedi',   nadpis: 'Existuje, ale nepůsobí jednotně', popis: 'Logo mám, ale vše vypadá pokaždé jinak.', kratce: 'nepůsobí jednotně' },
-      { id: 'zavedena', nadpis: 'Je zavedená',                    popis: 'Chci ji využít v něčem novém.',           kratce: 'je zavedená' }
+      { id: 'zavedena', nadpis: 'Je zavedená',                    popis: 'Chci ji využít v něčem novém.',           kratce: 'je zavedená' }
     ]
   },
   {
     klic: 'misto', text: 'Kde se má objevit nejdřív?',
     moznosti: [
-      { id: 'online',  nadpis: 'Online',         popis: 'Web a sociální sítě.',       kratce: 'online' },
+      { id: 'online',  nadpis: 'Online',         popis: 'Web a sociální sítě.',       kratce: 'online' },
       { id: 'produkt', nadpis: 'Na produktu',    popis: 'Obal, etiketa, tisk.',       kratce: 'na produktu' },
-      { id: 'kampan',  nadpis: 'V kampani',      popis: 'Vizuály, reklama, akce.',    kratce: 'v kampani' }
+      { id: 'kampan',  nadpis: 'V kampani',      popis: 'Vizuály, reklama, akce.',    kratce: 'v kampani' }
     ]
   },
   {
@@ -45,28 +45,28 @@ const OTAZKY = [
 /* ───── Doporučení ───── */
 const BALICKY = {
   logo: {
-    nazev: 'Logo & základ', sluzba: 'Logo a základ',
-    proc: 'Začínáš od nuly, a tak dává smysl nejdřív pevný základ: logo, barvy, písmo a pravidla, jak s nimi pracovat. Na tom se pak dá postavit všechno ostatní.'
+    nazev: 'Logo a základ', sluzba: 'Logo a základ',
+    proc: 'Začínáš od nuly, a tak dává smysl nejdřív pevný základ: logo, barvy, písmo a pravidla, jak s nimi pracovat. Na tom se pak dá postavit všechno ostatní.'
   },
   identita_nesedi: {
     nazev: 'Vizuální identita', sluzba: 'Vizuální identita',
-    proc: 'Značku už máš, jen nepůsobí jako celek. Vizuální identita sjednotí logo, barvy, písmo i jejich použití do jednoho systému a přidá manuál, podle kterého se dá držet.'
+    proc: 'Značku už máš, jen nepůsobí jako celek. Vizuální identita sjednotí logo, barvy, písmo i jejich použití do jednoho systému a přidá manuál, podle kterého se dá držet.'
   },
   identita_kampan: {
     nazev: 'Vizuální identita', sluzba: 'Vizuální identita',
-    proc: 'Kampaň stojí na stabilním vizuálním systému. Proto bych nezačínal samotným logem, ale celou identitou, ze které se kampaň dá odvodit a která vydrží i po ní.'
+    proc: 'Kampaň stojí na stabilním vizuálním systému. Proto bych nezačínal samotným logem, ale celou identitou, ze které se kampaň dá odvodit a která vydrží i po ní.'
   },
   web: {
     nazev: 'Kampaň · packaging · web', sluzba: 'Web',
-    proc: 'Značku máš a teď ji potřebuješ nasadit na web tak, aby seděla k tomu, co už existuje. Tenhle balíček počítá s webem (design i frontend) a s dlouhodobější spoluprací.'
+    proc: 'Značku máš a teď ji potřebuješ nasadit na web tak, aby seděla k tomu, co už existuje. Tenhle rozsah počítá s webem (design i frontend) a s dlouhodobější spoluprací.'
   },
   packaging: {
     nazev: 'Kampaň · packaging · web', sluzba: 'Packaging',
-    proc: 'Značku máš a teď ji potřebuješ dostat na obal nebo do tisku. Tenhle balíček počítá s obalovým designem i s řadami produktů a s dlouhodobější spoluprací.'
+    proc: 'Značku máš a teď ji potřebuješ dostat na obal nebo do tisku. Tenhle rozsah počítá s obalovým designem i s řadami produktů a s dlouhodobější spoluprací.'
   },
   kampan: {
     nazev: 'Kampaň · packaging · web', sluzba: 'Kampaň',
-    proc: 'Značku máš a teď ji potřebuješ nasadit do kampaně. Tenhle balíček počítá s kampaní včetně art direction a s dlouhodobější spoluprací.'
+    proc: 'Značku máš a teď ji potřebuješ nasadit do kampaně. Tenhle rozsah počítá s kampaní včetně art direction a s dlouhodobější spoluprací.'
   }
 };
 
@@ -119,7 +119,6 @@ function vykresli(zamerit) {
     q.moznosti.forEach((m, i) => {
       const b = el('button', 'quiz__opt' + (odpovedi[q.klic] === m.id ? ' is-picked' : ''));
       b.type = 'button';
-      b.setAttribute('data-cursor', 'hover');
       b.appendChild(el('b', null, 'ABC'[i]));
       const t = el('span');
       t.appendChild(el('strong', null, m.nadpis));
@@ -138,7 +137,6 @@ function vykresli(zamerit) {
     if (krok > 0) {
       const zpet = el('button', 'quiz__back', '← Zpět');
       zpet.type = 'button';
-      zpet.setAttribute('data-cursor', 'hover');
       zpet.addEventListener('click', () => { krok--; vykresli(true); });
       stranka.appendChild(zpet);
     }
@@ -161,22 +159,19 @@ function vykresli(zamerit) {
   OTAZKY.forEach(q => chips.appendChild(el('li', null, moznost(q, o[q.klic]).kratce)));
   stranka.appendChild(chips);
 
-  stranka.appendChild(el('p', 'quiz__note', 'Je to orientační. Rozsah a cenu doladíme spolu podle toho, co opravdu potřebuješ.'));
+  stranka.appendChild(el('p', 'quiz__note', 'Je to orientační. Rozsah a cenu doladíme spolu podle toho, co opravdu potřebuješ.'));
 
   const akce = el('div', 'quiz__cta');
   const pokracuj = el('a', 'btn btn--primary', 'Probrat projekt');
   pokracuj.href = '#contact';
-  pokracuj.setAttribute('data-cursor', 'hover');
   pokracuj.addEventListener('click', () => predvyplnit(r));
   const cenik = el('a', 'btn btn--ghost', 'Podívat se do ceníku');
   cenik.href = '#pricing';
-  cenik.setAttribute('data-cursor', 'hover');
   akce.appendChild(pokracuj); akce.appendChild(cenik);
   stranka.appendChild(akce);
 
   const znovu = el('button', 'quiz__back', '↺ Začít znovu');
   znovu.type = 'button';
-  znovu.setAttribute('data-cursor', 'hover');
   znovu.addEventListener('click', () => {
     Object.keys(odpovedi).forEach(k => delete odpovedi[k]);
     krok = 0; zacato = false;
@@ -199,7 +194,7 @@ function predvyplnit(r) {
     const o = odpovedi;
     msg.value = PREFIX + 'značka ' + moznost(OTAZKY[0], o.faze).kratce +
       '; nejdřív se má objevit ' + moznost(OTAZKY[1], o.misto).kratce +
-      '; termín: ' + moznost(OTAZKY[2], o.termin).kratce + '. Doporučený balíček: ' + r.nazev + '.';
+      '; termín: ' + moznost(OTAZKY[2], o.termin).kratce + '. Doporučený rozsah: ' + r.nazev + '.';
     msg.dispatchEvent(new Event('input', { bubbles: true }));
   }
 }
