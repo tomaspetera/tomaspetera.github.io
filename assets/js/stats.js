@@ -58,7 +58,7 @@ function oznameni(text) {
   el.textContent = text;
   el.style.cssText = 'position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);z-index:10000;' +
     'max-width:calc(100vw - 2rem);padding:.7rem 1.2rem;border-radius:999px;font-size:.8125rem;line-height:1.35;' +
-    'text-align:center;background:#0a0810;color:#fff;border:1px solid rgba(168,85,247,.5);' +
+    'text-align:center;background:#1A1713;color:#EBE6DA;border:1px solid rgba(177,172,85,.5);' +
     'box-shadow:0 8px 32px rgba(0,0,0,.5)';
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 4500);
