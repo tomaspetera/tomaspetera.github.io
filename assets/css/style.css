@@ -389,18 +389,71 @@ section{ position:relative; }
 .item figcaption h3{ font-size:clamp(.98rem,1.5vw,1.2rem); font-weight:500; }
 .item figcaption p{ font-size:.82rem; color:var(--ink-2); margin-top:.25rem; }
 
-/* ═══ SLUŽBY ═══ */
-.services{ padding:6rem 0 8rem; }
-.svc{ margin-top:3.5rem; border-top:1px solid var(--line); }
-.svc__row{
-  display:grid; grid-template-columns:1fr auto; gap:2.5rem; align-items:start;
-  padding:2.5rem 0; border-bottom:1px solid var(--line);
+/* ═══ SLUŽBY: rejstřík ═══ */
+.services{
+  padding:6rem 0 8rem;
+  --rj-display:min(3.5vw,2.75rem);  /* na počítači totéž co .h2 */
+  --rj-cols:calc(var(--rj-display)*10) minmax(0,1fr) 11rem;  /* nejdelší název má 9,64 em */
+  --rj-gap:clamp(1.5rem,2.5vw,2.5rem);
+  --rj-leading:1.6rem;
 }
-.svc__main h3{ font-size:clamp(1.15rem,2.1vw,1.6rem); margin-bottom:.6rem; transition:color .4s; }
-@media (hover:hover){ .svc__row:hover .svc__main h3{ color:var(--neon-2); } }
-.svc__main p{ color:var(--ink-2); font-size:.93rem; max-width:56ch; }
-.svc__tags{ list-style:none; display:flex; flex-direction:column; gap:.4rem; text-align:right; }
-.svc__tags li{ font-size:.7rem; color:var(--muted); letter-spacing:.02em; }
+.services .container{
+  display:grid; grid-template-columns:var(--rj-cols); column-gap:var(--rj-gap);
+  align-items:baseline;
+}
+.services .eyebrow{ grid-column:1/-1; }
+.services .h2{ grid-column:1; font-size:var(--rj-display); overflow-wrap:break-word; }
+.services .h2 .accent{ display:block; text-wrap:balance; }
+.services .lead{ grid-column:2/-1; text-wrap:pretty; }
+@media (min-width:641px){ .services .lead{ font-size:1.08rem; } }
+.rejstrik{
+  grid-column:1/-1;
+  margin-top:clamp(2.5rem,4.5vw,4rem);
+  border-top:1px solid var(--line-2);
+}
+.rejstrik__row{
+  display:grid; grid-template-columns:var(--rj-cols); column-gap:var(--rj-gap);
+  align-items:baseline;
+  padding-block:clamp(1.75rem,3vw,2.75rem) clamp(2rem,3.4vw,3.25rem);
+  border-bottom:1px solid var(--line-2);
+}
+.rejstrik__row h3{ font-size:var(--rj-display); font-weight:400; overflow-wrap:break-word; transition:color .4s; }
+@media (hover:hover){ .rejstrik__row:hover h3{ color:var(--neon-2); } }
+.rejstrik__row p{ font-size:1rem; line-height:var(--rj-leading); color:var(--ink-2); max-width:56ch; text-wrap:pretty; }
+.rejstrik__out{ list-style:none; font-size:.9375rem; font-weight:500; line-height:var(--rj-leading); color:var(--neon-2); }
+/* Tablet: název přes celou šířku, pod ním popis a výstupy */
+@media (max-width:1080px){
+  .services{
+    --rj-display:clamp(1.25rem,8.8vw,2.4rem);
+    --rj-cols:minmax(0,1fr) 11rem;
+    --rj-gap:2rem;
+  }
+  .services .container{ display:block; }
+  .services .h2{ line-height:1.15; }
+  .services .lead{ margin-top:1.4rem; }
+  .rejstrik__row{ row-gap:.85rem; padding-block:1.75rem 2.25rem; }
+  .rejstrik__row h3{ grid-column:1/-1; }
+}
+/* Mobil: 8,8vw vejde nejdelší název i na šířku 320. Pořadí: název, výstupy, popis */
+@media (max-width:640px){
+  .services{ --rj-cols:minmax(0,1fr); --rj-leading:1.5rem; }
+  .rejstrik{ margin-top:2.25rem; }
+  .rejstrik__row{ row-gap:0; padding-block:1.5rem 1.75rem; }
+  .rejstrik__row h3{ grid-row:1; line-height:1.1; }
+  .rejstrik__row p{ grid-row:3; margin-top:.85rem; font-size:.9375rem; }
+  .rejstrik__out{
+    grid-row:2; margin-top:.45rem;
+    display:flex; flex-wrap:wrap; column-gap:1.2em;
+    overflow:hidden;  /* ořízne oddělovač na začátku každého řádku */
+    font-size:.875rem; line-height:1.4;
+  }
+  .rejstrik__out li{ position:relative; }
+  .rejstrik__out li::before{
+    content:''; position:absolute;
+    left:calc(-.6em - 1.5px); top:calc(.8em - 1.5px);
+    width:3px; height:3px; background:var(--neon);
+  }
+}
 
 /* ═══ PROCES — časová osa ═══ */
 .process{ padding:6rem 0 8rem; }
@@ -693,8 +746,6 @@ section{ position:relative; }
   .plans{ grid-template-columns:1fr; max-width:520px; }
   .contact__grid{ grid-template-columns:1fr; gap:3rem; }
   .footer__inner{ grid-template-columns:1fr 1fr; }
-  .svc__row{ grid-template-columns:1fr; gap:1.5rem; }
-  .svc__tags{ flex-direction:row; flex-wrap:wrap; gap:.9rem; text-align:left; margin-top:.4rem; }
   .shot{ grid-template-columns:1fr; align-content:center; gap:1.4rem; }
   .shot__media{ height:min(42vh,340px); height:min(42svh,340px); }
 }
