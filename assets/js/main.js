@@ -407,6 +407,29 @@ setTimeout(() => {
 }, 5000);
 
 /* ═══════════ 9. ROK, KOTVY ═══════════ */
+/* Nejbližší volný hovor: údaj chodí z mého serveru, ne přímo z Googlu. Načte se, až když se místo blíží k obrazovce.
+   Když nepřijde, je prázdný nebo už prošel, prvky zůstanou skryté a na stránce se nic nezmění. */
+const terminy = $$('[data-termin]');
+if (terminy.length && 'IntersectionObserver' in window) {
+  const nacti = new IntersectionObserver(zaznamy => {
+    if (!zaznamy.some(z => z.isIntersecting)) return;
+    nacti.disconnect();
+    fetch('https://termin.tomaspetera.cz/')
+      .then(r => r.ok ? r.json() : null)
+      .then(d => {
+        const m = d && typeof d.termin === 'string' && /^(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2})$/.exec(d.termin);
+        if (!m || Date.parse(d.termin) < Date.now()) return;
+        const den = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+        const en = document.documentElement.lang === 'en';
+        const text = en
+          ? 'Next free call: ' + den.toLocaleDateString('en-GB', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'short' }).replace(',', '') + ', ' + m[4]
+          : 'Nejbližší volný hovor: ' + ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'][den.getUTCDay()] + ' ' + (+m[3]) + '.\u00A0' + (+m[2]) + '.\u00A0v\u00A0' + m[4];
+        terminy.forEach(el => { el.insertBefore(document.createTextNode(text), el.firstChild); el.hidden = false; });
+      })
+      .catch(() => {});
+  });
+  terminy.forEach(el => nacti.observe(el.parentElement));
+}
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
