@@ -16,6 +16,7 @@
   font-family:'Montserrat'; font-style:normal; font-display:swap;
   font-weight:400 700;
   src:url('../fonts/montserrat.woff2') format('woff2');
+  unicode-range:U+0020-007E, U+00A0-017F, U+02C6-02DD, U+2010-203A, U+20AC, U+2122, U+2212;   /* šipky Montserrat má malé, ty nechávám systémovému písmu */
 }
 
 :root{
@@ -95,8 +96,6 @@ section{ position:relative; }
 }
 .totop.on{ opacity:1; pointer-events:auto; transform:none; }
 .totop:hover{ border-color:rgba(177,172,85,.6); color:var(--ink); }
-/* šipky v kulatých tlačítkách: systémové písmo je má větší a čitelnější než Montserrat */
-.totop,.lb__nav,.lb__close{ font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
 
 /* ═══ NAVIGACE ═══ */
 .nav{
@@ -621,12 +620,19 @@ section{ position:relative; }
 .footer__inner p{ color:var(--muted); font-size:.84rem; margin-top:.6rem; }
 .footer__col{ display:flex; flex-direction:column; gap:.55rem; }
 .footer__col h4{
+  font-family:inherit;
   font-size:.66rem; letter-spacing:.09em;
   text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:.4rem;
 }
 .footer__col a{ font-size:.85rem; color:var(--ink-2); transition:color .35s; }
 .footer__col a:hover{ color:var(--neon-2); }
 .footer__inner .footer__status{ margin-top:0; color:var(--ink-2); font-size:.85rem; }
+/* velké jméno jako podpis webu: přes celou šířku obsahu, velikost písma se počítá z šířky */
+.footer__jmeno{
+  font-family:'Unbounded',sans-serif; font-weight:500; line-height:1.1; letter-spacing:-.03em; white-space:nowrap;
+  font-size:calc((min(100vw,var(--max)) - 2 * var(--pad)) / 8.392); padding-bottom:clamp(1.6rem,3.5vw,3rem);
+}
+.footer__jmeno i{ font-style:normal; font-size:.2em; position:relative; top:-2.4em; margin-left:.2em; letter-spacing:0; color:var(--neon); }
 .footer__bar{
   display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   padding-block:1.5rem; border-top:1px solid var(--line); font-size:.75rem; color:var(--muted);
@@ -737,6 +743,12 @@ section{ position:relative; }
 .item img{aspect-ratio:16/9;height:auto;object-fit:contain;filter:none;display:block}
 .item figcaption{position:static;transform:none;opacity:1;background:var(--bg-2);padding:1.4rem;flex:1}
 .item:hover img{transform:none}.item:focus-visible{outline:2px solid var(--neon-2);outline-offset:4px}
+/* dlaždice: při najetí název zolivoví a na obrázku se objeví popisek (šipka myši zůstává systémová) */
+.item::after{ content:'Zobrazit projekt →'; position:absolute; top:.9rem; right:.9rem; z-index:1; pointer-events:none; padding:.4rem .7rem; border-radius:4px; background:rgba(18,16,13,.88); color:var(--ink); font-size:.74rem; font-weight:500; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .35s var(--ease); }
+html[lang="en"] .item::after{ content:'View project →'; }
+.item figcaption h3{ transition:color .35s; }
+@media (hover:hover){ .item:hover::after{ opacity:1; transform:none; } .item:hover figcaption h3{ color:var(--neon-2); } }
+.item:focus-visible::after{ opacity:1; transform:none; } .item:focus-visible figcaption h3{ color:var(--neon-2); }
 .shot__media{aspect-ratio:16/9;height:auto}.shot__media img{object-fit:contain;transform:none!important}
 .about__facts b{font-size:clamp(.95rem,1.5vw,1.25rem);}
 /* Ceny zůstávají rozmazané a odkryjí se až při najetí / klepnutí (pravidla u .plan__price-val výše). */
