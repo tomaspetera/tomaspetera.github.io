@@ -627,12 +627,6 @@ section{ position:relative; }
 .footer__col a{ font-size:.85rem; color:var(--ink-2); transition:color .35s; }
 .footer__col a:hover{ color:var(--neon-2); }
 .footer__inner .footer__status{ margin-top:0; color:var(--ink-2); font-size:.85rem; }
-/* velké jméno jako podpis webu: přes celou šířku obsahu, velikost písma se počítá z šířky */
-.footer__jmeno{
-  font-family:'Unbounded',sans-serif; font-weight:500; line-height:1.1; letter-spacing:-.03em; white-space:nowrap;
-  font-size:calc((min(100vw,var(--max)) - 2 * var(--pad)) / 8.392); padding-bottom:clamp(1.6rem,3.5vw,3rem);
-}
-.footer__jmeno i{ font-style:normal; font-size:.2em; position:relative; top:-2.4em; margin-left:.2em; letter-spacing:0; color:var(--neon); }
 .footer__bar{
   display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   padding-block:1.5rem; border-top:1px solid var(--line); font-size:.75rem; color:var(--muted);
